@@ -24,7 +24,7 @@ public class ReplyMapperTests {
     public void testCreate(){
         IntStream.rangeClosed(1,10).forEach(i ->{
             ReplyVO vo = new ReplyVO();
-
+            System.out.println("1111");
             // 게시물의 번호
             vo.setBno(bnoArr[i%5]);
             vo.setReply("댓글 테스트 " + i);

@@ -1,4 +1,4 @@
-package net.developia.spring04.controller;
+package net.developia.mini1st.controller;
 
 
 import lombok.extern.java.Log;

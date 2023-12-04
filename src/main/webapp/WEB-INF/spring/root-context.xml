@@ -26,8 +26,8 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		  p:dataSource-ref="dataSource"
-		  p:typeAliasesPackage="net.developia.sprnig04.mapper"
+		  p:typeAliasesPackage="net.developia.mini1st.mapper"
 	/>
-	<mybatis-spring:scan base-package="net.developia.spring04.mapper"></mybatis-spring:scan>
-	<context:component-scan base-package="net.developia.spring04"></context:component-scan>
+	<mybatis-spring:scan base-package="net.developia.mini1st.mapper"></mybatis-spring:scan>
+	<context:component-scan base-package="net.developia.mini1st"></context:component-scan>
 </beans>

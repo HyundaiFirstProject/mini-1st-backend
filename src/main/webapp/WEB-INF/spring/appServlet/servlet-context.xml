@@ -22,7 +22,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="net.developia.spring04" />
+	<context:component-scan base-package="net.developia.mini1st" />
 	<aop:aspectj-autoproxy/>
 	
 	

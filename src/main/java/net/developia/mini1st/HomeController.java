@@ -1,4 +1,4 @@
-package net.developia.spring04;
+package net.developia.mini1st;
 
 import java.text.DateFormat;
 import java.util.Date;

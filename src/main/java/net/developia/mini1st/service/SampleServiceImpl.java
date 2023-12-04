@@ -1,4 +1,4 @@
-package net.developia.spring04.service;
+package net.developia.mini1st.service;
 
 import org.springframework.stereotype.Service;
 

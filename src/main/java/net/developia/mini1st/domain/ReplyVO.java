@@ -1,4 +1,4 @@
-package net.developia.spring04.domain;
+package net.developia.mini1st.domain;
 import lombok.Data;
 import java.util.Date;
 

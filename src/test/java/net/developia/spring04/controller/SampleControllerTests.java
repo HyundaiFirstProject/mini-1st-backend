@@ -19,6 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.google.gson.Gson;
 
 import lombok.Setter;
+import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
 import net.developia.mini1st.domain.Ticket;
 
@@ -26,7 +27,7 @@ import net.developia.mini1st.domain.Ticket;
 @WebAppConfiguration
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-@Log4j
+@Log
 public class SampleControllerTests {
 
     @Setter(onMethod_ = {@Autowired})
@@ -34,7 +35,7 @@ public class SampleControllerTests {
 
     private MockMvc mockMvc;
 
-    @Before
+    @org.junit.Before
     public void setup(){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
     }

@@ -38,10 +38,33 @@ public class UserController {
         } catch (Exception e) {
             // 회원가입 실패 시
             log.info(e.getMessage());
+            System.out.println(userDTO.getUser_no());
+            System.out.println(userDTO.getEmail());
+            System.out.println(userDTO.getNickname());
+            System.out.println(userDTO.getPassword());
             Map<String, String> response = new HashMap<>();
             response.put("status", "422");
             response.put("description", "회원가입 실패");
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
         }
     }
+
+    @PostMapping("/checkNickname")
+    public ResponseEntity<Map<String, Object>> checkNickname(@RequestBody Map<String, String> request) {
+        try {
+            String nickname = request.get("nickname");
+            boolean isAvailable = userService.isNicknameAvailable(nickname);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.OK.value());
+            response.put("nicknameCheck", isAvailable);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.put("description", "서버 오류");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
 }

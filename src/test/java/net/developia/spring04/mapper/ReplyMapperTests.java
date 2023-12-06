@@ -3,7 +3,7 @@ package net.developia.spring04.mapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import net.developia.mini1st.mapper.ReplyMapper;
-import net.developia.spring04.domain.ReplyVO;
+import net.developia.mini1st.domain.ReplyVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

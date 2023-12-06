@@ -20,4 +20,15 @@ public class UserServiceImpl implements UserService{
     public void signUp(UserDTO userDTO){
         userMapper.insertUser(userDTO);
     }
+
+    @Override
+    public boolean isNicknameAvailable(String nickname){
+        int countDuplicateNickName = userMapper.countUsersByNickname(nickname);
+        if (countDuplicateNickName > 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }

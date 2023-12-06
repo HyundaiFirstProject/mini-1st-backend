@@ -23,4 +23,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.createReview(dto);
 	}
 
+	@Override
+	public ReviewDTO readReview(long postid) {
+		return mapper.readReview(postid);
+	}
+
 }

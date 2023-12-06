@@ -8,4 +8,6 @@ public interface ReviewService {
 	public List<ReviewDTO> getReviewList();
 
 	public int register(ReviewDTO dto);
+
+	public ReviewDTO readReview(long postid);
 }

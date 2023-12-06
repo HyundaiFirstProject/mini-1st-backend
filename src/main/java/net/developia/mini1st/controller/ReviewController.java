@@ -27,7 +27,7 @@ public class ReviewController {
 	private ReviewService service;
 	
 	// 후기 게시판 게시글 리스트 불러오기(아직 페이징 X)
-	@GetMapping(value="/bestReviewList",
+	@GetMapping(value="/bestReviewsList",
 			produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<ReviewDTO>> getReviewList(){
 		try {
@@ -41,7 +41,7 @@ public class ReviewController {
 	}
 	
 	// 후기 게시판 글 등록
-	@PostMapping(value="/bestReviewPost"
+	@PostMapping(value="/bestReviewsPost"
 				,produces = MediaType.APPLICATION_JSON_VALUE
 				,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO dto){
@@ -54,7 +54,7 @@ public class ReviewController {
 	}
 	
 	// 후기 게시판 글 상세보기
-	@GetMapping("/bestReviewDetail")
+	@GetMapping("/bestReviewsDetail")
 	public ResponseEntity<ReviewDTO> readReview(@RequestParam("postID") long postid){
 		log.info("read Review : " + postid);
 		try {

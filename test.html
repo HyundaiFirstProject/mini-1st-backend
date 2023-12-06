@@ -1,0 +1,1348 @@
+
+
+
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+<title>더현대닷컴</title>
+
+
+<!--[if IE 8 ]>
+<script type="text/javascript">
+    if(parent && parent != this) document.write('<link rel="stylesheet" href="https://www.thehyundai.com/cssssl/font_iframe.css"> ');
+    else document.write('<link rel="stylesheet" href="https://www.thehyundai.com/cssssl/font.css"> ');
+</script>
+<![endif]-->
+<!--[if (gt IE 8)|!(IE)]><!-->
+<link rel="stylesheet" type="text/css" href="https://image.thehyundai.com/pc/cssssl/font.css">
+<!--<![endif]-->
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TKDB5QC');</script>
+<!-- End Google Tag Manager -->
+
+<link rel="stylesheet" type="text/css" href="https://image.thehyundai.com/pc/cssssl/co.css?ver=17" />
+<link rel="stylesheet" type="text/css" href="https://image.thehyundai.com/pc/cssssl/wf.css">
+<script src="https://image.thehyundai.com/pc/js/jquery-1.11.3.min.js"></script>
+<script src="https://image.thehyundai.com/pc/js/jquery-ui.min.js"></script>
+<script src="https://image.thehyundai.com/pc/js/jquery-migrate.min.js"></script>
+
+<script type="text/javascript">
+document.domain = "thehyundai.com";
+var locationHref = document.location.href;
+var imageServer = "https://image.thehyundai.com";
+var serverHost = "http://www.thehyundai.com";
+var serverHostForSSL = "https://www.thehyundai.com";
+
+var switch_serverHost;
+var contextPath = "/front";
+
+if (locationHref.indexOf("https") > -1) {
+    switch_serverHost = serverHostForSSL;
+
+} else if (locationHref.indexOf("http") > -1) {
+    switch_serverHost = serverHost;
+
+}
+
+
+
+function timeOutLogOut(){
+    try{
+        gfnSsoDscdToknReq(dscdCallback2);
+    }catch(exception){
+        console.log(exception);
+    }finally{
+        location.href="https://www.thehyundai.com/front/cob/logout.thd";
+    }
+}
+
+// 로그아웃 스크립트 2021.02.15 추가
+// 1.주문서는 타임아웃 자동로그아웃 제외
+// 2.다중 탭 열린 상태에서 한 탭 타임아웃 시 타임아웃 안된 다른 탭 남아있으면 로그아웃 방지
+function timeOutLogOutCookie(){
+    if(top.location.href.indexOf('order.thd')<0)
+    {
+        var currentDtm = new Date();
+        var ChkSTDtmVal = "";
+        var ca = document.cookie.split(';');
+        for (var i=0;i<ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf('ChkSTDtm=') == 0) ChkSTDtmVal = c.substring('ChkSTDtm='.length,c.length);
+        }
+        if (currentDtm.getTime() > ChkSTDtmVal)
+        {
+            timeOutLogOut();
+        }
+    }
+}
+
+function dscdCallback2(data){
+    //console.log("data.rtnMsg:"+data.rtnMsg);
+    if(data.succYn == "Y"){
+        console.log("토큰 만료처리");
+
+    }else{
+        console.log("토큰 미존재");
+
+    }
+    //location.href="https://www.thehyundai.com/front/cob/logout.thd";
+}
+
+
+
+</script>
+
+<script src="https://image.thehyundai.com/pc/js/plugin.js?ver=120517"></script>
+<script type="text/javascript" src="https://image.thehyundai.com/pc/js/hdmall/co/jquery.form.js"></script>
+<script type="text/javascript" src="https://image.thehyundai.com/pc/js/hdmall/co/default.js?ver=120517"></script>
+<script type="text/javascript" src="https://image.thehyundai.com/pc/js/hdmall/co/common.js?ver=120517"></script>
+<script src="https://image.thehyundai.com/pc/js/common.js?ver=120517"></script>
+<script type="text/javascript" src="https://image.thehyundai.com/pc/js/swiper.min.js?ver=120517"></script>
+
+<!-- 그루비(MA) 솔루션 스크립트 삽입 -->
+<script src="/js/hdmall/co/groobeeAnalyticsBuilder.js"></script> 
+
+ 
+<script type="text/javascript">
+(function(a,i,u,e,o){
+a[u]=a[u]||function(){(a[u].q=a[u].q||[]).push(arguments)};
+})(window, document, "groobee");
+if(window.location.host.indexOf('dev') != -1 || window.location.host.indexOf('stg') != -1){
+    groobee("serviceKey","6ab0c3cdd6c9458ab02dec4fc6c0cccd");
+}else{
+    groobee("serviceKey","4dd20a40cca8449988053b600a926c57");
+}
+groobee("siteType","custom");
+</script>
+<script charset="utf-8" src="//static.groobee.io/dist/g2/groobee.init.min.js"></script>
+ 
+<meta property="groobee:member_id" content=""/>
+<meta property="groobee:member_grade" content=""/>
+<meta property="groobee:member_gender" content=""/>
+<meta property="groobee:member_type" content=""/>
+<meta property="groobee:member_age" content=""/>
+<meta property="groobee:member_kind" content""/>
+
+<script type="text/javascript"> 
+
+var custNoMa = '';
+var itntGrdMa = '';
+var sexGbcdMa = '';
+var upntCustMa = '';
+var birthMa = '';
+var vipGrdNmMa = '';
+if(pageViewObj2.custNo != null) custNoMa = pageViewObj2.custNo;
+if(pageViewObj2.itntGrd != null) itntGrdMa = pageViewObj2.itntGrd;
+if(pageViewObj2.sexGbcd != null) sexGbcdMa = pageViewObj2.sexGbcd;
+if(pageViewObj2.upntCustYn != null) upntCustMa = pageViewObj2.upntCustYn;
+if(pageViewObj2.birthday != null) birthMa = pageViewObj2.birthday;
+if(pageViewObj2.vipGrdNm != null) vipGrdNmMa = pageViewObj2.vipGrdNm;
+
+
+$('meta[property="groobee:member_id"]').attr('content',custNoMa);
+$('meta[property="groobee:member_grade"]').attr('content',itntGrdMa);
+$('meta[property="groobee:member_gender"]').attr('content',sexGbcdMa);
+$('meta[property="groobee:member_type"]').attr('content',upntCustMa);
+$('meta[property="groobee:member_age"]').attr('content',birthMa);
+$('meta[property="groobee:member_kind"]').attr('content',vipGrdNmMa);
+
+</script>
+
+<!--  카카오 챗봇 추가 20221102 -->
+
+<!-- 기존 챗봇cdn 경로 주석 > 내부 챗봇서버로 경로변경 2023.04.12 -->
+ <!-- <script type="text/javascript" src="https://s.kakaoicdn.net/webchatbot/prod/js/latest/kakaoi.js?1" ></script>  -->
+ <!-- <script type="text/javascript" src="https://mk.kakaocdn.net/dn/vertebra/sdk/vertebra.latest.js?1"></script> -->
+ 
+        <script src="https://chbotsrv.ehyundai.com/sdk/kakaoi.js?ver=202312051751"></script>
+        <script src="https://chbotsrv.ehyundai.com/sdk/vertebra.latest.js?ver=202312051751"></script>
+        <script src="https://chbotsrv.ehyundai.com/sdk/kakao_sdk.js?ver=202312051751"></script>
+     
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/gateway/org/cometd.js"></script>
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/gateway/org/cometd/ReloadExtension.js"></script>
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/gateway/jquery/jquery.cometd.js"></script>
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/gateway/jquery/jquery.cometd-reload.js"></script>
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/common/common.js"></script>
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/gateway/gateway.js"></script>
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/talk/talkGateway.js"></script>
+<script type="text/javascript" src="https://chbotsrv.ehyundai.com/spactra/static/js/spectra/common/spactraCallApi.js"></script>
+
+<link rel="stylesheet" href="https://www.thehyundai.com/cssssl/cc.css">
+<link rel="stylesheet" href="https://www.thehyundai.com/cssssl/vip.css">
+
+<link rel="stylesheet" type="text/css" href="https://www.thehyundai.com/cssssl/dp.css?ver=17" />
+<link rel="stylesheet" type="text/css" href="https://www.thehyundai.com/cssssl/sb.css?ver=17" />
+<!-- 스페셜브랜드 css 추가 -->
+
+<script type="text/javascript" src="https://www.thehyundai.com/js/sb.js"></script>
+<!-- 스페셜브랜드 js 추가 -->
+
+<script>
+$(document).ready(function(){
+    
+	var sort = '09';
+    var sortType = "";
+    if(sort == "03") sortType = "new_item";
+    else if(sort ="09") sortType = "sect_disp";
+    else sortType = "new_item";
+    setSectInfoItemCount($("#sectId").val());
+    setSectInfoItemList($("#sectId").val(), 40, sortType, 1);
+
+    // 스페셜 브랜드 샵 세팅
+    $('.sb-shop-type7').sbShop_v7({
+        sortClick : function(val){
+            /*
+            소팅 클릭 했을 경우 콜백
+            리턴값은 object
+            - $tihs : 클릭한 엘리먼트(제이쿼리 엘리먼트)
+            - idx : 클릭한 index값
+            */
+            //alert(val.idx + ' : ' + val.$this.text());
+
+            switch(val.idx) {
+            case 0:
+                sortType = "new_item";
+                break;
+            case 1:
+            	sortType = "sect_disp";
+            	break;
+            case 2:
+                sortType = "sale_cost_u";
+                break;
+            case 3:
+                sortType = "sale_cost_l";
+                break;
+            case 4:
+                sortType = "new_item";
+                break;
+                default:
+                    break;
+            }
+
+            $("#page").val(1);
+            setSectInfoItemList($("#sectId").val(), 40, sortType, 1);
+        }
+    });
+});
+
+//상품 리스트 재생성
+function setSectInfoItemList(sectId, listSize, sortType, page) {
+    var currentCnt = listSize * page;
+
+    //상품리스트
+    $.ajax({
+        type : "get",
+        url : "/front/dps/ajaxSpclSectInfoItemList.thd",
+        data : { "sectId" : sectId, "listSize": listSize, "sortType": sortType, "page" : page, "tmplType" : "G"},
+        async: false,
+        dataType : "HTML",
+        success:function(data){
+            $("div.goods-box").empty();
+            $("div.goods-box").append(data);
+
+            if(currentCnt > $("span.t-num-top").text()) {
+                $("span.c-num").empty();
+                $("span.c-num").append( (1 + (page - 1) * 40) + "-" + $("span.t-num-top").text());
+                $("span.page-cur-top").empty();
+                $("span.page-cur-top").append( page);
+                $("span.page-cur-bot").empty();
+                $("span.page-cur-bot").append( page);
+            }else {
+                $("span.c-num").empty();
+                $("span.c-num").append( (1 + (page - 1) * 40) + "-" + currentCnt);
+                $("span.page-cur-top").empty();
+                $("span.page-cur-top").append( page);
+                $("span.page-cur-bot").empty();
+                $("span.page-cur-bot").append( page);
+            }
+
+            if(page == 1) {
+                $("a.btn-prev").addClass("disabled");
+                if($("span.page-max-top").text() != 1) {
+                    $("a.btn-next").removeClass("disabled");
+                } else {
+                    $("a.btn-next").addClass("disabled");
+                }
+            }
+            else if(page == $("span.page-max-top").text()) {
+                $("a.btn-prev").removeClass("disabled");
+                $("a.btn-next").addClass("disabled");
+            }else {
+                $("a.btn-prev").removeClass("disabled");
+                $("a.btn-next").removeClass("disabled");
+            }
+        },
+     error:function(xhr,status,error){
+         alert("실패"+error);
+     },
+        complete:function() {
+
+        }
+    });
+
+}
+
+function searchPageItemList(mvPage){
+    var sortType = setSortType($("li.active").text());
+    var pagenation = $("span.page-cur-bot").text() * 1 + mvPage;
+    if( pagenation <= 0 ) {
+        return;
+    } else if ( pagenation > $("span.page-max-bot").text()){
+        return;
+    }
+    setSectInfoItemList($("#sectId").val(), 40, sortType, $("span.page-cur-bot").text() * 1 + mvPage);
+}
+
+//전체 상품 수, 마지막 페이지 계산
+function setSectInfoItemCount(sectId) {
+    $.ajax({
+        type : "get",
+        url : "/front/dps/ajaxSpclSectInfoItemCount.thd",
+        data : { "sectId" : sectId},
+        async: false,
+        dataType : "HTML",
+        success:function(data){
+            $("span.t-num-top").empty();
+            $("span.t-num-top").append(data);
+            $("span.t-num-bot").empty();
+            $("span.t-num-bot").append(data);
+            $("span.page-max-top").empty();
+            $("span.page-max-bot").empty();
+            $("span.page-max-top").append( Math.ceil(data / 40));
+            $("span.page-max-bot").append( Math.ceil(data / 40));
+        },
+        error:function(xhr,status,error){
+            alert("실패"+error);
+        },
+        complete:function() {
+            loadingBar.stop();
+        }
+    });
+}
+
+//정렬 타입 결정
+function setSortType(sortName) {
+    if(sortName == '신상품순') {
+        return "new_item";
+    }else if(sortName == '추천순'){
+        return 	"sect_disp";
+    }else if (sortName == '높은가격순') {
+        return "sale_cost_u";
+    }else if (sortName == '낮은가격순') {
+        return "sale_cost_l";
+    }
+}
+
+//(JIRA : DEP01WORK-14658 GA 구축 프로젝트)
+var _gaPageTitle = '스페셜매장>브랜드상세>간식';
+
+//상품 클릭시 전자상거래 정보 전송
+$(document).on('click', '.prod-unit a', function(){
+    if($(this).hasClass('zzim')){
+        return false;
+    }
+    
+    var dimension = new Object();
+    var Product = new Object();
+    var actionList = new Object();
+    var Products = new Array();
+    var E_step = 'click';
+    
+    // data_slitmCd = 상품코드:매장번호
+    // data_info = 브랜드코드:지점코드:지점명:담당MD코드:담당MD명
+    var data_slitmCd = $(this).parents('.prod-unit').find('.img').attr('data-slitmcd');
+    var data_info = $(this).parents('.prod-unit').find('.img').attr('data-info');
+    
+    dimension.category = 'Ecommerce';
+    dimension.action = 'Click';
+    
+    Product.id = data_slitmCd.split(':')[0];                                                 // 상품코드
+    Product.name = $(this).parents('.prod-unit').find('.title').html();                      // 상품명
+    Product.dimension37 = data_info.split(':')[0];                                           // 브랜드코드
+    Product.dimension38 = data_slitmCd.split(':')[1];                                        // 매장번호
+    Product.dimension39 = data_info.split(':')[1]+"_"+data_info.split(':')[2];               // 지점코드_지점명
+    //Product.position = $(".prod-unit").index($(this).parents('.prod-unit')) +1;            // 제품 위치 - 기획서 변경으로 제외 
+    Product.dimension40 = data_info.split(':')[4] + "(" + data_info.split(':')[3] + ")";     // 담당MD명(담당MD코드)
+    
+    actionList.action = 'click';
+    actionList.currency  = 'KRW';
+    actionList.list = '브랜드스토어_'+data_info.split(':')[0];                                    // 브랜드스토어_브랜드코드
+   
+    Products.push(Product);
+    EcommerceSet(E_step, Products, actionList, dimension);
+    // GA 이벤트 전송
+    GA_Event('PC_#ThE PET','상품', Product.name);
+});
+</script>
+
+<script type="text/javascript">
+var criteoAry = [];
+
+
+					criteoAry.push('2148393774');
+					
+					criteoAry.push('2147745237');
+					
+					criteoAry.push('2148365919');
+					
+
+</script>
+
+<script type="text/javascript" src="https://www.thehyundai.com/js/hdmall/co/md5.js"></script>
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+/* 2018.10.04 크리테오 태그 - 트래커(상세) (47466) - S */
+var stateLogin = isLogin();	// 로그인 유무
+
+if(stateLogin == 'true') {	// 로그인
+	var criteoCustNo = '';
+
+	if(typeof criteoCustNo != 'undefined' && criteoCustNo != null && criteoCustNo != '') {
+		var hashedCustNo = hex_md5(criteoCustNo);
+
+		if(criteoAry != null && criteoAry.length > 0) { // 상품코드 존재
+			window.criteo_q = window.criteo_q || [];
+			window.criteo_q.push(
+					{ event: "setAccount", account: 52201 },
+					{ event: "setCustomerId", id: hashedCustNo },
+					{ event: "setSiteType", type: "d" },
+					{ event: "viewList", item: criteoAry}
+			);
+		}
+	} else {
+		if(criteoAry != null && criteoAry.length > 0) { // 상품코드 존재
+			window.criteo_q = window.criteo_q || [];
+			window.criteo_q.push(
+					{ event: "setAccount", account: 52201 },
+					{ event: "setSiteType", type: "d" },
+					{ event: "viewList", item: criteoAry}
+			);
+		}
+	}
+} else {
+	if(criteoAry != null && criteoAry.length > 0) { // 상품코드 존재
+		window.criteo_q = window.criteo_q || [];
+		window.criteo_q.push(
+				{ event: "setAccount", account: 52201 },
+				{ event: "setSiteType", type: "d" },
+				{ event: "viewList", item: criteoAry}
+		);
+	}
+}
+/* 2018.10.04 크리테오 태그 - 트래커(상세) (47466) - E */
+</script>
+</head>
+
+<body>
+
+<div id="wrap" class="sub notgnb">
+        
+<script type="text/javascript" src="https://www.thehyundai.com/js/hdmall/co/referCodes.js"></script>
+<script src="/js/sso/SsoHttpRequest.js"></script>
+<script src="/js/sso/SsoAjax.js"></script>
+<script src="/js/sso/SsoLogin.js"></script> <!-- SSO 로그인 js 공통 처리 2021.03.08-->
+
+<script type="text/javascript" src="https://www.thehyundai.com/static/gen/js/mainBnnrContents.js?ver=051751"></script>
+<script type="text/javascript" src="https://www.thehyundai.com/js/sub.js?ver=120517"></script>
+<script src="https://www.thehyundai.com/static/gen/js/main_data_new.js"></script>
+<script src="https://www.thehyundai.com/js/hdmall/dp/main_data_new_tmpl.js"></script>
+<link rel="stylesheet" type="text/css" href="https://www.thehyundai.com/cssssl/main_new.css">
+<link rel="stylesheet" type="text/css" href="https://www.thehyundai.com/cssssl/swiper.min.css">
+
+<!-- skip-navigation -->
+
+<script  type="text/javascript">
+$(document).ready(function() {
+	//check ReferCode
+	if(isDirectVisit()){
+		$('.ic-onff').removeClass('off');
+		$('.ic-onff').addClass('on');
+		$('.ic-onff').html('ON');
+	}
+	/*전환가입 체크용도*/
+	 var reloadYn = "";
+	try{
+		reloadYn = getCookie("reloadYn");
+	}catch(e){
+		reloadYn = "";
+	}
+	//alert("reloadYn>>"+reloadYn);
+	if(reloadYn =="Y"){
+		goReloadSession();
+	}
+});
+
+function isDirectVisit() {
+	try{
+		var visitReferCode = getCookie('EHReferCode');
+		if(REFER_CODES.indexOf(visitReferCode) > -1) {
+			return true;
+		}
+		return false;
+	}catch(e){
+		return false;
+	}
+
+}
+
+function getCookie(cookieName) {
+	var i, key, value;
+	var cookieList = document.cookie.split(";");
+	//console.log(cookieList);
+	for(i = 0; i < cookieList.length; i++) {
+		key = cookieList[i].substr(0, cookieList[i].indexOf("="));
+		key = key.replace(" ","");
+		value = cookieList[i].substr(cookieList[i].indexOf("=")+1);
+		key = key.replace(/^s+|s+$/g,"");
+		if( key == cookieName) {
+			return unescape(value);
+		}
+	}
+}
+
+function dummy(){
+		// 와이즈로그 수집위해 빈 URL 호출
+		$.ajax({
+			type: "post"
+			, url: "/front/dpl/dummyLogParam.thd?MainpageGroup=Menu&GroupbannerName=handsome"
+			, dataType: "json"
+			, success : function(data) {
+				window.open('http://www.thehandsome.com/ko/?ref=thehyundai.com','_blank');
+			}
+			, error : function(e) {
+				window.open('http://www.thehandsome.com/ko/?ref=thehyundai.com','_blank');
+			}
+
+		});
+	}
+function dummyGnb(){
+	// 와이즈로그 수집위해 빈 URL 호출
+	$.ajax({
+		type: "post"
+		, url: "/front/dpl/dummyLogParam.thd?MainpageGroup=Fix&GroupbannerName=GNB_handsome"
+		, dataType: "json"
+		, success : function(data) {
+			window.open('http://www.thehandsome.com/ko/?ref=thehyundai.com','_blank');
+		}
+		, error : function(e) {
+			window.open('http://www.thehandsome.com/ko/?ref=thehyundai.com','_blank');
+		}
+
+	});
+}
+function logOut(){
+	try{
+		//gfnSsoDscdToknReqAjax(dscdCallback);
+		gfnSsoDscdToknReq(dscdCallback);
+	}catch(exception){
+		console.log(exception);
+
+		//location.href="https://www.thehyundai.com/front/cob/logout.thd";
+	}finally{
+		location.href="https://www.thehyundai.com/front/cob/logout.thd";
+	}
+
+
+}
+function deleteCookie(cookieName){
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() - 1);
+    //alert(cookieName + "= " + "; expires=" + expireDate.toGMTString());
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString()+";path=/;";
+}
+//토큰만료 콜백
+function dscdCallback(data){
+	//console.log("data.rtnMsg:"+data.rtnMsg);
+	if(data.succYn == "Y"){
+		console.log("토큰 만료처리");
+
+	}else{
+		console.log("토큰 미존재");
+
+	}
+	//location.href="https://www.thehyundai.com/front/cob/logout.thd";
+}
+ function goReloadSession() {
+
+	showLoadingBar("180px", "150px");
+	$.ajax({
+		url: "https://www.thehyundai.com/front/sessionReload.thd"
+		, type: "post"
+		, dataType : "json"
+		, data : { "id" : "" }
+		, success: function(responseData) {
+			  hideBlockLoadingBar();
+			  //alert(responseData.resultType);
+			 if(responseData.resultType == "A"){
+				 //alert(responseData.authKey);
+				 //alert(responseData.authSsoCd);
+	               gfnReqSSoToknIssuHttp(responseData.authKey, responseData.authSsoCd, fnCallback03);
+
+	         }
+			 deleteCookie("reloadYn"); // 처리가 되었으므로 쿠키를 제거해 토큰재발급을 막는다.
+			 hideBlockLoadingBar();
+		}
+		, error: function(e) {
+			  hideBlockLoadingBar();
+		}
+
+	});
+
+}
+function fnCallback03(data){
+	//alert("테스트용 토큰발급 성공여부::"+data.succYn);
+}
+</script>
+
+<div id="skip-navigation">
+	<p><a href="#header-wrap">헤더영역 바로가기</a></p>
+	<p><a href="#header-gnb-area">GNB영역 바로가기</a></p>
+	<p><a href="#container">컨텐츠영역 바로가기</a></p>
+	<p><a href="#footer">푸터영역 바로가기</a></p>
+</div>
+<!-- //skip-navigation -->
+
+
+
+<!-- header -->
+<!-- 서브메뉴 -->
+
+
+<!-- top banner -->
+<div id="js-tpl-topBanner" style="display: none;"></div>
+
+
+<div class="top-wrap sub" id="header-top">
+	<div class="top-area-setting">
+	<div class="top-con">
+		<div class="top-con-logo"><h1><a href="http://www.thehyundai.com/Home.html?MainpageGroup=Fix&GroupbannerName=GNB_Logo"><span class="blind">The HYUNDAI</span></a></h1></div>
+		
+		<div class="top-con-search">
+			<form name="formTopSearchPopup" id="formTopSearchPopup" method="get" action="https://www.thehyundai.com/front/dpo/hdSearch.thd">
+				<input type="hidden" name="searchtype" id="js_searchtype">
+				<input type="hidden" name="searchQuery" autocomplete="off">
+				<div class="top-con-search-unit">
+					<input type="text" class="top-con-search-input" maxlength="30" id="cs-token-input" value="" onfocus="return dq_setTextbox(0,event);" onmousedown="dq_setTextbox(1,event);" onkeydown="dq_setTextbox(1,event);" autocomplete="off">
+					<button type="submit" class="top-con-search-btn" onclick="javascript:goTopSearch(); return false;"><span class="blind">검색</span></button>
+
+					<!-- 검색 -->
+					<div class="search-box" id="search_info_box" style="display: none;" onmouseover="dq_info_setMouseon();" onmouseout="dq_info_setMouseoff();">
+
+						<!-- 최근검색어 -->
+						<div class="search-box-list" id="recent_rs_search">
+							<div class="search-box-tit">최근검색어</div>
+							<div class="search-box-cont">
+								<ul class="search-box-text">
+									<li>최근 검색어가 없습니다.</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- 인기검색어 -->
+						<div class="search-box-list" id="hot_rs_search">
+							<div class="search-box-tit">인기검색어</div>
+							<div class="search-box-cont">
+								<div class="search-box-best">
+									<li>인기 검색어가 없습니다.</li>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="search-box" id="search_auto_box" style="display: none;" onmouseover="dq_setMouseon();" onmouseout="dq_setMouseoff();">
+
+						<!-- 연관검색어 -->
+						<div class="search-box-list" id="relation_rs_search">
+							<div class="search-box-cont">
+								<ul class="search-box-text">
+									<li>연관 검색어가 없습니다.</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- 추천브랜드 -->
+						<div class="search-box-list" id="brand_rs_search">
+							<div class="search-box-tit">추천브랜드</div>
+							<div class="search-box-cont">
+								<ul class="search-box-brand">
+									<li>추천 브랜드가 없습니다.</li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+					<!-- //검색 -->
+				</div>
+			</form>
+		</div>
+		
+		<div class="top-con-quick">
+			
+			<ul>
+				<li class="myshop-info">
+					<div class="top-con-quick-my">
+					
+							<a href="javascript:openLoginPopup();">로그인/회원</a>
+						
+					</div>
+
+						<!-- 20190118 추가 레이어팝업 -->
+						<div class="myshop-info-layer logout"> <!-- logout:비 로그인 상태, login:로그인 상태 -->
+							<div class="myshop-cont">
+								<ul class="myshop-cont-top">
+									<li class="myshop-hyundai"><a href="https://www.thehyundai.com/front/mpf/selectMyPageMain.thd?MainpageGroup=Util&GroupbannerName=GNB_MyHyundai">마이현대</a></li>
+									<li><a href="https://www.thehyundai.com/front/mpa/selectOrdDlvCrst.thd?MainpageGroup=Util&GroupbannerName=GNB_Order">주문배송</a></li>
+									<li><a href="https://www.thehyundai.com/front/mpc/sltdItemList.thd">나의 찜</a></li>
+									<li class="myshop-join"><a href="https://www.thehyundai.com/front/cob/COBCertificationSelect.thd">회원가입</a></li>
+									<li class="myshop-logout"><a href="javascript:logOut();">로그아웃</a></li>
+								</ul>
+								<ul class="myshop-cont-body">
+									<li class="logout-only">
+										<span class="tit">나의 쇼핑 혜택</span>
+										<a href="javascript://" onclick="javascript:buyGradePup(event);return false;"><span class="blind">자세히보기</span></a>
+									</li>
+									<li class="login-only">
+
+										<span class="tit">등급</span>
+										<span class="cont">혜택</span>
+										<a href="javascript://" onclick="javascript:GA_Event('PC_공통','헤더_메뉴','나의 쇼핑 혜택'); buyGradePup(event);return false;"><span class="blind">자세히보기</span></a>
+
+									</li>
+									<li>
+										<span class="tit">쿠폰</span>
+										<span class="cont login-only">0장</span>
+										<a href="https://www.thehyundai.com/front/mpe/selectCopnList.thd"><span class="blind">자세히보기</span></a>
+									</li>
+									<li>
+										<span class="tit">H.Point</span>
+										<span class="cont login-only">0P</span>
+										<a href="#" onclick="if(confirm('H.Point의 사용/적립현황은 H.Point 사이트에서 확인할 수 있습니다.\nH.Point 사이트로 이동하시겠습니까?')){window.open('https://www.h-point.co.kr/cu/myh/myPnt.shd?ssoMcustNo=','','');}"><span class="blind">자세히보기</span></a>
+									</li>
+									<li>
+										<span class="tit">더머니</span>
+										<span class="cont login-only">0원</span>
+										<a href="https://www.thehyundai.com/front/mpe/selectHPntTabPage.thd"><span class="blind">자세히보기</span></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- // 20190118 추가 레이어팝업 -->
+
+
+				</li>
+				<li>
+					<a href="http://www.thehyundai.com/CS/eva/evntBnftPageDivide.thd?MainpageGroup=Util&GroupbannerName=GNB_Event&tabNo=1">이벤트/혜택</a>
+				</li>
+				<li>
+					<div class="top-con-quick-basket"><a href="https://www.thehyundai.com/front/odb/basktList.thd?MainpageGroup=Util&GroupbannerName=GNB_Basket">장바구니</a><span class="basket-num" id="quick_baskt_num">0</span></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="top-nav" id="header-gnb-area">
+		
+	</div>
+	<!-- //gnb-area -->
+	
+	<script type="text/javascript" src="https://www.thehyundai.com/js/hdmall/dp/dpo/dqSearch.js?ver=120517"></script>
+	
+	<script type="text/javascript" src="https://www.thehyundai.com/js/hdmall/dp/dpo/dqAutoCompleteNewCommon.js?ver=120517"></script>
+	<script type="text/javascript" src="https://www.thehyundai.com/js/hdmall/dp/dpo/dqAutoCompleteNew.js?ver=120517"></script>
+
+<!-- //header -->
+
+
+</div>
+</div>
+
+
+<script type="text/javascript" src="https://www.thehyundai.com/js/hdmall/co/skyscraper.js?ver=120517"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//장바구니개수
+		$("#quick_baskt_num").html(fnSelectBasktCount());
+		//rcntItemsRearange();
+		hdmallMain();
+
+	});
+</script>
+
+
+    <!-- container area -->
+    <div id="container">
+
+        <h1 class="blind">컨텐츠영역</h1>
+
+        <!--  스페셜 브랜드 샵 -->
+        <div class="sb-shop-type7">
+            <!-- top-box// -->
+            <div class="top-box">
+                <!-- top-area// -->
+                <div class="top-area">
+                    <div class="inner">
+                        <!-- logo-box// -->
+                        <div class="logo">
+                            <h2>
+                                <a onclick="GA_Event('PC_#ThE PET','브랜드_로고','#ThE PET')" href="/front/dpa/searchSectItem.thd?sectId=191775">
+                                    <img src="https://image.thehyundai.com/static/image/spcl/logo191775.png" alt="191775" />
+                                </a>
+                            </h2>
+                        </div>
+                        <!-- //logo-box -->
+                        <!-- catgory top// -->
+                        <div class="top-nav-box">
+                            <ul class="top-nav">
+                                
+                                        <li>
+                                            <a onclick="GA_Event('PC_#ThE PET','메뉴_1DEPTH','FASHION')" href="/front/dpa/searchSectItem.thd?sectId=192018">
+                                                <span>
+                                                    FASHION
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a onclick="GA_Event('PC_#ThE PET','메뉴_1DEPTH','LIVING')" href="/front/dpa/searchSectItem.thd?sectId=192019">
+                                                <span>
+                                                    LIVING
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a onclick="GA_Event('PC_#ThE PET','메뉴_1DEPTH','CARE')" href="/front/dpa/searchSectItem.thd?sectId=192021">
+                                                <span>
+                                                    CARE
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a onclick="GA_Event('PC_#ThE PET','메뉴_1DEPTH','FOOD')" href="/front/dpa/searchSectItem.thd?sectId=192022">
+                                                <span>
+                                                    FOOD
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                            </ul>
+                        </div>
+                        <!-- //catgory top -->
+                    </div>
+                </div>
+                <!-- //top-area -->
+
+                <!-- sub-area// -->
+                <div class="sub-area">
+                    <div class="cont-box">
+                        <div class="inner">
+                            
+                                    <div class="sub-nav-box">
+                                        <div class="sub-nav2dep">
+                                        
+                                            <ul class="list">
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FASHION_티셔츠')" href="/front/dpa/searchSectItem.thd?sectId=192759">티셔츠</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FASHION_아우터')" href="/front/dpa/searchSectItem.thd?sectId=192760">아우터</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FASHION_드레스')" href="/front/dpa/searchSectItem.thd?sectId=192761">드레스</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FASHION_올인원')" href="/front/dpa/searchSectItem.thd?sectId=192762">올인원</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FASHION_ACC')" href="/front/dpa/searchSectItem.thd?sectId=192763">ACC</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FASHION_기타')" href="/front/dpa/searchSectItem.thd?sectId=192764">기타</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="sub-nav-box">
+                                        <div class="sub-nav2dep">
+                                        
+                                            <ul class="list">
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','LIVING_하우스')" href="/front/dpa/searchSectItem.thd?sectId=192766">하우스</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','LIVING_하네스 리드줄')" href="/front/dpa/searchSectItem.thd?sectId=194190">하네스 리드줄</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','LIVING_이동가방')" href="/front/dpa/searchSectItem.thd?sectId=192767">이동가방</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','LIVING_유모차')" href="/front/dpa/searchSectItem.thd?sectId=192768">유모차</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','LIVING_카시트')" href="/front/dpa/searchSectItem.thd?sectId=192769">카시트</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','LIVING_장난감')" href="/front/dpa/searchSectItem.thd?sectId=192975">장난감</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','LIVING_기타')" href="/front/dpa/searchSectItem.thd?sectId=192770">기타</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="sub-nav-box">
+                                        <div class="sub-nav2dep">
+                                        
+                                            <ul class="list">
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','CARE_목욕용품')" href="/front/dpa/searchSectItem.thd?sectId=192771">목욕용품</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','CARE_케어용품')" href="/front/dpa/searchSectItem.thd?sectId=192772">케어용품</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','CARE_기타')" href="/front/dpa/searchSectItem.thd?sectId=192773">기타</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="sub-nav-box">
+                                        <div class="sub-nav2dep">
+                                        
+                                            <ul class="list">
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FOOD_간식')" href="/front/dpa/searchSectItem.thd?sectId=192775">간식</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FOOD_사료')" href="/front/dpa/searchSectItem.thd?sectId=194162">사료</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FOOD_영양식')" href="/front/dpa/searchSectItem.thd?sectId=192776">영양식</a>
+                                                    </li>
+                                                
+                                                    <li>
+                                                        <a onclick="GA_Event('PC_#ThE PET','메뉴_2DEPTH','FOOD_기타')" href="/front/dpa/searchSectItem.thd?sectId=192777">기타</a>
+                                                    </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                
+                        </div>
+                    </div>
+                </div>
+                <!-- //sub-area -->
+            </div>
+            <!-- //top-box -->
+
+            <!-- sub-cont-box// -->
+            <div class="sub-cont-box">
+
+                
+
+                <!-- sb-path// -->
+                <div class="sb-path">
+                    
+                                <div class="path">
+                                    #ThE PET                
+                                </div>
+                            
+                                        <div class="path">
+                                            FOOD
+                                        </div>
+                                 
+                                        <!-- path-select 2-->
+                                        <div class="path-select">
+                                            <a class="item-select" href="/front/dpa/searchSectItem.thd?sectId=192775"><span>간식</span></a>
+                                            <div class="item-list-box">
+                                                <ul class="item-list">
+                                                
+                                                    <li><a href="/front/dpa/searchSectItem.thd?sectId=192022">모두보기</a></li>
+                                                    
+                                                            <li><a href="/front/dpa/searchSectItem.thd?sectId=192775">간식</a></li>
+                                                        
+                                                            <li><a href="/front/dpa/searchSectItem.thd?sectId=194162">사료</a></li>
+                                                        
+                                                            <li><a href="/front/dpa/searchSectItem.thd?sectId=192776">영양식</a></li>
+                                                        
+                                                            <li><a href="/front/dpa/searchSectItem.thd?sectId=192777">기타</a></li>
+                                                        
+                                                </ul>
+                                            </div>
+                                              
+                                        </div>
+                                    
+                </div>
+                <!-- //sb-path -->
+
+            <form name="scrollListForm" id="scrollListForm">
+                <input type="hidden" name="sectId" id="sectId" value="192775" />
+                <input type="hidden" name="page" id="page" value="1" />
+                <input type="hidden" name="regionType" id="regionType" value="" />
+            </form>
+
+                <!-- sb-util-box -->
+                <div class="sb-util-box">
+                    <!-- sort-box -->
+                    <div class="sort-box">
+                        <!-- 활성화된 메뉴에 active 클래스 붙혀주기 -->
+                        <ul>
+                          
+	                            <li><a><span>신상품순</span></a></li>
+	                            <li class="active"><a><span>추천순</span></a></li>
+                            
+                            <li><a><span>높은가격순</span></a></li>
+                            <li><a><span>낮은가격순</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- paging-num-box -->
+                    <div class="paging-num-box">
+                        <span class="c-num"></span>
+                        <span>/</span>
+                        <span class="t-num-top"></span>
+                        <span>개</span>
+                    </div>
+
+                    <!-- paging-control -->
+                    <div class="paging-control">
+                        <a class="btn-prev" onclick="javascript:searchPageItemList(-1)">이전</a>
+                        <div class="current-page"><span class="page-cur-top"></span> / <span class="page-max-top"></span></div>
+                        <a class="btn-next" onclick="javascript:searchPageItemList(1)">다음</a>
+                    </div>
+                </div>
+
+                <!-- product-list start-->
+                <div class='goods-box'>
+                        <ul>
+<li><div class="prod-unit"><div class="img" data-slitmcd='2148393774:192775' data-info='212875:007562:부산점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','2148393774', 'N');return false;"><img src="https://image.thehyundai.com/static/7/7/3/39/48/2148393774_0_480.jpg" alt="[루이독] 동결건조 간식 북어" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','2148393774', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('2148393774', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','2148393774', 'N');return false;">[루이독] 동결건조 간식 북어</a><div class='price-info single'><span>9,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='2147745237:192775' data-info='212875:007562:부산점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','2147745237', 'N');return false;"><img src="https://image.thehyundai.com/static/3/2/5/74/47/2147745237_0_480.JPG" alt="[루이독] 그릭 요거트(스트로베리)" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','2147745237', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('2147745237', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','2147745237', 'N');return false;">[루이독] 그릭 요거트(스트로베리)</a><div class='price-info single'><span>20,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='2148365919:192775' data-info='212875:007562:부산점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','2148365919', 'N');return false;"><img src="https://image.thehyundai.com/static/1/9/5/36/48/2148365919_0_480.JPG" alt="[루이독] 열빙어" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','2148365919', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('2148365919', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','2148365919', 'N');return false;">[루이독] 열빙어</a><div class='price-info single'><span>10,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='2148393546:192775' data-info='212875:007562:부산점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','2148393546', 'N');return false;"><img src="https://image.thehyundai.com/static/4/5/3/39/48/2148393546_0_480.jpg" alt="[루이독] 동결건조 간식 방어" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','2148393546', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('2148393546', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','2148393546', 'N');return false;">[루이독] 동결건조 간식 방어</a><div class='price-info single'><span>13,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+</ul>
+<ul>
+<li><div class="prod-unit"><div class="img" data-slitmcd='2147572545:192775' data-info='212875:007562:부산점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','2147572545', 'N');return false;"><img src="https://image.thehyundai.com/static/4/5/2/57/47/2147572545_0_480.jpg" alt="[루이독]힙스터 시어 케이프 " onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','2147572545', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('2147572545', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','2147572545', 'N');return false;">[루이독]힙스터 시어 케이프 </a><div class='price-info single'><span>57,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span><span class='d2'>무 6</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='2148393897:192775' data-info='212875:007562:부산점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','2148393897', 'N');return false;"><img src="https://image.thehyundai.com/static/9/8/3/39/48/2148393897_0_480.jpg" alt="[루이독] 동결건조 간식 소고기" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','2148393897', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('2148393897', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','2148393897', 'N');return false;">[루이독] 동결건조 간식 소고기</a><div class='price-info single'><span>14,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1557733:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1557733', 'N');return false;"><img src="https://image.thehyundai.com/static/3/7/7/55/A1/40A1557733_0_480.jpg" alt="황태  -애견 수제간식" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1557733', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1557733', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1557733', 'N');return false;">황태  -애견 수제간식</a><div class='price-info single'><span>6,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1540595:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1540595', 'N');return false;"><img src="https://image.thehyundai.com/static/9/5/0/54/A1/40A1540595_0_480.jpg" alt="치카치카 포크칩스-국내산 슬라이스 돼지귀" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1540595', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1540595', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1540595', 'N');return false;">치카치카 포크칩스-국내산 슬라이스 돼지귀</a><div class='price-info single'><span>6,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+</ul>
+<ul>
+<li><div class="prod-unit"><div class="img" data-slitmcd='2141216170:192775' data-info='212875:007562:부산점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','2141216170', 'N');return false;"><img src="https://image.thehyundai.com/static/7/1/6/21/41/2141216170_0_480.jpg" alt="[루이독] 계란 n 야채 푸딩" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','2141216170', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('2141216170', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','2141216170', 'N');return false;">[루이독] 계란 n 야채 푸딩</a><div class='price-info single'><span>18,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1537119:192775' data-info='300376:003766:미아점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1537119', 'N');return false;"><img src="https://image.thehyundai.com/static/1/1/7/53/A1/40A1537119_0_480.jpg" alt="허글-멍멍하누 한우스틱 신제품" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1537119', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1537119', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1537119', 'N');return false;">허글-멍멍하누 한우스틱 신제품</a><div class='price-info single'><span>6,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1538470:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1538470', 'N');return false;"><img src="https://image.thehyundai.com/static/7/4/8/53/A1/40A1538470_0_480.jpg" alt="내추럴트리 노그레인 멀티비타민 300g" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1538470', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1538470', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1538470', 'N');return false;">내추럴트리 노그레인 멀티비타민 300g</a><div class='price-info single'><span>15,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1523925:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1523925', 'N');return false;"><img src="https://image.thehyundai.com/static/2/9/3/52/A1/40A1523925_0_480.jpg" alt="템테이션 고양이간식 85g-고소한 참치맛" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1523925', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1523925', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1523925', 'N');return false;">템테이션 고양이간식 85g-고소한 참치맛</a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+</ul>
+<ul>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1523922:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1523922', 'N');return false;"><img src="https://image.thehyundai.com/static/2/9/3/52/A1/40A1523922_0_480.jpg" alt="템테이션 고양이간식 85g-담백한 연어맛" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1523922', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1523922', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1523922', 'N');return false;">템테이션 고양이간식 85g-담백한 연어맛</a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1523902:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1523902', 'N');return false;"><img src="https://image.thehyundai.com/static/0/9/3/52/A1/40A1523902_0_480.jpg" alt="템테이션 고양이간식 85g-해산물맛" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1523902', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1523902', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1523902', 'N');return false;">템테이션 고양이간식 85g-해산물맛</a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1523899:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1523899', 'N');return false;"><img src="https://image.thehyundai.com/static/9/8/3/52/A1/40A1523899_0_480.jpg" alt="템테이션 고양이간식 60g-헤어볼 (닭고기맛)" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1523899', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1523899', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1523899', 'N');return false;">템테이션 고양이간식 60g-헤어볼 (닭고기맛)</a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1522869:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1522869', 'N');return false;"><img src="https://image.thehyundai.com/static/6/8/2/52/A1/40A1522869_0_480.jpg" alt="필라인 그리니즈 고양이 간식 60g -닭고기" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1522869', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1522869', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1522869', 'N');return false;">필라인 그리니즈 고양이 간식 60g -닭고기</a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+</ul>
+<ul>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1522856:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1522856', 'N');return false;"><img src="https://image.thehyundai.com/static/5/8/2/52/A1/40A1522856_0_480.jpg" alt="필라인 그리니즈 고양이간식 60g-참치" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1522856', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1522856', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1522856', 'N');return false;">필라인 그리니즈 고양이간식 60g-참치</a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1514574:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1514574', 'N');return false;"><img src="https://image.thehyundai.com/static/7/5/4/51/A1/40A1514574_0_480.jpg" alt="셰프 쿠킹 소고기치즈고구마 400g" onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1514574', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1514574', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1514574', 'N');return false;">셰프 쿠킹 소고기치즈고구마 400g</a><div class='price-info single'><span>9,900<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1514612:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1514612', 'N');return false;"><img src="https://image.thehyundai.com/static/1/6/4/51/A1/40A1514612_0_480.jpg" alt=" 쫄깃한 한우콜라겐껌 블루베리 100g " onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1514612', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1514612', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1514612', 'N');return false;"> 쫄깃한 한우콜라겐껌 블루베리 100g </a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+<li><div class="prod-unit"><div class="img" data-slitmcd='40A1514620:192775' data-info='118328:013368:판교점:1012:식품'><a href='#' onclick="javascript:itemDetailView('192775','40A1514620', 'N');return false;"><img src="https://image.thehyundai.com/static/2/6/4/51/A1/40A1514620_0_480.jpg" alt=" 쫄깃한 한우콜라겐껌 연어 100g " onerror="noImage(this, 'https://image.thehyundai.com/hdmall/images/pd/no_image_480x480.jpg')"/><span class='bg'></span></a><span class='hover-info'><a href='#' onclick="javascript:itemDetailViewWin('192775','40A1514620', 'N', '');return false;"></a><a href='#' target='찜하기' onclick="javascript:sltdItemDone('40A1514620', '192775', event); " class='zzim'><span>찜하기</span></a></div><div class='info'><a href='#' class="title ellipsis" onclick="javascript:itemDetailView('192775','40A1514620', 'N');return false;"> 쫄깃한 한우콜라겐껌 연어 100g </a><div class='price-info single'><span>4,000<i>원</i></span></div><div class='addinfo'><div class='gift ellipsis no' title=''></div><div class='flag'><span class='d5'>삼성 7%</span></div></div></div></li>
+</ul>
+</ul>
+
+                </div>
+                <!-- //product-list end -->
+
+                <!-- sb-util-box -->
+                <div class="sb-util-box">
+                    <!-- paging-num-box -->
+                    <div class="paging-num-box">
+                        <span class="c-num"></span>
+                        <span>/</span>
+                        <span class="t-num-bot"></span>
+                        <span>개</span>
+                    </div>
+
+                    <!-- paging-control -->
+                    <div class="paging-control">
+                        <a class="btn-prev" onclick="javascript:searchPageItemList(-1)">이전</a>
+                        <div class="current-page"><span class="page-cur-bot"></span> / <span class="page-max-bot"></span></div>
+                        <a class="btn-next" onclick="javascript:searchPageItemList(1)">다음</a>
+                    </div>
+                </div>
+                <!-- //sb-util-box -->
+
+            </div>
+            <!-- //sub-cont-box -->
+
+            <!-- bottom-box// -->
+            
+            <!-- //bottom-box -->
+        </div>
+    </div>
+    <!-- footer -->
+    
+
+<!-- skip-navigation -->
+<!-- <div id="skip-navigation"> -->
+<!-- 	<p><a href="#header-wrap">헤더영역 바로가기</a></p> -->
+<!-- 	<p><a href="#header-gnb-area">GNB영역 바로가기</a></p> -->
+<!-- 	<p><a href="#container">컨텐츠영역 바로가기</a></p> -->
+<!-- 	<p><a href="#footer">푸터영역 바로가기</a></p> -->
+<!-- </div> -->
+<!-- //skip-navigation -->
+
+	<!-- footer -->
+	<div id="footer">
+		<h1 class="blind">푸터영역</h1>
+		<div class="top">
+			<div class="row">
+				<div class="hyundai-menu">
+					<span class="tit">
+						<a href="javascript:;" onclick="javascript:GA_Event('PC_공통','푸터_메뉴','현대백화점그룹'); dummyLogCatch('http://www.ehyundai.com/newPortal/ir', 'Footer', 'group', 'blank', 'Y', null)">현대백화점그룹</a>
+					</span>
+					<ul>
+						
+						<li><a onclick="GA_Event('PC_공통','푸터_메뉴','공지사항');" href="http://www.thehyundai.com/front/ccb/noticeList.thd?MainpageGroup=Footer&GroupbannerName=notice">공지사항</a></li>
+						
+						<li><a href="javascript:;" onclick="javascript:GA_Event('PC_공통','푸터_메뉴','윤리경영'); dummyLogCatch('http://www.ehyundai.com/newPortal/ir/ETH/ETH000001.do?ir=3', 'Footer', 'legal', 'blank', 'Y', null)">윤리경영</a></li>
+						<li><a href="javascript:;" onclick="javascript:GA_Event('PC_공통','푸터_메뉴','사회공헌'); dummyLogCatch('http://www.ehyundai.com/newPortal/csr/main.do', 'Footer', 'legal', 'blank', 'Y', null)">사회공헌</a></li>
+						<li><a onclick="GA_Event('PC_공통','푸터_메뉴','이용약관');" href="http://www.thehyundai.com/front/cua/viewPolicyPup.thd?view=1&MainpageGroup=Footer&GroupbannerName=agree" data-toggle="winpopup" data-api="center,900,770,scrollbars" target="_blank">이용약관</a></li>
+						<li><a onclick="GA_Event('PC_공통','푸터_메뉴','개인정보 처리방침');" href="http://www.thehyundai.com/front/cua/viewPolicyPup.thd?view=2&MainpageGroup=Footer&GroupbannerName=private" data-toggle="winpopup" data-api="center,900,770,scrollbars" target="_blank"><strong>개인정보 처리방침</strong></a></li>
+					</ul>
+				</div>
+
+				<!-- 2016-07-28// -->
+				<div class="family">
+					<a href="#" onclick="javascript:GA_Event('PC_공통','푸터_메뉴','FAMILY SITE'); $(this).parents('.family').toggleClass('current');return false;">FAMILY SITE <i></i></a>
+					<div class="family-site">
+						<!-- <h4>쇼핑몰 site</h4> -->
+						<div class="scrollable">
+							<ul>
+							    <li><a onclick="GA_Event('PC_공통','패밀리사이트','현대식품관 투홈');" href="http://tohome.thehyundai.com" target="_blank">현대식품관 투홈</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대Hmall');" href="https://www.hmall.com" target="_blank">현대Hmall</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대백화점 DUTY FREE');" href="https://www.hddfs.com/shop/dm/main.do?ptnrChlCd=00003905" target="_blank">현대백화점 DUTY FREE</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','더한섬닷컴');" href="http://www.thehansome.com" target="_blank">더한섬닷컴</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대리바트몰');" href="http://mall.hyundailivart.co.kr" target="_blank">현대리바트몰</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대렌탈케어');" href="http://www.hyundairentalcare.co.kr" target="_blank">현대렌탈케어</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','H패션몰');" href="http://www.hfashionmall.com/sfmweb/" target="_blank">H패션몰</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대어린이책미술관');" href="https://www.hmoka.org" target="_blank">현대어린이책미술관</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','그리팅');" href="https://www.greating.co.kr/" target="_blank">그리팅</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','한섬EQL');" href="https://www.eqlstore.com/main" target="_blank">한섬EQL</a></li>
+							</ul>
+						</div>
+ 
+						<h4>관계사 site</h4>
+						<div class="scrollable">
+							<ul>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대백화점 그룹');" href="http://www.ehyundai.com/newPortal/ir" target="_blank">현대백화점 그룹</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대백화점');" href="http://www.ehyundai.com" target="_blank">현대백화점</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대홈쇼핑');" href="https://www.hmall.com" target="_blank">현대홈쇼핑</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대그린푸드');" href="http://www.hyundaigreenfood.com" target="_blank">현대그린푸드</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','한섬');" href="http://www.thehansome.com" target="_blank">한섬</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대리바트');" href="http://www.hyundailivart.co.kr" target="_blank">현대리바트</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','지누스');" href="https://zinus.co.kr/" target="_blank">지누스</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대L&amp;C');" href="https://www.hyundailnc.com/company" target="_blank">현대L&amp;C</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대렌탈케어');" href="http://www.hyundairentalcare.co.kr" target="_blank">현대렌탈케어</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대드림투어');" href="http://www.hyundaidreamtour.com" target="_blank">현대드림투어</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대에버다임');" href="http://www.everdigm.com" target="_blank">현대에버다임</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','씨엔에스푸드시스템');" href="http://www.cnsfoodsystem.co.kr" target="_blank">씨엔에스푸드시스템</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대캐터링시스템');" href="http://www.hyundaicatering.co.kr" target="_blank">현대캐터링시스템</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대IT&E');" href="http://www.hyundai-ite.com/index.jsp" target="_blank">현대IT&E</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대퓨처넷');" href="https://www.hyundaifuturenet.co.kr" target="_blank">현대퓨처넷</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대이지웰');" href="https://www.hyundaiezwel.com/renew/main.ez" target="_blank">현대이지웰</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','현대바이오랜드');" href="http://www.hyundaibioland.co.kr/main" target="_blank">현대바이오랜드</a></li>
+								<li><a onclick="GA_Event('PC_공통','패밀리사이트','벤디스');" href="https://sikdae.com" target="_blank">벤디스</a></li> <!-- 20230113 신규계열사 벤디스 추가-->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- //2016-07-28 -->
+
+			</div>
+
+		</div>
+		<div class="bottom">
+			<div class="row">
+				<div class="logo">
+					<a href="http://www.thehyundai.com/Home.html"><img src="https://image.thehyundai.com/hdmall/images/co/img_bottom_logo.png" alt="THE HYUNDAI"></a>
+				</div>
+				<div class="info">
+					<!-- 171130 수정// -->
+					<p>주식회사 현대백화점 대표이사 : 정지선, 김형종 서울시 강남구 테헤란로98길 12</p>
+                    <p>사업자등록번호 : 211-87-21455 <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2118721455" data-toggle="winpopup" data-api="center,750,700,scrollbars" target="_blank">[사업자정보 확인]</a>  통신판매업신고 : 2010-서울강남-01882</p>
+					<p>홈페이지/앱 문의 : <a href="mailto:customerservice@thehyundai.com">customerservice@thehyundai.com</a>
+					   고객센터 : <strong>1800-2233</strong></p>
+                    <p>호스팅서비스 : (주)현대백화점</p>
+					<p class="copy">CopyrightⓒHyundai Department Store. All rights reserved.</p>
+					<!-- //171130 수정 -->
+				</div>
+
+				<div class="sns-quickgo">
+					<ul>
+						<li><a href="javascript:;" onclick="javascript:GA_Event('PC_공통','패밀리사이트','FACEBOOK'); dummyLogCatch('https://www.facebook.com/eHYUNDAI/', 'Footer', 'facebook', 'blank', 'Y', null)"><i class=" facebook">facebook</i></a></li>
+						<li><a href="javascript:;" onclick="javascript:GA_Event('PC_공통','패밀리사이트','TWITTER'); dummyLogCatch('https://twitter.com/eHyundai_tweets/', 'Footer', 'twitter', 'blank', 'Y', null)"><i class=" twitter">트위터</i></a></li>
+						<!-- 2017-01-25 핀터레스트 제거
+						<li><a href="javascript:;" onclick="javascript:dummyLogCatch('https://www.pinterest.com/hyundaidept/', 'Footer', 'pinterest', 'blank', 'Y', null)"><i class=" pinterest">pinterest</i></a></li>
+						-->
+						<!-- 2017-01-25 인스타그램 추가 -->
+						<li><a href="javascript:;" onclick="javascript:GA_Event('PC_공통','패밀리사이트','INSTAGRAM'); dummyLogCatch('https://www.instagram.com/the_hyundai/', 'Footer', 'instagram', 'blank', 'Y', null)"><i class=" instagram">instagram</i></a></li>
+						<li><a href="javascript:;" onclick="javascript:GA_Event('PC_공통','패밀리사이트','TISTORY'); dummyLogCatch('http://thehyundai.tistory.com/', 'Footer', 'blog', 'blank', 'Y', null)"><i class=" tistory">tistory</i></a></li>
+					</ul>
+					
+				</div>
+
+
+
+			</div>
+            <div class="certi-wrap row">
+                <p class="certi">
+                    <a href="https://kolsa.or.kr/%ED%9A%8C%EC%9B%90%EC%82%AC-%ED%98%84%ED%99%A9/?pageid=3&category1=%EC%A0%95%ED%9A%8C%EC%9B%90&mod=list" target="_blank"><img src="https://image.thehyundai.com/hdmall/images/co/img_footer_v2_certi_01.png" alt="사단법인 한국온라인 쇼핑협회 정회원사"></a>
+                    <span class="scol">|</span>
+                    <a href="https://www.kca.go.kr/ccm/certSystemOutlineView.do" target="_blank"><img src="https://image.thehyundai.com/hdmall/images/co/img_footer_v2_certi_02.png" alt="공정거래위원회 CCm 인증 [소비자중심 경영우수기업]"></a>
+                    <span class="scol">|</span>
+					<a target="_blank"><img src="https://image.thehyundai.com/hdmall/images/co/img_footer_certi_03.png" alt="위해상품 차단 시스템 운영매장"></a>
+					<span class="scol">|</span>
+					<a target="_blank"><img src="https://image.thehyundai.com/hdmall/images/co/img_footer_certi_04.png" alt="모바일 어워드 코리아 2016"></a>
+                </p>
+                <p class="checkguarantee">
+                    <span>
+                        고객님의 안전거래를 위해 현금결제시 우리은행과 채무지급보증계약을<br>
+                        체결하여 안전거래를 보장하고 있습니다.
+                    </span>
+                    <!--http://www.thehyundai.com/html/contents/-->
+                    <a href="#" onclick="javascript:popover_ajax('https://www.thehyundai.com/html/contents/guarantee.html', 750);return false;">서비스 가입사실 확인</a>
+                </p>
+            </div>
+		</div>
+
+	</div>
+	<!-- //footer -->
+
+
+
+<!--[if lte IE 9]>
+<script src="https://www.thehyundai.com/js/common_ie.js"></script>
+<![endif]-->
+<!--[if lt IE 8]>
+	<link rel="stylesheet" href="https://www.thehyundai.com/cssssl/ie7.css">
+	<script type="text/javascript" src="https://www.thehyundai.com/js/IE8.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="https://www.thehyundai.com/js/hdmall/co/makePCookie.js"></script>
+
+<!-- 베네피아 iframe 중복 스크롤 방지 script-->
+<script language='Javascript' type='text/javascript'>
+	var visitReferCodeFooter = getCookie('EHReferCode');
+	if(visitReferCodeFooter == 'B11'){
+		function resizeBenepiaFrame(){
+			var h = document.documentElement.scrollHeight;
+			var w = document.documentElement.scrollWidth;
+			if (parent.frames["beneFrame"] != undefined) {
+				parent.frames["beneFrame"].resizeTo(w,h);
+			}
+		}
+		resizeBenepiaFrame();
+	}
+
+</script>
+
+<!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+	var visitReferCode = getCookie('EHReferCode');
+	if(visitReferCode == '441' || visitReferCode == '190'){
+		if (!wcs_add) var wcs_add={};
+		wcs_add["wa"] = "s_1999141c8036";
+		if (!_nasa) var _nasa={};
+		wcs.inflow();
+		wcs_do(_nasa);
+ 	}
+ </script>
+
+<!-- //이탈방지솔루션, NHN모어(More) -->
+<!--  <script>
+	var _croID = '5cedeb70e4b059f6b521cd33';
+	console.log("footer");
+	function mcroPushEvent(n)
+		{"undefined"!=typeof globalCRO?
+		globalCRO.sendEvent(n):("undefined"==typeof gCro&&(window.gCro=new Array),gCro.push(n))}
+	function _cro_initialize(){window.globalCRO=new MCro,globalCRO.jsInit(_croID)}
+	console.log("footerend");
+</script>
+<script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script> -->
+<!-- //이탈방지솔루션, NHN모어(More) -->
+
+<!-- NABUS 공통 SCRIPT -->
+<script type="text/javascript" src="https://sc.11h11m.net/s/E5455.js"></script>
+
+<!-- GA 구축 프로젝트 공통 js 추가, 21.12.09 -->
+<script src="/js/hdmall/co/googleAnalyticsBuilder.js"></script>
+
+<!-- SSO 회원화 전환가입 팝업 호출, 22.02.13 -->
+<script type="text/javascript">
+$(function(){
+	if(typeof isLogin != "undefined"){      //로그인 체크 함수가 존재할 경우
+        if(isLogin() == 'false' && $.cookie('conversionSignupOpened') == 'Y'){
+            _setCookieAt00('conversionSignupOpened', 'N', 1);       //로그아웃할때 쿠키 날릴 것  -> 비로그인 상태일때 'N'으로 쿠키 설정
+        }
+    }
+    
+            if(typeof callConversionSignupPopup != "undefined"){
+                callConversionSignupPopup();
+            }
+        
+});
+</script>
+
+<!-- 구글 전환스크립트 -->
+<!-- Global site tag (gtag.js) - Google Ads: 879261918 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-879261918"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-879261918');
+  gtag('config', 'UA-69960332-7');
+</script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKDB5QC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+    <!-- //footer -->
+</body>
+</html>

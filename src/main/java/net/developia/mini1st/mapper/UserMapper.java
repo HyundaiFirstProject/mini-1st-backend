@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Options;
 @Mapper
 public interface UserMapper {
     @Insert("INSERT INTO users (email, password, nickname) VALUES (#{email}, #{password}, #{nickname})")
-    @Options(useGeneratedKeys = true, keyProperty = "user_id")
+    @Options(useGeneratedKeys = true, keyProperty = "user_no", keyColumn = "user_no")
     void insertUser(UserDTO userDTO);
 
 

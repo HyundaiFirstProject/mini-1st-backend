@@ -27,12 +27,4 @@ public class CrawlTest {
 		System.out.println(el);
 	}
 	
-	static WebDriver getChromeDriver() {
-		if (ObjectUtils.isEmpty(System.getProperty("webdriver.chrome.driver")))
-		{
-			System.setProperty("webdrivcer.chrome.driver", WEB_DRIVER_PATH);
-		}
-		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.set
-	}
 }

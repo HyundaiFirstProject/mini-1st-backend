@@ -48,10 +48,10 @@ public class CrawlTest2 {
         driver.get("https://heodolf.tistory.com/101");
         
         // 웹페이지에서 글제목 가져오기
-        WebElement page1_title = driver.findElementByXPath("//*[@id=\"content\"]/div[1]/div[1]/div/h1");
-        if( page1_title != null  ) {
-            System.out.println( page1_title.getText() );            
-        }
+       // WebElement page1_title = driver.findElementByXPath("//*[@id=\"content\"]/div[1]/div[1]/div/h1");
+       // if( page1_title != null  ) {
+        //    System.out.println( page1_title.getText() );            
+        //}
         // 웹페이지 소스 출력
         //System.out.println( driver.getPageSource() );
         
@@ -67,10 +67,10 @@ public class CrawlTest2 {
         driver.get("https://heodolf.tistory.com/102");
         
         // 웹페이지에서 글제목 가져오기
-        WebElement page2_title = driver.findElementByXPath("//*[@id=\"content\"]/div[1]/div[1]/div/h1");
-        if( page1_title != null  ) {
-            System.out.println( page2_title.getText() );            
-        }
+//        WebElement page2_title = driver.findElementByXPath("//*[@id=\"content\"]/div[1]/div[1]/div/h1");
+//        if( page1_title != null  ) {
+//            System.out.println( page2_title.getText() );            
+//        }
         
         // 웹페이지 소스 출력
         //System.out.println( driver.getPageSource() );

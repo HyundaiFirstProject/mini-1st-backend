@@ -5,6 +5,7 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
 @ToString
@@ -20,5 +21,5 @@ public class ReviewDTO {
 	private	Date	updatedate;	//수정일
 	private	String	stars;		//별점
 	private	long	user_no;	//작성자번호
-	private	String	itemID;		//아이템번호
+	private	long	itemid;		//아이템번호
 }

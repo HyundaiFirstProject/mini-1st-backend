@@ -11,4 +11,9 @@
 		insert into review_board(postid, title, content, writer, stars, user_no, itemid)
 		values (seq_review.nextval, #{title}, #{content}, #{writer}, #{stars}, #{user_no}, #{itemid})
 	</insert>
+	<select id="readReview" resultType="net.developia.mini1st.domain.ReviewDTO">
+		select	postid, title, content, writer, views, likes, img, regdate, updatedate, stars, user_no, itemID
+		from	review_board
+		where	postid = #{postid}
+	</select>
 </mapper>

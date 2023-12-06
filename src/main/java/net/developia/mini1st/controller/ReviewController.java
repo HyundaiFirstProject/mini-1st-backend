@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -51,4 +53,16 @@ public class ReviewController {
 				: new ResponseEntity<ReviewDTO>(HttpStatus.UNAUTHORIZED);
 	}
 	
+	// 후기 게시판 글 상세보기
+	@GetMapping("/bestReviewDetail")
+	public ResponseEntity<ReviewDTO> readReview(@RequestParam("postID") long postid){
+		log.info("read Review : " + postid);
+		try {
+			ReviewDTO dto = service.readReview(postid);
+			return new ResponseEntity<ReviewDTO>(dto, HttpStatus.OK);
+		}catch(Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<ReviewDTO>(HttpStatus.NOT_FOUND);
+		}
+	}
 }

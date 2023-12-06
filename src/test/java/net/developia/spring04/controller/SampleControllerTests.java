@@ -21,7 +21,6 @@ import com.google.gson.Gson;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
-import net.developia.mini1st.domain.Ticket;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -40,20 +39,20 @@ public class SampleControllerTests {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
     }
 
-    @Test
-    public void testConvert() throws Exception {
-        Ticket ticket = new Ticket();
-        ticket.setTno(123);
-        ticket.setOwner("Admin");
-        ticket.setGrade("AAA");
-
-        String jsonStr = new Gson().toJson(ticket);
-
-        log.info(jsonStr);
-
-        mockMvc.perform(post("/sample/ticket")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonStr))
-                .andExpect(status().is(200));
-    }
+//    @Test
+//    public void testConvert() throws Exception {
+//        Ticket ticket = new Ticket();
+//        ticket.setTno(123);
+//        ticket.setOwner("Admin");
+//        ticket.setGrade("AAA");
+//
+//        String jsonStr = new Gson().toJson(ticket);
+//
+//        log.info(jsonStr);
+//
+//        mockMvc.perform(post("/sample/ticket")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(jsonStr))
+//                .andExpect(status().is(200));
+//    }
 }

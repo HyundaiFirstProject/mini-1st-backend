@@ -24,13 +24,15 @@ public class MyPageController {
 	@GetMapping(value="/getUserInfo/{userno}",
 				produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserDTO> getUserInfo(@PathVariable("userno") int user_no){
+		
 		log.info("get user info : " + user_no);
 		try {
 			UserDTO dto = service.getUserInfo(user_no);
+			log.info("user => " + dto.toString());
+			return new ResponseEntity<UserDTO>(dto, HttpStatus.OK);
 		}catch(Exception e) {
 			log.info(e.getMessage());
+			return new ResponseEntity<UserDTO>(HttpStatus.UNAUTHORIZED);
 		}
-		log.info("user => " + dto.toString());
-		return new ResponseEntity<UserDTO>(dto, HttpStatus.OK);
 	}
 }

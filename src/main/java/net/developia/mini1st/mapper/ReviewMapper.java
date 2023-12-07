@@ -10,4 +10,6 @@ public interface ReviewMapper {
 	public int createReview(ReviewDTO dto);
 
 	public ReviewDTO readReview(long postid);
+
+	public int updateReview(ReviewDTO dto);
 }

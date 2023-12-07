@@ -16,4 +16,9 @@
 		from	review_board
 		where	postid = #{postid}
 	</select>
+	<update id="updateReview">
+    update review_board 
+    set title=#{title}, content=#{content}, stars=#{stars}, itemid=#{itemid}
+    where postid=#{postid}
+	</update>
 </mapper>

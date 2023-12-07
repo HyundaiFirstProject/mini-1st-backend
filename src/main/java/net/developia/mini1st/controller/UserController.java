@@ -33,17 +33,17 @@ public class UserController {
     public ResponseEntity<Map<String, String>> signUp(@RequestBody UserDTO userDTO) {
         try {
             userService.signUp(userDTO);
-            // �쉶�썝媛��엯 �꽦怨� �떆
+            // 회원가입 성공 시
             Map<String, String> response = new HashMap<>();
             response.put("status", "200");
-            response.put("description", "�쉶�썝媛��엯 �꽦怨�");
+            response.put("description", "회원가입 성공");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            // �쉶�썝媛��엯 �떎�뙣 �떆
+        	// 회원가입 실패 시
             log.info(e.getMessage());
             Map<String, String> response = new HashMap<>();
             response.put("status", "422");
-            response.put("description", "�쉶�썝媛��엯 �떎�뙣");
+            response.put("description", "회원가입 실패");
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
         }
     }

@@ -16,8 +16,8 @@
         -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521/xepdb1"></property>
-		<property name="username" value="ace"></property>
-		<property name="password" value="ace"></property>
+		<property name="username" value="tester2"></property>
+		<property name="password" value="tester2"></property>
 	</bean>
 
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">

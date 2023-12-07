@@ -20,10 +20,12 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final EmailSendService emailSendService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EmailSendService emailSendService) {
         this.userService = userService;
+        this.emailSendService = emailSendService;
     }
 
     @PostMapping("/signup")
@@ -61,5 +63,21 @@ public class UserController {
             response.put("description", "서버 오류");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+    
+    @PostMapping("/sendEmail")
+    public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailDTO emailDTO) {
+        Map<String, String> response = new HashMap<>();
+    	try {
+    		emailSendService.sendSimpleMessage(emailDTO.getEmail(), emailDTO.getRandNum());
+    		response.put("status", "200");
+            response.put("description", "이메일 전송 선공");
+            return ResponseEntity.ok(response);
+    	}
+    	catch (Exception e){
+    		response.put("status", "500");
+			response.put("description", "Internal Server Error");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    	}
     }
 }

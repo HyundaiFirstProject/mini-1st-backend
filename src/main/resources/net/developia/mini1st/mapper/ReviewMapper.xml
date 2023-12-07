@@ -11,4 +11,15 @@
 		insert into review_board(postid, title, content, writer, stars, user_no, itemid)
 		values (seq_review.nextval, #{title}, #{content}, #{writer}, #{stars}, #{user_no}, #{itemid})
 	</insert>
+	
+	<select id="getBestReview" resultType="net.developia.mini1st.domain.ReviewDTO">
+		<![CDATA[
+    		SELECT postid, title, img, stars, likes
+    		FROM (
+        		SELECT postid, title, img, stars, likes
+        		FROM review_board
+        		ORDER BY likes DESC
+    		) WHERE ROWNUM <= 4
+    	]]>
+	</select>
 </mapper>

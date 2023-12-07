@@ -17,7 +17,7 @@ import net.developia.mini1st.service.MyPageService;
 @RequestMapping("/api")
 @Log
 public class MyPageController {
-	
+	//깃허브 테스트
 	@Autowired
 	private MyPageService service;
 	

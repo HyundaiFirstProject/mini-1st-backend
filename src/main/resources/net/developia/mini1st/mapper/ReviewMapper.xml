@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.developia.mini1st.mapper.ReviewMapper">
+	<select id="getBestReview" resultType="net.developia.mini1st.domain.ReviewDTO">
+		<![CDATA[
+    		SELECT postid, title, img, stars, likes
+    		FROM (
+        		SELECT postid, title, img, stars, likes
+        		FROM review_board
+        		ORDER BY likes DESC
+    		) WHERE ROWNUM <= 4
+    	]]>
+	</select>
+</mapper>

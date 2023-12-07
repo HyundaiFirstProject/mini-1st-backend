@@ -12,4 +12,6 @@ public interface ReviewService {
 	public ReviewDTO readReview(long postid);
 
 	public int updateReview(ReviewDTO dto);
+
+	public int deleteReview(long postid);
 }

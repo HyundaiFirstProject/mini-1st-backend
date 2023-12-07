@@ -33,4 +33,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.updateReview(dto);
 	}
 
+	@Override
+	public int deleteReview(long postid) {
+		return mapper.deleteReview(postid);
+	}
+
 }

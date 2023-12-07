@@ -21,4 +21,8 @@
     set title=#{title}, content=#{content}, stars=#{stars}, itemid=#{itemid}
     where postid=#{postid}
 	</update>
+	<delete id="deleteReview">
+		delete from review_board
+		where postid=#{postid}
+	</delete>
 </mapper>

@@ -8,4 +8,6 @@ public interface ReviewMapper {
 	public List<ReviewDTO> getReviewList();
 
 	public int createReview(ReviewDTO dto);
+
+	public List<ReviewDTO> getBestReview();
 }

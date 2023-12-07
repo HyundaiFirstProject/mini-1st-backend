@@ -1,6 +1,8 @@
 package net.developia.mini1st.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,12 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService service;
+	
+	@Autowired
+	public ReviewController(ReviewService reviewService) {
+		this.service = reviewService;
+	}
+	
 	
 	// 후기 게시판 게시글 리스트 불러오기(아직 페이징 X)
 	@GetMapping(value="/bestReviewList",
@@ -51,4 +59,19 @@ public class ReviewController {
 				: new ResponseEntity<ReviewDTO>(HttpStatus.UNAUTHORIZED);
 	}
 	
+	
+	@GetMapping("/bestReviews")
+	public ResponseEntity<Map<String, Object>> getBestReviews(){
+		Map<String, Object> response = new HashMap<>();
+		try {
+			response.put("status", "200");
+			response.put("description", "��ǥ �ı� �Խù�");
+			response.put("data", service.getBestReview());
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+            response.put("status", "500");
+			response.put("description", "Internal Server Error");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
 }

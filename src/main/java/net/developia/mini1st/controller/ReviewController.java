@@ -40,7 +40,7 @@ public class ReviewController {
 		}
 	}
 	
-	// 후기 게시판 글 등록
+	// 후기 게시판 글 등록 (Create)
 	@PostMapping(value="/bestReviewsPost"
 				,produces = MediaType.APPLICATION_JSON_VALUE
 				,consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -53,7 +53,7 @@ public class ReviewController {
 				: new ResponseEntity<ReviewDTO>(HttpStatus.UNAUTHORIZED);
 	}
 	
-	// 후기 게시판 글 상세보기
+	// 후기 게시판 글 상세보기 (Read)
 	@GetMapping("/bestReviewsDetail")
 	public ResponseEntity<ReviewDTO> readReview(@RequestParam("postID") long postid){
 		log.info("read Review : " + postid);
@@ -63,6 +63,28 @@ public class ReviewController {
 		}catch(Exception e) {
 			log.info(e.getMessage());
 			return new ResponseEntity<ReviewDTO>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	// 후기 게시판 글 수정(Update)
+	@PostMapping(value="/bestReviewsUpdate", consumes = "application/json")
+	public ResponseEntity<String> updateReview(@RequestBody ReviewDTO dto){
+		log.info("update Review : " + dto.getPostid());
+		// 수정 가능 항목(RequestBody) : 사진(img), 제목(title), 내용(content), 별점(star) , 제품번호(itemID)
+		
+		try {
+	        // 해당 정보를 사용하여 업데이트 
+	        int updateCount = service.updateReview(dto);
+	        // 업데이트가 성공하면 OK(200) 응답을 반환
+	        if (updateCount == 1) {
+	            return new ResponseEntity<>("success", HttpStatus.OK);
+	        } else {
+	            // 업데이트가 실패하면 UNAUTHORIZED(401) 응답을 반환
+	            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	        }
+		}catch(Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 }

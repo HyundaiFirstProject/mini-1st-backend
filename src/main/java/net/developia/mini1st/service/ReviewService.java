@@ -10,4 +10,6 @@ public interface ReviewService {
 	public int register(ReviewDTO dto);
 
 	public ReviewDTO readReview(long postid);
+
+	public int updateReview(ReviewDTO dto);
 }

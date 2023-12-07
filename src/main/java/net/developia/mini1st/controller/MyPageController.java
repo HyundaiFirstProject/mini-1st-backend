@@ -17,7 +17,7 @@ import net.developia.mini1st.service.MyPageService;
 @RequestMapping("/api")
 @Log
 public class MyPageController {
-	
+	//±êÇãºê Çª½Ã Å×½ºÆ®
 	@Autowired
 	private MyPageService service;
 	

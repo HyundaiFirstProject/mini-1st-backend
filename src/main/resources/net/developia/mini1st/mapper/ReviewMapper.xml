@@ -25,4 +25,7 @@
 		delete from review_board
 		where postid=#{postid}
 	</delete>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from review_board where postid > 0
+	</select>
 </mapper>

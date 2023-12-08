@@ -31,5 +31,9 @@ public class ReviewReplyServiceImpl implements ReviewReplyService{
 	public ReviewReplyDTO getReply(long rno) {
 		return mapper.getReply(rno);
 	}
+	@Override
+	public int deleteReply(long rno) {
+		return mapper.deleteReply(rno);
+	}
 
 }

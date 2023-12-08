@@ -24,4 +24,7 @@
 				,updatedate=sysdate
 		where	rno=#{rno}
 	</update>
+	<delete id="deleteReply">
+		delete	from review_reply where rno=#{rno}
+	</delete>
 </mapper>

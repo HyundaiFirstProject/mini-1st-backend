@@ -16,4 +16,6 @@ public interface ReviewReplyService {
 
 	public ReviewReplyDTO getReply(long rno);
 
+	public int deleteReply(long rno);
+
 }

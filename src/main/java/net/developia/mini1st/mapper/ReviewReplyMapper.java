@@ -14,4 +14,6 @@ public interface ReviewReplyMapper {
 
 	public ReviewReplyDTO getReply(long rno);
 
+	public int deleteReply(long rno);
+
 }

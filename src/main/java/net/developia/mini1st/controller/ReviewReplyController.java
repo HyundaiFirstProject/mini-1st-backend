@@ -27,7 +27,7 @@ public class ReviewReplyController {
 	@Autowired
 	private ReviewReplyService service;
 	
-	// 후기 게시판 댓글 등록(Create) - 현재 오류나고있음
+	// 후기 게시판 댓글 등록(Create)
 	@PostMapping(value="/bestReviewsCommentsUpload", 
 			consumes = "application/json")
 	public ResponseEntity<ReviewReplyDTO> createReply(@RequestBody ReviewReplyDTO dto){
@@ -36,7 +36,7 @@ public class ReviewReplyController {
 		System.out.println("컨트롤러 createReply 호출....");
 		System.out.println("ReplyDTO -> " + dto);
 		System.out.println("========= Controller end ========");
-		int createCount = service.register(dto);
+		int createCount = service.createReply(dto);
 		return (createCount == 1)? 
 				new ResponseEntity<ReviewReplyDTO>(HttpStatus.OK)
 				: new ResponseEntity<ReviewReplyDTO>(HttpStatus.UNAUTHORIZED);

@@ -6,7 +6,7 @@ import net.developia.mini1st.domain.ReviewReplyDTO;
 
 public interface ReviewReplyService {
 
-	int register(ReviewReplyDTO dto);
+	int createReply(ReviewReplyDTO dto);
 
 	List<ReviewReplyDTO> getReplyList(long postid);
 

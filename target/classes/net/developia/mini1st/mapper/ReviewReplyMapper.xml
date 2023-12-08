@@ -13,4 +13,15 @@
 		from	review_reply
 		where  	postid = #{postid}
 	</select>
+	<select id="getReply" resultType="net.developia.mini1st.domain.ReviewReplyDTO">
+		select 	rno, writer, reply, likes, regdate, updatedate, postid
+		from	review_reply
+		where  	rno = #{rno}
+	</select>
+	<update id="updateReply">
+		update	review_reply
+		set		reply=#{reply}
+				,updatedate=sysdate
+		where	rno=#{rno}
+	</update>
 </mapper>

@@ -54,4 +54,25 @@ public class ReviewReplyController {
 			return new ResponseEntity<List<ReviewReplyDTO>>(HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
+	// 후기 게시판 댓글 수정(UPDATE)
+	@PostMapping(value="/bestReviewsCommentsUpdate",
+				consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateReply(@RequestBody ReviewReplyDTO dto){
+		// 넘어오는 정보 : id(작성자 번호), rno(댓글 번호), postid(원글 번호), content(댓글 내용)
+		System.out.println("updateReply 호출(Controller)....");
+		long	rno = dto.getRno();
+		ReviewReplyDTO newDTO = service.getReply(rno);
+		String	reply = dto.getReply();
+		newDTO.setReply(reply); // 댓글 내용 수정
+		System.out.println("dto(Controller) -> " + dto.toString());
+		return (service.updateReply(newDTO) == 1) ?
+				new ResponseEntity<String>("success", HttpStatus.OK)
+				: new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+	}
+	
+	// 댓글 번호(rno) 에 해당하는 댓글DTO 리턴하는 메소드
+	public ReviewReplyDTO getReply(long rno) {
+		return service.getReply(rno);
+	}
 }

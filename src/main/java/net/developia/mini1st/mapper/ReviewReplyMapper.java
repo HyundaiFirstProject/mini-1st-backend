@@ -10,4 +10,8 @@ public interface ReviewReplyMapper {
 
 	public List<ReviewReplyDTO> getReplyList(long postid);
 
+	public int updateReply(ReviewReplyDTO dto);
+
+	public ReviewReplyDTO getReply(long rno);
+
 }

@@ -2,6 +2,8 @@ package net.developia.mini1st.service;
 
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,15 @@ public class ReviewReplyServiceImpl implements ReviewReplyService{
 	}
 	@Override
 	public List<ReviewReplyDTO> getReplyList(long postid) {
-		// TODO Auto-generated method stub
 		return mapper.getReplyList(postid);
+	}
+	@Override
+	public int updateReply(ReviewReplyDTO dto) {
+		return mapper.updateReply(dto);
+	}
+	@Override
+	public ReviewReplyDTO getReply(long rno) {
+		return mapper.getReply(rno);
 	}
 
 }

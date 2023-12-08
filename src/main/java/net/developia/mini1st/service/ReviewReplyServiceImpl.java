@@ -13,9 +13,9 @@ public class ReviewReplyServiceImpl implements ReviewReplyService{
 	@Autowired
 	private ReviewReplyMapper mapper;
 	@Override
-	public int register(ReviewReplyDTO dto) {
+	public int createReply(ReviewReplyDTO dto) {
 		System.out.println("service/register 호출.....");
-		return mapper.createReply();
+		return mapper.createReply(dto);
 	}
 	@Override
 	public List<ReviewReplyDTO> getReplyList(long postid) {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import net.developia.mini1st.domain.ReviewReplyDTO;
+import net.developia.mini1st.domain.ReviewReplyHeartDTO;
 
 public interface ReviewReplyService {
 
@@ -17,5 +18,11 @@ public interface ReviewReplyService {
 	public ReviewReplyDTO getReply(long rno);
 
 	public int deleteReply(long rno);
+
+	public List<Long> peopleWhoLikes(long rno);
+
+	public void likesReply(ReviewReplyHeartDTO dto);
+
+	public void likesReplyCancel(ReviewReplyHeartDTO dto);
 
 }

@@ -1,5 +1,6 @@
 package net.developia.mini1st.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import lombok.extern.java.Log;
 import net.developia.mini1st.domain.ReplyVO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.ReviewReplyDTO;
+import net.developia.mini1st.domain.ReviewReplyHeartDTO;
 import net.developia.mini1st.service.ReviewReplyService;
 
 @RestController
@@ -86,5 +88,45 @@ public class ReviewReplyController {
 		return (service.deleteReply(rno) == 1) ?
 				new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+	}
+	
+	// 좋아요 처리
+	// 1. { } 번 댓글에 좋아요를 누른 사람 목록에서 유저 검색
+	// 2. 목록에서 찾지 못하면 -> 좋아요 안누른 상태 -> 좋아요 처리
+	// 3. 목록에서 찾으면 -> 좋아요 누른 상태 -> 좋아요 취소 처리
+	@PostMapping(value="/bestReviewsReplyLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> replyLikes(@RequestBody ReviewReplyHeartDTO dto){
+		long rno = dto.getRno(); // 댓글 번호
+		// 1. {rno} 번 댓글에 좋아요를 누른 사람 목록에서 유저가 있는지 찾는다
+		List<Long> list = peopleWhoLikes(rno);
+		long user_no = dto.getUser_no();
+		System.out.println("---------- Controller --------");
+		System.out.println(rno + " 번 좋아요 한 사람들 목록 --");
+		System.out.println(list.toString());
+		System.out.println("현재 유저 번호 : " + user_no);
+		System.out.println("-------------------------------");
+		try {
+			if (list.contains(user_no) == false) 
+			{ 	// 유저가 좋아요를 누르지 않았으면
+				// 좋아요를 1증가시키고, review_reply_heart 테이블에 정보 추가(좋아요번호(시퀀스), 댓글번호, 유저번호)
+				service.likesReply(dto);
+			}
+			else if (list.contains(user_no) == true) 
+			{ 	// 유저가 이미 좋아요를 누른 상태면
+				// 좋아요를 1감소 시키고, review_reply_heart 테이블에 정보 삭제(좋아요번호(시퀀스), 댓글번호, 유저번호)
+				service.likesReplyCancel(dto);
+			}
+			return new ResponseEntity<String>(HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	// {rno} 번 댓글을 좋아요한 유저 번호 리스트 리턴하는 메소드
+	public List<Long> peopleWhoLikes(long rno){
+		List<Long> list = new ArrayList<>();
+		list = service.peopleWhoLikes(rno);
+		return list;
 	}
 }

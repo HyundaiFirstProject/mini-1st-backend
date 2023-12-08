@@ -27,4 +27,27 @@
 	<delete id="deleteReply">
 		delete	from review_reply where rno=#{rno}
 	</delete>
+	<select id="peopleWhoLikes" resultType="long">
+		select	user_no
+		from	review_reply_heart
+		where	rno=#{rno}
+	</select>
+	<insert id="likesReply">
+		insert into review_reply_heart(hno, rno, user_no)
+		values (seq_review_reply_heart.nextval, #{rno}, #{user_no})
+	</insert>
+	<update id="increaseLikes">
+		update	review_reply
+		set		likes = likes + 1
+		where	rno = #{rno}
+	</update>
+	<delete id="likesReplyCancel">
+		delete	from review_reply_heart 
+		where	rno=#{rno} and user_no=#{user_no}
+	</delete>
+	<update id="decreaseLikes">
+		update	review_reply
+		set		likes = likes - 1
+		where	rno = #{rno}
+	</update>
 </mapper>

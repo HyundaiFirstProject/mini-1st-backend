@@ -33,10 +33,10 @@ public class ReviewController {
 	public ResponseEntity<List<ReviewDTO>> getReviewList(){
 		try {
 			List<ReviewDTO> list = service.getReviewList();
-			log.info("list=>" + list.toString());
+			System.out.println("list=>" + list.toString());
 			return new ResponseEntity<List<ReviewDTO>>(list, HttpStatus.OK);
 		}catch(Exception e) {
-			log.info(e.getMessage());
+			System.out.println(e.getMessage());
 			return new ResponseEntity<List<ReviewDTO>>(HttpStatus.UNAUTHORIZED);
 		}
 	}

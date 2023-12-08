@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="getReplyList" resultType="net.developia.mini1st.domain.ReviewReplyDTO">
-		select 	rno, writer, reply, likes, regdate, updatedate
+		select 	rno, writer, reply, likes, regdate, updatedate, postid
 		from	review_reply
 		where  	postid = #{postid}
 	</select>

@@ -9,5 +9,13 @@ public interface ReviewMapper {
 
 	public int createReview(ReviewDTO dto);
 
-	public List<ReviewDTO> getBestReview();
+	public ReviewDTO readReview(long postid);
+
+	public int updateReview(ReviewDTO dto);
+
+	public int deleteReview(long postid);
+
+	public void deleteReplyCascade(long postid);
+
+	//public long getTotalCount(PagingVO vo);
 }

@@ -8,18 +8,28 @@
 		from	review_board
 	</select>
 	<insert id="createReview">
-		insert into review_board(postid, title, content, writer, stars, user_no, itemid)
-		values (seq_review.nextval, #{title}, #{content}, #{writer}, #{stars}, #{user_no}, #{itemid})
+		insert into review_board(postid, title, content, writer, stars, user_no, itemid, img)
+		values (seq_review.nextval, #{title}, #{content}, #{writer}, #{stars}, #{user_no}, #{itemid}, #{img})
 	</insert>
-	
-	<select id="getBestReview" resultType="net.developia.mini1st.domain.ReviewDTO">
-		<![CDATA[
-    		SELECT postid, title, img, stars, likes
-    		FROM (
-        		SELECT postid, title, img, stars, likes
-        		FROM review_board
-        		ORDER BY likes DESC
-    		) WHERE ROWNUM <= 4
-    	]]>
+	<select id="readReview" resultType="net.developia.mini1st.domain.ReviewDTO">
+		select	postid, title, content, writer, views, likes, img, regdate, updatedate, stars, user_no, itemID
+		from	review_board
+		where	postid = #{postid}
+	</select>
+	<update id="updateReview">
+    update review_board 
+    set title=#{title}, content=#{content}, stars=#{stars}, itemid=#{itemid}
+    where postid=#{postid}
+	</update>
+	<delete id="deleteReview">
+		delete from review_board
+		where postid=#{postid}
+	</delete>
+	<delete id="deleteReplyCascade">
+		delete from review_reply
+        where postid=#{postid}
+	</delete>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from review_board where postid > 0
 	</select>
 </mapper>

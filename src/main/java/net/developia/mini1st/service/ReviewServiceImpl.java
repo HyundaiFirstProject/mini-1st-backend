@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.developia.mini1st.domain.PagingVO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.mapper.ReviewMapper;
 @Service
@@ -36,13 +35,14 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public int deleteReview(long postid) {
+		mapper.deleteReplyCascade(postid);
 		return mapper.deleteReview(postid);
 	}
 
-	@Override
-	public long getTotalCount(PagingVO vo) {
-		return mapper.getTotalCount(vo);
-	}
+//	@Override
+//	public long getTotalCount(PagingVO vo) {
+//		return mapper.getTotalCount(vo);
+//	}
 
 
 

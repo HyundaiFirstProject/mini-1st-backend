@@ -2,7 +2,6 @@ package net.developia.mini1st.mapper;
 
 import java.util.List;
 
-import net.developia.mini1st.domain.PagingVO;
 import net.developia.mini1st.domain.ReviewDTO;
 
 public interface ReviewMapper {
@@ -16,5 +15,7 @@ public interface ReviewMapper {
 
 	public int deleteReview(long postid);
 
-	public long getTotalCount(PagingVO vo);
+	public void deleteReplyCascade(long postid);
+
+	//public long getTotalCount(PagingVO vo);
 }

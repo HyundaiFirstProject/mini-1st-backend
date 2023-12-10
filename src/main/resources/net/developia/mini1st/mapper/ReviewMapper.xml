@@ -8,8 +8,8 @@
 		from	review_board
 	</select>
 	<insert id="createReview">
-		insert into review_board(postid, title, content, writer, stars, user_no, itemid)
-		values (seq_review.nextval, #{title}, #{content}, #{writer}, #{stars}, #{user_no}, #{itemid})
+		insert into review_board(postid, title, content, writer, stars, user_no, itemid, img)
+		values (seq_review.nextval, #{title}, #{content}, #{writer}, #{stars}, #{user_no}, #{itemid}, #{img})
 	</insert>
 	<select id="readReview" resultType="net.developia.mini1st.domain.ReviewDTO">
 		select	postid, title, content, writer, views, likes, img, regdate, updatedate, stars, user_no, itemID
@@ -24,6 +24,10 @@
 	<delete id="deleteReview">
 		delete from review_board
 		where postid=#{postid}
+	</delete>
+	<delete id="deleteReplyCascade">
+		delete from review_reply
+        where postid=#{postid}
 	</delete>
 	<select id="getTotalCount" resultType="int">
 		select count(*) from review_board where postid > 0

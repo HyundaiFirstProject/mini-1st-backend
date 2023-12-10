@@ -47,6 +47,7 @@ public class ReviewController {
 				,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO dto){
 		log.info("posting new Review....");
+		System.out.println("글등록 컨트롤러 호출");
 		int createCount = service.register(dto);
 		log.info("## Review create count : " + createCount);
 		return (createCount == 1)? 
@@ -55,9 +56,11 @@ public class ReviewController {
 	}
 	
 	// 후기 게시판 글 상세보기 (Read)
-	@GetMapping("/bestReviewsDetail")
-	public ResponseEntity<ReviewDTO> readReview(@RequestParam("postID") long postid){
+	@GetMapping(value="/bestReviewsDetail/{postid}"
+			,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ReviewDTO> readReview(@PathVariable("postid") long postid){
 		log.info("read Review : " + postid);
+		System.out.println("게시판 글 상세보기(Detail) 컨트롤러 호출...");
 		try {
 			ReviewDTO dto = service.readReview(postid);
 			return new ResponseEntity<ReviewDTO>(dto, HttpStatus.OK);

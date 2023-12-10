@@ -7,7 +7,10 @@
 		insert into review_reply(rno, writer, reply, postid)
 		values (seq_review_reply.nextval, #{writer}, #{reply}, #{postid})
 	</insert>
-	
+	<resultMap id="yourResultMap" type="net.developia.mini1st.domain.ReviewReplyDTO">
+    	<result property="regDate" column="regDate" javaType="java.util.Date" jdbcType="VARCHAR" />
+    	<result property="updateDate" column="updateDate" javaType="java.util.Date" jdbcType="VARCHAR" />
+	</resultMap>
 	<select id="getReplyList" resultType="net.developia.mini1st.domain.ReviewReplyDTO">
 		select 	rno, writer, reply, likes, regdate, updatedate, postid
 		from	review_reply

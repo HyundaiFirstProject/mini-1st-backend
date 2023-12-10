@@ -8,6 +8,12 @@ public interface ReviewService {
 	public List<ReviewDTO> getReviewList();
 
 	public int register(ReviewDTO dto);
+
+	public ReviewDTO readReview(long postid);
+
+	public int updateReview(ReviewDTO dto);
+
+	public int deleteReview(long postid);
 	
-	public List<ReviewDTO> getBestReview();
+//	public long getTotalCount(PagingVO vo);
 }

@@ -28,9 +28,28 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.createReview(dto);
 	}
 	
+
 	@Override
-	public List<ReviewDTO> getBestReview() {
-		return mapper.getBestReview();
+	public ReviewDTO readReview(long postid) {
+		return mapper.readReview(postid);
 	}
+
+	@Override
+	public int updateReview(ReviewDTO dto) {
+		return mapper.updateReview(dto);
+	}
+
+	@Override
+	public int deleteReview(long postid) {
+		mapper.deleteReplyCascade(postid);
+		return mapper.deleteReview(postid);
+	}
+
+//	@Override
+//	public long getTotalCount(PagingVO vo) {
+//		return mapper.getTotalCount(vo);
+//	}
+
+
 
 }

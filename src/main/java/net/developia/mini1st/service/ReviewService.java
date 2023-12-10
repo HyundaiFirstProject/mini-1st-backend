@@ -3,6 +3,7 @@ package net.developia.mini1st.service;
 import java.util.List;
 
 import net.developia.mini1st.domain.ReviewDTO;
+import net.developia.mini1st.domain.ReviewDetailDTO;
 
 public interface ReviewService {
 	public List<ReviewDTO> getReviewList();
@@ -15,5 +16,6 @@ public interface ReviewService {
 
 	public int deleteReview(long postid);
 	
+	public ReviewDetailDTO getDetail(long postid);
 //	public long getTotalCount(PagingVO vo);
 }

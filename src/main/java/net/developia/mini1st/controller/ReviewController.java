@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import net.developia.mini1st.domain.ReviewDTO;
+import net.developia.mini1st.domain.ReviewDetailDTO;
 import net.developia.mini1st.service.ReviewService;
 
 @RestController
@@ -63,15 +64,15 @@ public class ReviewController {
 	// 후기 게시판 글 상세보기 (Read)
 	@GetMapping(value="/bestReviewsDetail/{postid}"
 			,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ReviewDTO> readReview(@PathVariable("postid") long postid){
+	public ResponseEntity<ReviewDetailDTO> readReview(@PathVariable("postid") long postid){
 		log.info("read Review : " + postid);
 		System.out.println("게시판 글 상세보기(Detail) 컨트롤러 호출...");
 		try {
-			ReviewDTO dto = service.readReview(postid);
-			return new ResponseEntity<ReviewDTO>(dto, HttpStatus.OK);
+			ReviewDetailDTO dto = service.getDetail(postid);
+			return new ResponseEntity<ReviewDetailDTO>(dto, HttpStatus.OK);
 		}catch(Exception e) {
 			log.info(e.getMessage());
-			return new ResponseEntity<ReviewDTO>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ReviewDetailDTO>(HttpStatus.NOT_FOUND);
 		}
 	}
 	

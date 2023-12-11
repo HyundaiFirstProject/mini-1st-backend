@@ -9,9 +9,14 @@ import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.mapper.ReviewMapper;
 @Service
 public class ReviewServiceImpl implements ReviewService {
-
+	
+	private final ReviewMapper mapper;
+	
 	@Autowired
-	private ReviewMapper mapper;
+	public ReviewServiceImpl(ReviewMapper reviewMapper) {
+		this.mapper = reviewMapper;
+	}
+	
 	
 	@Override
 	public List<ReviewDTO> getReviewList() {
@@ -22,6 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public int register(ReviewDTO dto) {
 		return mapper.createReview(dto);
 	}
+	
 
 	@Override
 	public ReviewDTO readReview(long postid) {

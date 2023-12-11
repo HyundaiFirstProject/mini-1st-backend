@@ -1,6 +1,8 @@
 package net.developia.mini1st.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,12 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService service;
+	
+	@Autowired
+	public ReviewController(ReviewService reviewService) {
+		this.service = reviewService;
+	}
+	
 	
 	// 후기 게시판 게시글 리스트 불러오기(아직 페이징 X)
 	@GetMapping(value="/bestReviewsList",
@@ -55,6 +63,7 @@ public class ReviewController {
 				: new ResponseEntity<ReviewDTO>(HttpStatus.UNAUTHORIZED);
 	}
 	
+
 	// 후기 게시판 글 상세보기 (Read)
 	@GetMapping(value="/bestReviewsDetail/{postid}"
 			,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -102,4 +111,5 @@ public class ReviewController {
 				: new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
 		
 	}
+
 }

@@ -18,4 +18,5 @@ public interface ReviewMapper {
 	public void deleteReplyCascade(long postid);
 
 	//public long getTotalCount(PagingVO vo);
+
 }

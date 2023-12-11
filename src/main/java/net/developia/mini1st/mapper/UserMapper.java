@@ -2,15 +2,19 @@ package net.developia.mini1st.mapper;
 
 
 import net.developia.mini1st.domain.UserDTO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
-    @Insert("INSERT INTO users (email, password, nickname) VALUES (#{email}, #{password}, #{nickname})")
-    @Options(useGeneratedKeys = true, keyProperty = "user_id")
-    void insertUser(UserDTO userDTO);
+    @Insert("INSERT INTO user_info (user_no, email, password, nickname) VALUES (user_info_seq.NEXTVAL, #{userDTO.email}, #{userDTO.password}, #{userDTO.nickname})")
+    @SelectKey(statement="SELECT user_info_seq.CURRVAL FROM DUAL", keyProperty="userDTO.user_no", before=false, resultType=int.class)
+    void insertUser(@Param("userDTO") UserDTO userDTO);
+
+
+
+
+    @Select("SELECT COUNT(*) FROM user_info WHERE nickname = #{nickname}")
+    int countUsersByNickname(String nickname);
 
 
 }

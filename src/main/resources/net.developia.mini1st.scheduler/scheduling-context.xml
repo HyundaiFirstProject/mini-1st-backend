@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/task
+           http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!-- 스케줄링 활성화 -->
+    <task:annotation-driven/>
+    
+    <!-- Component scanning 활성화 -->
+    <context:component-scan base-package="net.developia.mini1st"/>
+    
+	<!-- Task Executor 및 Scheduler 추가 -->
+    <task:executor id="taskExecutor" pool-size="5"/>
+    <task:scheduler id="taskScheduler" pool-size="5"/>
+    
+    <!-- CrawlingProducts를 Bean으로 등록 -->
+    <bean id="crawlingProducts" class="net.developia.mini1st.CrawlingProducts">
+        <constructor-arg ref="productsService"/>
+    </bean>
+
+    <!-- ProductsService를 Bean으로 등록 -->
+    <bean id="productsService" class="net.developia.mini1st.service.ProductsService"/>
+
+	
+</beans>

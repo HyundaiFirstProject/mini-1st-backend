@@ -28,6 +28,7 @@ public class MyPageController {
 		log.info("get user info : " + user_no);
 		try {
 			UserDTO dto = service.getUserInfo(user_no);
+			dto.setPassword(null);
 			log.info("user => " + dto.toString());
 			return new ResponseEntity<UserDTO>(dto, HttpStatus.OK);
 		}catch(Exception e) {

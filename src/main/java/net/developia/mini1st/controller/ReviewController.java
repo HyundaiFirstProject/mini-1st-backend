@@ -74,9 +74,11 @@ public class ReviewController {
 		System.out.println("게시판 글 상세보기(Detail) 컨트롤러 호출...");
 		try {
 			ReviewDetailDTO dto = service.getDetail(postid);
+			service.increaseViews(postid); // 조회수 1증가
 			return new ResponseEntity<ReviewDetailDTO>(dto, HttpStatus.OK);
 		}catch(Exception e) {
 			log.info(e.getMessage());
+			e.printStackTrace();
 			return new ResponseEntity<ReviewDetailDTO>(HttpStatus.NOT_FOUND);
 		}
 	}

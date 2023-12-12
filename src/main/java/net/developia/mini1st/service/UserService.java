@@ -6,4 +6,8 @@ public interface UserService {
     void signUp(UserDTO userDTO);
     boolean isNicknameAvailable(String nickname);
 	boolean checkPW(UserDTO dto);
+
+    UserDTO getUserById(int userid);
+    void updateUserProfileImage(UserDTO userDTO);
+
 }

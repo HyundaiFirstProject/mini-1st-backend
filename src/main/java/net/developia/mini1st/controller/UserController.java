@@ -84,5 +84,17 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     	}
     }
+    
+    @PostMapping(value="/checkPW")
+    public ResponseEntity<String> checkPW(@RequestBody UserDTO dto){
+    	boolean check = userService.checkPW(dto);
+    	System.out.println("----- controller -----");
+    	System.out.println("check -> " + check);
+    	if(check == true) {
+    		return new ResponseEntity<String>("success", HttpStatus.OK);
+    	}else {
+    		return new ResponseEntity<String>("wrong password", HttpStatus.UNAUTHORIZED);
+    	}
+    }
 }
 

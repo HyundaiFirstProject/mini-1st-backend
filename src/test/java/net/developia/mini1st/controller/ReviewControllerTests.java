@@ -54,6 +54,6 @@ public class ReviewControllerTests {
 		ReviewDTO dto = new ReviewDTO();
 		dto.setTitle("");
 		dto.setContent("");
-		dto.setImg("");
+		//dto.setImg("");
 	}
 }

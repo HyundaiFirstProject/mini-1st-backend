@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import net.developia.mini1st.domain.ProductsDTO;
 import net.developia.mini1st.mapper.ProductsMapper;
 
@@ -30,11 +31,13 @@ public class ProductsServiceImpl implements ProductsService{
 		System.out.println("createProductsList(Service)...");
 		// pet_products 테이블 비우기
 		mapper.initProducts();
+		// WebDriverManager를 사용하여 WebDriver 초기화
+		WebDriverManager.chromedriver().setup();
+		//System.setProperty("webdriver.chrome.driver", "C:/dev/chromedriver-win64/chromedriver.exe");
 		// ChromeOptions를 사용하여 Chrome을 백그라운드 모드로 실행
 	    ChromeOptions options = new ChromeOptions();
-	    options.addArguments("--headless"); // 백그라운드 모드로 실행
+	    //options.addArguments("--headless"); // 백그라운드 모드로 실행
 		// WebDriver 설정 
-        System.setProperty("webdriver.chrome.driver", "C:/dev/chromedriver-win64/chromedriver.exe");
         WebDriver driver = new ChromeDriver(options);
         try {
             // 쇼핑몰 페이지 열기
@@ -65,8 +68,8 @@ public class ProductsServiceImpl implements ProductsService{
                 // 링크 추출
                 try {
                     // <a> 태그를 찾아 클릭
-                    WebElement linkElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[starts-with(@onclick, 'javascript:itemDetailView')]")));
-                    linkElement.click();
+                	WebElement linkElement = element.findElement(By.cssSelector("a[onclick^='javascript:itemDetailView']"));
+                	linkElement.click();
 
                     // 클릭 후 현재 페이지 URL 가져오기
                     String currentURL = driver.getCurrentUrl();
@@ -77,6 +80,11 @@ public class ProductsServiceImpl implements ProductsService{
                     System.err.println("제품 링크를 가져오는 중 오류 발생: " + e.getMessage());
                     // 혹은 e.printStackTrace(); 를 사용하여 전체 스택 트레이스 출력 가능
                 }
+                System.out.println("=================================================");
+                System.out.println("제품명 : " + productName);
+                System.out.println("이미지 URL : " + imageUrl);
+//                System.out.println("링크 : " + currentURL);
+                System.out.println("=================================================");
                 // 크롤링한 DTO를 DB에 저장
                 mapper.insertProduct(dto);
                 // 뒤로 가기

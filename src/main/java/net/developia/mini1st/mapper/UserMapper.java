@@ -20,6 +20,11 @@ public interface UserMapper {
 
     @Select("SELECT password FROM user_info WHERE user_no=#{user_no}")
 	String getUserPassword(int user_no);
+    @Select("SELECT * FROM user_info WHERE user_no = #{userId}")
+    UserDTO getUserById(int userId);
+
+    @Update("UPDATE user_info SET img_url = #{img_url} WHERE user_no = #{user_no}")
+    void updateUserProfile(UserDTO userDTO);
 
 
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.developia.mini1st.mapper.PetBoardMapper">
+	<select id="getPetBoardList" resultType="net.developia.mini1st.domain.PetBoardDTO">
+		select	bno, title, content, writer, views, likes, photo, regdate, updatedate, pettype, user_no
+		from	pet_board
+	</select>
+	<insert id="register">
+		insert 	into pet_board(bno, title, content, writer, photo, pettype, user_no)
+		values	(seq_pet_board.nextval, #{title}, #{content}, #{writer}, #{photo}, #{pettype}, #{user_no})
+	</insert>
+	<select id="getDetail">
+		select	bno, title, writer, views, likes, photo, regdate, updatedate, pettype, user_no
+		from	pet_board
+		where	bno=#{bno}
+	</select>
+	<update id="updatePetBoard">
+		update	pet_board
+		set		title=#{title}, content=#{content}, photo=#{photo}, pettype=#{pettype}, updatedate=sysdate
+		where	bno=#{bno}
+	</update>
+	<delete id="deletePetBoard">
+		delete 	from pet_board
+		where	bno=#{bno}
+	</delete>
+</mapper>

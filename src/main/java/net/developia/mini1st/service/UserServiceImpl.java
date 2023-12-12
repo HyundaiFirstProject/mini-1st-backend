@@ -54,4 +54,15 @@ public class UserServiceImpl implements UserService{
 			return false;
 		}
 	}
+
+	@Override
+	public UserDTO getUserById(int userid){
+		UserDTO userDTO = userMapper.getUserById(userid);
+		return userDTO;
+	}
+	@Override
+	public void updateUserProfileImage(UserDTO userDTO) {
+		userMapper.updateUserProfile(userDTO);
+	}
+
 }

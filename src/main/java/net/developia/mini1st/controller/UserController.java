@@ -70,12 +70,13 @@ public class UserController {
         }
     }
     @PostMapping("/user/modifyUserInfo")
-    public ResponseEntity<Map<String, String>> uploadProfileImage
+    public ResponseEntity<Map<String, String>> uploadProfile
             (@RequestParam("file") MultipartFile profileImage, @RequestParam Map<String, String> request) {
         try {
             Integer userId = Integer.parseInt(request.get("user_no"));
             //userId에 해당하는 UserDTO 가져오기
             UserDTO userDTO = userService.getUserById(userId);
+            userDTO.setNickname(request.get("nickname"));
             System.out.println("userId에 해당하는 UserDTO = " + userDTO);
 
             imageS3Service.uploadProfile(profileImage, userDTO);

@@ -23,7 +23,7 @@ public interface UserMapper {
     @Select("SELECT * FROM user_info WHERE user_no = #{userId}")
     UserDTO getUserById(int userId);
 
-    @Update("UPDATE user_info SET img_url = #{img_url} WHERE user_no = #{user_no}")
+    @Update("UPDATE user_info SET img_url = #{img_url},nickname = #{nickname} WHERE user_no = #{user_no}")
     void updateUserProfile(UserDTO userDTO);
 
 

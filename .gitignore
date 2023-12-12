@@ -8,5 +8,6 @@
 /dataSources.local.xml
 /.idea
 target/
-application.properties
+src/main/resources/application.properties
+src/main/resources/application.yml
 

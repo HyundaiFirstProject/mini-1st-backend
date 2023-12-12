@@ -4,8 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.developia.mini1st.mapper.ReviewMapper">
 	<select id="getReviewList" resultType="net.developia.mini1st.domain.ReviewDTO">
-		select	postid, title, content, writer, views, likes, img, regdate, updatedate, stars, user_no, itemID
-		from	review_board
+		<![CDATA[
+		select		postid, title, content, writer, views, likes, regdate, updatedate, stars, user_no, itemid, img
+		from		(
+					select	/*+INDEX_DESC(tbl_board pk_board) */
+							rownum rn
+							,postid
+							,title
+							,content
+							,writer
+							,views
+							,likes
+							,regdate
+							,updatedate
+							,stars
+							,user_no
+							,itemid
+							,img
+					from	review_board
+					where	rownum <= #{pageNum} * #{amount}
+					)
+		where 		rn > (#{pageNum} - 1) * #{amount}
+	]]>
 	</select>
 	<insert id="createReview">
 		insert into review_board(postid, title, content, writer, stars, user_no, itemid, img)
@@ -40,5 +60,42 @@
 		select	user_no, nickname, img_url
 		from	user_info
 		where	user_no = (select user_no from review_board where postid=#{postid})
+	</select>
+	<select id="peopleWhoLikes" resultType="long">
+		select	user_no
+		from	review_board_heart
+		where	postid=#{postid}
+	</select>
+	<insert id="likesReply">
+		insert into review_board_heart(hno, postid, user_no)
+		values (seq_review_board_heart.nextval, #{postid}, #{user_no})
+	</insert>
+	<update id="increaseLikes">
+		update	review_board
+		set		likes = likes + 1
+		where	postid = #{postid}
+	</update>
+	<update id="decreaseLikes">
+		update	review_board
+		set		likes = likes - 1
+		where	postid = #{postid}
+	</update>
+	<delete id="likesReplyCancel">
+		delete	from review_board_heart 
+		where	postid=#{postid} and user_no=#{user_no}
+	</delete>
+	<select id="getProductDetail" resultType="net.developia.mini1st.domain.ProductsDTO">
+		select	product_id, product_name, url, img
+		from	pet_products
+		where	product_id=#{product_id}
+	</select>
+	<select id="searchReviews">
+		<![CDATA[
+        select	postid, title, content, writer, views, likes, regdate, updatedate, stars, user_no, itemid, img
+        from 	review_board
+        where 	(title like '%' || #{keyword} || '%'
+        		or content like '%' || #{keyword} || '%'
+        		or writer like '%' || #{keyword} || '%')
+    	]]>
 	</select>
 </mapper>

@@ -17,4 +17,9 @@ public interface UserMapper {
     int countUsersByNickname(String nickname);
 
 
+
+    @Select("SELECT password FROM user_info WHERE user_no=#{user_no}")
+	String getUserPassword(int user_no);
+
+
 }

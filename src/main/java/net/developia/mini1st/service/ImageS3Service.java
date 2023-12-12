@@ -43,23 +43,20 @@ public class ImageS3Service{
             PutObjectResult putObjectResult = amazonS3.putObject(new PutObjectRequest(
                     bucketName, changedName, image.getInputStream(), metadata
             ).withCannedAcl(CannedAccessControlList.PublicRead));
-            System.out.println("putObjectResult = " + putObjectResult);
         } catch (IOException e) {
-            System.out.println("e = " + e);
             throw new ImageUploadException(); //커스텀 예외 던짐.
         }
         return amazonS3.getUrl(bucketName, changedName).toString(); //데이터베이스에 저장할 이미지가 저장된 주소
 
     }
 
-    public void uploadProfileImage(MultipartFile image, UserDTO userDTO) {
-        if (image != null && !image.isEmpty()) {
 
+    public void uploadProfile(MultipartFile image, UserDTO userDTO) {
+        if (image != null && !image.isEmpty()) {
             String imageUrl = uploadImageToS3(image);
             userDTO.setImg_url(imageUrl);
             userDTO.setNickname(userDTO.getNickname());
-            System.out.println("userDTO = " + userDTO);
-            userService.updateUserProfileImage(userDTO);
+            userService.updateUserProfile(userDTO);
         }
     }
 

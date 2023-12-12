@@ -39,7 +39,7 @@
 	</select>
 	<update id="updateReview">
     update review_board 
-    set title=#{title}, content=#{content}, stars=#{stars}, itemid=#{itemid}
+    set title=#{title}, content=#{content}, stars=#{stars}, itemid=#{itemid}, updatedate=sysdate
     where postid=#{postid}
 	</update>
 	<delete id="deleteReview">
@@ -98,4 +98,9 @@
         		or writer like '%' || #{keyword} || '%')
     	]]>
 	</select>
+	<update id="increaseViews">
+		update	review_board
+		set		views = views + 1
+		where	postid = #{postid}
+	</update>
 </mapper>

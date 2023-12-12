@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.developia.mini1st.mapper.PetReplyMapper">
+	<insert id="createReply">
+		insert into pet_reply(rno, writer, reply, bno)
+		values (seq_pet_reply.nextval, #{writer}, #{reply}, #{bno})
+	</insert>
+	<select id="getReplyList" resultType="net.developia.mini1st.domain.PetReplyDTO">
+		select	rno, writer, reply, likes, regdate, updatedate, bno
+		from	pet_reply
+		where	bno=#{bno}
+	</select>
+	<select id="getReply" resultType="net.developia.mini1st.domain.PetReplyDTO">
+		select 	rno, writer, reply, likes, regdate, updatedate, bno
+		from	pet_reply
+		where  	rno = #{rno}
+	</select>
+	<update id="updateReply">
+		update	pet_reply
+		set		reply=#{reply}
+				,updatedate=sysdate
+		where	rno=#{rno}
+	</update>
+	<delete id="deleteReply">
+		delete	from pet_reply where rno=#{rno}
+	</delete>
+	<select id="peopleWhoLikes" resultType="long">
+		select	user_no
+		from	pet_reply_heart
+		where	rno=#{rno}
+	</select>
+	<update id="increaseLikes">
+		update	pet_reply
+		set		likes = likes + 1
+		where	rno = #{rno}
+	</update>
+	<insert id="likesReply">
+		insert into pet_reply_heart(hno, rno, user_no)
+		values (seq_pet_reply_heart.nextval, #{rno}, #{user_no})
+	</insert>
+	<delete id="likesReplyCancel">
+		delete	from pet_reply_heart 
+		where	rno=#{rno} and user_no=#{user_no}
+	</delete>
+	<update id="decreaseLikes">
+		update	pet_reply
+		set		likes = likes - 1
+		where	rno = #{rno}
+	</update>
+</mapper>

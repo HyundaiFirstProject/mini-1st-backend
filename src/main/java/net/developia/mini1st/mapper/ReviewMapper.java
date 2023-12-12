@@ -40,4 +40,6 @@ public interface ReviewMapper {
 	public ProductsDTO getProductDetail(long product_id);
 
 	public List<ReviewDTO> searchReviews(String keyword);
+
+	public void increaseViews(long postid);
 }

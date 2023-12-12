@@ -57,10 +57,8 @@ public class ReviewServiceImpl implements ReviewService {
 		// review_board 와 user_info 테이블에서
 		// 필요한 데이터들만을 추출해 클라이언트에게 반환
 		ReviewDTO reviewDTO = readReview(postid);
-
 		// postid 번 게시글을 작성한 사람의 정보
 		UserDTO userDTO = mapper.getUserInfo(postid);
-
 		// 사용자에게 리턴할 ReviewDetailDTO 생성
 		ReviewDetailDTO reviewDetailDTO = new ReviewDetailDTO();
 		reviewDetailDTO.setPostid(reviewDTO.getPostid());
@@ -73,7 +71,6 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewDetailDTO.setItemid(reviewDTO.getItemid());
 		reviewDetailDTO.setNickname(userDTO.getNickname());
 		reviewDetailDTO.setImg_url(userDTO.getImg_url());
-
 		return reviewDetailDTO;
 	}
 
@@ -139,6 +136,11 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<ReviewDTO> searchReviews(String keyword) {
 		return mapper.searchReviews(keyword);
+	}
+
+	@Override
+	public void increaseViews(long postid) {
+		mapper.increaseViews(postid);
 	}
 
 }

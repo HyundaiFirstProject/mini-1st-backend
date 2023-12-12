@@ -25,4 +25,9 @@ public interface UserMapper {
 
 
 
+
+    @Select("SELECT password FROM user_info WHERE user_no=#{user_no}")
+	String getUserPassword(int user_no);
+
+
 }

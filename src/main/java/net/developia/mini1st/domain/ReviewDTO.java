@@ -1,6 +1,7 @@
 package net.developia.mini1st.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class ReviewDTO {
 	private String	writer;		//작성자
 	private	long	view;		//조회수
 	private	long	likes;		//좋아요
-	private	String	img;		//사진URL
+	private	List<String>	img;		//사진URL
 	private Date	regdate;	//작성일
 	private	Date	updatedate;	//수정일
 	private	String	stars;		//별점

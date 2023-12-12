@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.developia.mini1st.mapper.ProductsMapper">
+	<insert id="insertProduct">
+		insert into pet_products(product_id, product_name, url, img)
+		values (seq_pet_products.nextval, #{product_name}, #{url}, #{img})	
+	</insert>
+	<delete id="initProducts">
+		delete from pet_products
+	</delete>
+	<update id="initSequence">
+		alter sequence seq_pet_products minvalue 1
+	</update>
+	<select id="getProductsList" resultType="net.developia.mini1st.domain.ProductsDTO">
+		select product_id, product_name, url, img
+		from	pet_products	
+	</select>
+</mapper>

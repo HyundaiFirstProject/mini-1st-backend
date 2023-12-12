@@ -95,7 +95,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
         }
     }
-    
+
     @PostMapping("/sendEmail")
     public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailDTO emailDTO) {
         Map<String, String> response = new HashMap<>();
@@ -109,6 +109,18 @@ public class UserController {
     		response.put("status", "500");
 			response.put("description", "Internal Server Error");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    	}
+    }
+
+    @PostMapping(value="/checkPW")
+    public ResponseEntity<String> checkPW(@RequestBody UserDTO dto){
+    	boolean check = userService.checkPW(dto);
+    	System.out.println("----- controller -----");
+    	System.out.println("check -> " + check);
+    	if(check == true) {
+    		return new ResponseEntity<String>("success", HttpStatus.OK);
+    	}else {
+    		return new ResponseEntity<String>("wrong password", HttpStatus.UNAUTHORIZED);
     	}
     }
 }

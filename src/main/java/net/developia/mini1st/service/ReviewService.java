@@ -2,11 +2,14 @@ package net.developia.mini1st.service;
 
 import java.util.List;
 
+import net.developia.mini1st.domain.Criteria;
+import net.developia.mini1st.domain.ProductsDTO;
+import net.developia.mini1st.domain.ReviewBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.ReviewDetailDTO;
 
 public interface ReviewService {
-	public List<ReviewDTO> getReviewList();
+	public List<ReviewDTO> getReviewList(Criteria cri);
 
 	public int register(ReviewDTO dto);
 
@@ -17,5 +20,16 @@ public interface ReviewService {
 	public int deleteReview(long postid);
 	
 	public ReviewDetailDTO getDetail(long postid);
-//	public long getTotalCount(PagingVO vo);
+	
+	public long getTotalCount(Criteria cri);
+
+	public List<Long> peopleWhoLikes(long postid);
+
+	public void likesReply(ReviewBoardHeartDTO dto);
+
+	public void likesReplyCancel(ReviewBoardHeartDTO dto);
+
+	public ProductsDTO getProductDetail(long product_id);
+
+	public List<ReviewDTO> searchReviews(String keyword);
 }

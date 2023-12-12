@@ -8,6 +8,6 @@ public interface UserService {
 	boolean checkPW(UserDTO dto);
 
     UserDTO getUserById(int userid);
-    void updateUserProfileImage(UserDTO userDTO);
+    void updateUserProfile(UserDTO userDTO);
 
 }

@@ -20,6 +20,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ImageS3Service{
     private final AmazonS3 amazonS3;
+
+    private final UserService userService;
     @Value("${cloud.aws.s3.bucketName}")
     private String bucketName; //버킷 이름
     private String changedImageName(String originName) { //이미지 이름 중복 방지를 위해 랜덤으로 생성
@@ -32,12 +34,14 @@ public class ImageS3Service{
         String ext = originName.substring(originName.lastIndexOf(".")); //확장자
         String changedName = changedImageName(originName); //새로 생성된 이미지 이름
         ObjectMetadata metadata = new ObjectMetadata(); //메타데이터
-        metadata.setContentType("image/"+ext);
+
+        metadata.setContentType("png/"+ext);
+        metadata.setContentLength(image.getSize());
+
         try {
             PutObjectResult putObjectResult = amazonS3.putObject(new PutObjectRequest(
                     bucketName, changedName, image.getInputStream(), metadata
             ).withCannedAcl(CannedAccessControlList.PublicRead));
-
         } catch (IOException e) {
             throw new ImageUploadException(); //커스텀 예외 던짐.
         }
@@ -45,16 +49,17 @@ public class ImageS3Service{
 
     }
 
-    public UserDTO uploadProfile(MultipartFile image, UserDTO userDTO) {
+
+    public void uploadProfile(MultipartFile image, UserDTO userDTO) {
         if (image != null && !image.isEmpty()) {
             String imageUrl = uploadImageToS3(image);
             userDTO.setImg_url(imageUrl);
-            return userDTO;
-        } else {
-            // 이미지가 제공되지 않은 경우의 처리
-            return userDTO;
+            userDTO.setNickname(userDTO.getNickname());
+            System.out.println("userDTO = " + userDTO);
+            userService.updateUserProfile(userDTO);
         }
     }
+
 
 
 }

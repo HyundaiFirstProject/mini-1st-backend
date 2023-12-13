@@ -213,7 +213,7 @@ public class PetBoardController {
     }
 	
 	@GetMapping("/bestPets")
-	public ResponseEntity<Map<String, Object>> getBestReviews(){
+	public ResponseEntity<Map<String, Object>> getBestPets(){
 		Map<String, Object> response = new HashMap<>();
 		try {
 			response.put("status", "200");

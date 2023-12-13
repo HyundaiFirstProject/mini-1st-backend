@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,4 +40,18 @@ public class ProductsController {
 		service.createProductList();
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
+	
+	// 후기 게시판 아이템 검색
+	@GetMapping(value="/bestReviewsItemSearch/{product_name}"
+				,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProductsDTO>> searchProducts(@PathVariable("product_name")String product_name){
+		try {
+			List<ProductsDTO> list = service.searchProducts(product_name);
+			return new ResponseEntity<List<ProductsDTO>>(list, HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<ProductsDTO>>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
 }

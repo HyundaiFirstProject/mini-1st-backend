@@ -15,8 +15,8 @@ public class CrawlingProducts {
 	public CrawlingProducts(ProductsService service) {
 		this.service = service;
 	}
-	
-	@Scheduled(cron = "0 0 2 * * ?") // 매일 오전 2시에 실행
+	// 현재 크롤링한 데이터 지워지는 현상 있어서 스케줄 꺼놓음
+	//@Scheduled(cron = "0 0 2 * * ?") // 매일 오전 2시에 실행
 	//@Scheduled(fixedRate = 60000 * 5) // 매분마다 실행 (1분 = 60,000 밀리초)
     public void crawlAndStoreData() {
         System.out.println("Scheduled Crawling Task...");

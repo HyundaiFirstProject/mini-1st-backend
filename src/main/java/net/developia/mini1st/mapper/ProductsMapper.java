@@ -12,4 +12,6 @@ public interface ProductsMapper {
 	public List<ProductsDTO> getProductsList();
 	
 	public void initSequence();
+
+	public List<ProductsDTO> searchProducts(String product_name);
 }

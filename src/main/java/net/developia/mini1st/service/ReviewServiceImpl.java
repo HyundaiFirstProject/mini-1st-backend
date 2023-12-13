@@ -143,4 +143,29 @@ public class ReviewServiceImpl implements ReviewService {
 		mapper.increaseViews(postid);
 	}
 
+	@Override
+	public long getTotalPage() {
+		Criteria cri = new Criteria();
+		long totalRecord = mapper.getTotalCount(cri);
+		long onePageRecord = (long)cri.getAmount();
+		if (totalRecord <= onePageRecord) {
+			return 1;
+		}
+		long totalPages = (totalRecord % onePageRecord == 0) ? 
+				(totalRecord / onePageRecord) 
+				: (totalRecord / onePageRecord + 1);
+		return totalPages;
+	}
+
+	@Override
+	public List<ReviewDTO> getReviewsByItem(String product_name) {
+		return mapper.getReviewsByItem(product_name);
+	}
+
+	// postid 번 게시글 좋아요 누른 사람 리스트 List<UserDTO>
+	@Override
+	public List<UserDTO> getPeopleWhoLikes(long postid) {
+		return mapper.getPeopleWhoLikes(postid);
+	}
+
 }

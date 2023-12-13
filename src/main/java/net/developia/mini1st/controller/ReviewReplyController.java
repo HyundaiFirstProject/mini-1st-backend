@@ -21,6 +21,7 @@ import net.developia.mini1st.domain.ReplyVO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.ReviewReplyDTO;
 import net.developia.mini1st.domain.ReviewReplyHeartDTO;
+import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.service.ReviewReplyService;
 
 @RestController
@@ -128,5 +129,18 @@ public class ReviewReplyController {
 		List<Long> list = new ArrayList<>();
 		list = service.peopleWhoLikes(rno);
 		return list;
+	}
+	
+	// 특정 댓글 좋아요한 유저 정보 리스트
+	@GetMapping(value="/bestReviewsReplyLikedUser/{rno}"
+				, produces = MediaType.APPLICATION_JSON_VALUE)
+	ResponseEntity<List<UserDTO>> getPeopleWhoLikes(@PathVariable("rno") long rno){
+		try {
+			List<UserDTO> list = service.getPeopleWhoLikes(rno);
+			return new ResponseEntity<List<UserDTO>>(list, HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
+		}
 	}
 }

@@ -62,4 +62,12 @@
 		set		views = views + 1
 		where	bno = #{bno}
 	</update>
+	<select id="getPeopleWhoLikes" resultType="net.developia.mini1st.domain.UserDTO">
+		select	user_no, email, nickname, img_url
+		from	user_info
+		where	user_no in (select user_no from pet_board_heart where bno=#{bno})
+	</select>
+	<select id="getTotalCount" resultType="long">
+		select count(*) from pet_board 
+	</select>
 </mapper>

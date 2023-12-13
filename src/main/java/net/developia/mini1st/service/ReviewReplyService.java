@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import net.developia.mini1st.domain.ReviewReplyDTO;
 import net.developia.mini1st.domain.ReviewReplyHeartDTO;
+import net.developia.mini1st.domain.UserDTO;
 
 public interface ReviewReplyService {
 
@@ -24,5 +25,7 @@ public interface ReviewReplyService {
 	public void likesReply(ReviewReplyHeartDTO dto);
 
 	public void likesReplyCancel(ReviewReplyHeartDTO dto);
+
+	public List<UserDTO> getPeopleWhoLikes(long rno);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import net.developia.mini1st.domain.PetReplyDTO;
 import net.developia.mini1st.domain.PetReplyHeartDTO;
 import net.developia.mini1st.domain.ReviewReplyDTO;
+import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.mapper.PetReplyMapper;
 
 @Service
@@ -69,6 +70,12 @@ public class PetReplyServiceImpl implements PetReplyService {
 		mapper.decreaseLikes(rno);
 		// 2. review_reply_heart 테이블에 추가
 		mapper.likesReplyCancel(dto);
+	}
+
+	// rno 번 댓글 좋아요 누른 사람들의 List<UserDTO>
+	@Override
+	public List<UserDTO> getPeopleWhoLikes(long rno) {
+		return mapper.getPeopleWhoLikes(rno);
 	}
 
 }

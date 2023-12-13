@@ -8,4 +8,6 @@ public interface ProductsService {
 	public void	createProductList();
 
 	public List<ProductsDTO> getProductList();
+
+	public List<ProductsDTO> searchProducts(String product_name);
 }

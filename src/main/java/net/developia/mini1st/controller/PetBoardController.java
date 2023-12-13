@@ -197,7 +197,7 @@ public class PetBoardController {
 		}
 	}
 
-}
+
 
   
 	// 특정 게시글 좋아요한 유저 정보 리스트

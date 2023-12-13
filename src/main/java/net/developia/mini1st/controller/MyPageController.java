@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.java.Log;
 import net.developia.mini1st.domain.UserDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.MyPageService;
 
 @RestController
@@ -21,6 +22,7 @@ public class MyPageController {
 	@Autowired
 	private MyPageService service;
 	
+	@HasRoleUser
 	@GetMapping(value="/getUserInfo/{userno}",
 				produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserDTO> getUserInfo(@PathVariable("userno") int user_no){

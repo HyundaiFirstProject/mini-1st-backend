@@ -20,6 +20,7 @@ import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.PetBoardService;
 
 @RestController
@@ -47,8 +48,11 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 등록
-	@PostMapping(value = "/bestPetsPost", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PetBoardDTO> register(@RequestBody PetBoardDTO dto) {
+	@HasRoleUser
+	@PostMapping(value="/bestPetsPost"
+				,produces = MediaType.APPLICATION_JSON_VALUE
+				,consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PetBoardDTO> register(@RequestBody PetBoardDTO dto){
 		System.out.println("== 자랑게시판 글 등록 컨트롤러 호출 ==");
 		int createCount = service.register(dto);
 		return (createCount == 1) ? new ResponseEntity<PetBoardDTO>(HttpStatus.OK)
@@ -70,8 +74,10 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 수정
-	@PostMapping(value = "/bestPetsUpdate", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto) {
+	@HasRoleUser
+	@PostMapping(value="/bestPetsUpdate",
+				consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto){
 		try {
 			int updateCount = service.updatePetBoard(dto);
 			if (updateCount == 1) {
@@ -87,6 +93,7 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 삭제
+	@HasRoleUser
 	@DeleteMapping("/bestPetsDelete/{bno}")
 	public ResponseEntity<String> deletePetBoard(@PathVariable("bno") long bno) {
 		System.out.println("delete PetBoard(Controller) : " + bno);

@@ -17,4 +17,9 @@
 		select product_id, product_name, url, img
 		from	pet_products	
 	</select>
+	<select id="searchProducts" resultType="net.developia.mini1st.domain.ProductsDTO">
+		select 	product_id, product_name, img, url
+		from	pet_products
+		where	product_name like '%'||#{product_name}||'%'
+	</select>
 </mapper>

@@ -1,7 +1,9 @@
 package net.developia.mini1st.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
+import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.service.PetBoardService;
 
 @RestController
@@ -133,6 +136,20 @@ public class PetBoardController {
 		return list;
 	}
 
+	// 자랑게시판 전체 페이지 수
+	@GetMapping(value = "/bestPetsTotalPages", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, Long>> getTotalPage() {
+		try {
+			long end = service.getTotalPage(); // 마지막 페이지(전체페이지)
+			Map<String, Long> response = new HashMap<>();
+			response.put("end", end);
+			return new ResponseEntity<Map<String, Long>>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Map<String, Long>>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+
 	// 자랑게시판 통합 검색
 	@GetMapping(value = "/bestPetsBoardSearch", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PetBoardDTO>> getSearchResult(@RequestParam("content") String content) {
@@ -144,6 +161,18 @@ public class PetBoardController {
 			e.printStackTrace();
 			return new ResponseEntity<List<PetBoardDTO>>(HttpStatus.UNAUTHORIZED);
 
+		}
+	}
+
+	// 특정 게시글 좋아요한 유저 정보 리스트
+	@GetMapping(value = "/bestPetsLikedList/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	ResponseEntity<List<UserDTO>> getPeopleWhoLikes(@PathVariable("bno") long bno) {
+		try {
+			List<UserDTO> list = service.getPeopleWhoLikes(bno);
+			return new ResponseEntity<List<UserDTO>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
 		}
 	}
 }

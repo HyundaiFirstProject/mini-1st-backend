@@ -53,4 +53,9 @@
 		set		likes = likes - 1
 		where	rno = #{rno}
 	</update>
+	<select id="getPeopleWhoLikes">
+		select	user_no, email, nickname, img_url
+		from	user_info 
+		where	user_no	in (select user_no from review_reply_heart where rno=#{rno})
+	</select>
 </mapper>

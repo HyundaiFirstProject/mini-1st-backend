@@ -5,6 +5,7 @@ import java.util.List;
 import net.developia.mini1st.domain.PetReplyDTO;
 import net.developia.mini1st.domain.PetReplyHeartDTO;
 import net.developia.mini1st.domain.ReviewReplyDTO;
+import net.developia.mini1st.domain.UserDTO;
 
 public interface PetReplyService {
 
@@ -23,5 +24,7 @@ public interface PetReplyService {
 	public void likesReply(PetReplyHeartDTO dto);
 
 	public void likesReplyCancel(PetReplyHeartDTO dto);
+
+	public List<UserDTO> getPeopleWhoLikes(long rno);
 
 }

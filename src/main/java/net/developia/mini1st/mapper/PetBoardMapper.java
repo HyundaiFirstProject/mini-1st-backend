@@ -2,8 +2,10 @@ package net.developia.mini1st.mapper;
 
 import java.util.List;
 
+import net.developia.mini1st.domain.Criteria;
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
+import net.developia.mini1st.domain.UserDTO;
 
 public interface PetBoardMapper {
 
@@ -30,5 +32,9 @@ public interface PetBoardMapper {
 	public List<PetBoardDTO> searchPetBoards(String content);
 
 	public void increaseViews(long bno);
+
+	public List<UserDTO> getPeopleWhoLikes(long bno);
+
+	public long getTotalCount(Criteria cri);
 
 }

@@ -205,4 +205,22 @@ public class UserController {
             return new ResponseEntity<>("Server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping("/checkEmail")
+    public ResponseEntity<Map<String, Object>> checkEmail(@RequestBody Map<String, String> request) {
+        try {
+            String email = request.get("email");
+            boolean isAvailable = userService.isEmailAvailable(email);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.OK.value());
+            response.put("checkEmail", isAvailable);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.put("description", "서버 오류");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    
 }

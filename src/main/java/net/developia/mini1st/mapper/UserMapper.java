@@ -32,4 +32,6 @@ public interface UserMapper {
 
     //@Select("SELECT COUNT(*) FROM user_info WHERE email = #{email} and password = #{password}")
     int login(String email, String password);
+    
+    int countEmail(String email);
 }

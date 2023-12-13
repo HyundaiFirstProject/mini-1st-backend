@@ -1,7 +1,9 @@
 package net.developia.mini1st.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -151,6 +153,21 @@ public class PetBoardController {
 			e.printStackTrace();
 			return new ResponseEntity<List<PetBoardDTO>>(HttpStatus.UNAUTHORIZED);
 
+		}
+	}
+	
+	@GetMapping("/bestPets")
+	public ResponseEntity<Map<String, Object>> getBestReviews(){
+		Map<String, Object> response = new HashMap<>();
+		try {
+			response.put("status", "200");
+			response.put("description", "대표게시물 통신 성공");
+			response.put("data", service.getBestPets());
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+            response.put("status", "500");
+			response.put("description", "Internal Server Error");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
 }

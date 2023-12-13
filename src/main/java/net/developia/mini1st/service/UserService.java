@@ -18,4 +18,6 @@ public interface UserService {
   
     String getUserProfileImageUrl(int userId);
 
+    boolean isEmailAvailable(String email);
+
 }

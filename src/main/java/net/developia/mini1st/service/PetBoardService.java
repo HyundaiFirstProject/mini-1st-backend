@@ -29,5 +29,6 @@ public interface PetBoardService {
 	void increaseViews(long bno);
 
 
+	public List<PetBoardDTO> getBestPets();
 
 }

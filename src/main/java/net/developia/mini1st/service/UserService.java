@@ -10,4 +10,6 @@ public interface UserService {
     UserDTO getUserById(int userid);
     void updateUserProfile(UserDTO userDTO);
 
+    String getUserProfileImageUrl(int userId);
+
 }

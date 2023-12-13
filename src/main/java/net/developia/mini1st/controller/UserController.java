@@ -140,4 +140,19 @@ public class UserController {
         return new ResponseEntity<String>("Server error",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/getUserInfo/{userno}")
+    public ResponseEntity<String> getProfileUrl(@PathVariable int userno) {
+        try {
+            String profileUrl = userService.getUserProfileImageUrl(userno);
+
+            // 성공한 경우
+            return new ResponseEntity<>(profileUrl, HttpStatus.OK);
+        }  catch (Exception e) {
+            // 그 외의 예외가 발생한 경우
+            log.info(e.getMessage());
+            return new ResponseEntity<>("Server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
+}

@@ -27,4 +27,6 @@ public interface UserMapper {
     void updateUserProfile(UserDTO userDTO);
 
 
+    //@Select("SELECT COUNT(*) FROM user_info WHERE email = #{email} and password = #{password}")
+    int login(String email, String password);
 }

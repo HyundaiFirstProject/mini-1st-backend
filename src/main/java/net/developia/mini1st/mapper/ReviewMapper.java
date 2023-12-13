@@ -42,4 +42,6 @@ public interface ReviewMapper {
 	public List<ReviewDTO> searchReviews(String keyword);
 
 	public void increaseViews(long postid);
+	
+	public List<ReviewDTO> getBestReview();
 }

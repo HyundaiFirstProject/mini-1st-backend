@@ -1,5 +1,9 @@
 package net.developia.mini1st.service;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.annotations.Param;
+
 import net.developia.mini1st.domain.UserDTO;
 
 public interface UserService {
@@ -9,5 +13,6 @@ public interface UserService {
 
     UserDTO getUserById(int userid);
     void updateUserProfile(UserDTO userDTO);
-
+    
+    boolean login(@Param("email")String email,@Param("password")String password);
 }

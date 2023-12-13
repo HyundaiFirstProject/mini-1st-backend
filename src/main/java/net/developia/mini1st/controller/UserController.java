@@ -6,7 +6,10 @@ import java.util.Map;
 
 import net.developia.mini1st.service.ImageS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +35,6 @@ public class UserController {
         this.emailSendService = emailSendService;
         this.imageS3Service =  imageS3Service;
     }
-
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signUp(@RequestBody UserDTO userDTO) {
         try {
@@ -124,4 +126,18 @@ public class UserController {
             return new ResponseEntity<String>("wrong password", HttpStatus.UNAUTHORIZED);
         }
     }
-}
+
+
+    @PostMapping("/singleImg")
+    public ResponseEntity<String> uploadProfile
+            (@RequestParam("file") MultipartFile ImageFile) {
+        try {
+        String responseUrl = imageS3Service.responseUrl(ImageFile);
+        return new ResponseEntity<String>(responseUrl,HttpStatus.OK);
+        }
+        catch (Exception e) {
+        log.info(e.getMessage());
+        return new ResponseEntity<String>("Server error",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    }

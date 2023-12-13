@@ -30,4 +30,8 @@ public interface UserMapper {
     String getUserProfileImageUrl(int user_no);
 
 
+    //@Select("SELECT COUNT(*) FROM user_info WHERE email = #{email} and password = #{password}")
+    int login(String email, String password);
+    
+    int countEmail(String email);
 }

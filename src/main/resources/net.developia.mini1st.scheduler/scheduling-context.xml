@@ -12,8 +12,8 @@
     <!-- 스케줄링 활성화 -->
     <task:annotation-driven/>
     
-    <!-- Component scanning 활성화 -->
-    <context:component-scan base-package="net.developia.mini1st"/>
+    <!-- Component scanning 활성화 
+    <context:component-scan base-package="net.developia.mini1st"/>-->
     
 	<!-- Task Executor 및 Scheduler 추가 -->
     <task:executor id="taskExecutor" pool-size="5"/>

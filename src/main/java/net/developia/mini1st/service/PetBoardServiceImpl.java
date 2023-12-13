@@ -88,6 +88,7 @@ public class PetBoardServiceImpl implements PetBoardService {
 	}
 
 	@Override
+
 	public List<UserDTO> getPeopleWhoLikes(long bno) {
 		return mapper.getPeopleWhoLikes(bno);
 	}
@@ -104,6 +105,10 @@ public class PetBoardServiceImpl implements PetBoardService {
 				(totalRecord / onePageRecord) 
 				: (totalRecord / onePageRecord + 1);
 		return totalPages;
+  }
+
+	public List<PetBoardDTO> getBestPets() {
+		return mapper.getBestPets();
 	}
 
 

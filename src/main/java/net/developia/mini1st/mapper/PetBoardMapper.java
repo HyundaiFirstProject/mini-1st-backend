@@ -6,6 +6,7 @@ import net.developia.mini1st.domain.Criteria;
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
 import net.developia.mini1st.domain.UserDTO;
+import net.developia.mini1st.domain.ReviewDTO;
 
 public interface PetBoardMapper {
 
@@ -36,5 +37,7 @@ public interface PetBoardMapper {
 	public List<UserDTO> getPeopleWhoLikes(long bno);
 
 	public long getTotalCount(Criteria cri);
+
+	public List<PetBoardDTO> getBestPets();
 
 }

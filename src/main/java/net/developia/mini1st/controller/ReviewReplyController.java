@@ -22,6 +22,7 @@ import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.ReviewReplyDTO;
 import net.developia.mini1st.domain.ReviewReplyHeartDTO;
 import net.developia.mini1st.domain.UserDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.ReviewReplyService;
 
 @RestController
@@ -33,6 +34,7 @@ public class ReviewReplyController {
 	private ReviewReplyService service;
 	
 	// 후기 게시판 댓글 등록(Create)
+	@HasRoleUser
 	@PostMapping(value="/bestReviewsCommentsUpload", 
 			consumes = "application/json")
 	public ResponseEntity<ReviewReplyDTO> createReply(@RequestBody ReviewReplyDTO dto){
@@ -61,6 +63,7 @@ public class ReviewReplyController {
 	}
 	
 	// 후기 게시판 댓글 수정(UPDATE)
+	@HasRoleUser
 	@PostMapping(value="/bestReviewsCommentsUpdate",
 				consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> updateReply(@RequestBody ReviewReplyDTO dto){
@@ -82,6 +85,7 @@ public class ReviewReplyController {
 	}
 	
 	// 후기 게시판 댓글 삭제(DELETE)
+	@HasRoleUser
 	@DeleteMapping("/bestReviewsCommentsDelete/{rno}")
 	public ResponseEntity<String> deleteReply(@PathVariable("rno")long rno){
 		System.out.println("delete Reply(Controller) : " + rno);
@@ -95,6 +99,7 @@ public class ReviewReplyController {
 	// 1. { } 번 댓글에 좋아요를 누른 사람 목록에서 유저 검색
 	// 2. 목록에서 찾지 못하면 -> 좋아요 안누른 상태 -> 좋아요 처리
 	// 3. 목록에서 찾으면 -> 좋아요 누른 상태 -> 좋아요 취소 처리
+	@HasRoleUser
 	@PostMapping(value="/bestReviewsReplyLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> replyLikes(@RequestBody ReviewReplyHeartDTO dto){
 		long rno = dto.getRno(); // 댓글 번호

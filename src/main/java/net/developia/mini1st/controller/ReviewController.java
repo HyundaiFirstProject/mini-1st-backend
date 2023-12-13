@@ -25,6 +25,7 @@ import net.developia.mini1st.domain.ReviewBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.ReviewDetailDTO;
 import net.developia.mini1st.domain.UserDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.ReviewService;
 
 @RestController
@@ -54,8 +55,11 @@ public class ReviewController {
 	}
 
 	// 후기 게시판 글 등록 (Create)
-	@PostMapping(value = "/bestReviewsPost", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO dto) {
+	@HasRoleUser
+	@PostMapping(value="/bestReviewsPost"
+				,produces = MediaType.APPLICATION_JSON_VALUE
+				,consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO dto){
 		log.info("posting new Review....");
 		System.out.println("글등록 컨트롤러 호출");
 		int createCount = service.register(dto);
@@ -81,8 +85,9 @@ public class ReviewController {
 	}
 
 	// 후기 게시판 글 수정(Update)
-	@PostMapping(value = "/bestReviewsUpdate", consumes = "application/json")
-	public ResponseEntity<String> updateReview(@RequestBody ReviewDTO dto) {
+	@HasRoleUser
+	@PostMapping(value="/bestReviewsUpdate", consumes = "application/json")
+	public ResponseEntity<String> updateReview(@RequestBody ReviewDTO dto){
 		log.info("update Review : " + dto.getPostid());
 		// 수정 가능 항목(RequestBody) : 사진(img), 제목(title), 내용(content), 별점(star) ,
 		// 제품번호(itemID)
@@ -104,8 +109,10 @@ public class ReviewController {
 	}
 
 	// 후기 게시판 게시글 삭제(Delete)
-	@DeleteMapping(value = "/bestReviewsDelete/{postID}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> deleteReview(@PathVariable("postID") long postid) {
+	@HasRoleUser
+	@DeleteMapping(value="/bestReviewsDelete/{postID}"
+					,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> deleteReview(@PathVariable("postID") long postid){
 		log.info("delete Review(Controller) : " + postid);
 		return (service.deleteReview(postid) == 1) ? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
@@ -116,8 +123,10 @@ public class ReviewController {
 	// 1. { } 번 게시글에 좋아요를 누른 사람 목록에서 유저 검색
 	// 2. 목록에서 찾지 못하면 -> 좋아요 안누른 상태 -> 좋아요 처리
 	// 3. 목록에서 찾으면 -> 좋아요 누른 상태 -> 좋아요 취소 처리
-	@PostMapping(value = "/bestReviewsBoardLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> reviewBoardLikes(@RequestBody ReviewBoardHeartDTO dto) {
+
+	@HasRoleUser
+	@PostMapping(value="/bestReviewsBoardLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> reviewBoardLikes(@RequestBody ReviewBoardHeartDTO dto){
 		long postid = dto.getPostid(); // 게시글 번호
 		// 1. {postid}번 게시글에 좋아요를 누른 사람 목록에서 유저가 있는지 찾는다
 		List<Long> list = peopleWhoLikes(postid);
@@ -215,6 +224,21 @@ public class ReviewController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
+		}
+	}
+	
+	@GetMapping("/bestReviews")
+	public ResponseEntity<Map<String, Object>> getBestReviews(){
+		Map<String, Object> response = new HashMap<>();
+		try {
+			response.put("status", "200");
+			response.put("description", "대표게시물 통신 성공");
+			response.put("data", service.getBestReview());
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+            response.put("status", "500");
+			response.put("description", "Internal Server Error");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
 

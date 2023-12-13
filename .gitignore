@@ -10,4 +10,6 @@
 target/
 src/main/resources/application.properties
 src/main/resources/application.yml
+# Ignore compiled Java class files
+*.class
 

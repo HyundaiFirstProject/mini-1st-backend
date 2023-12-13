@@ -3,6 +3,7 @@ package net.developia.mini1st.mapper;
 import java.util.List;
 
 import net.developia.mini1st.domain.PetBoardDTO;
+import net.developia.mini1st.domain.PetBoardHeartDTO;
 
 public interface PetBoardMapper {
 
@@ -15,5 +16,19 @@ public interface PetBoardMapper {
 	public int updatePetBoard(PetBoardDTO dto);
 
 	public int deletePetBoard(long bno);
+
+	public List<Long> peopleWhoLikes(long bno);
+
+	public void increaseLikes(long bno);
+
+	public void likesReply(PetBoardHeartDTO dto);
+
+	public void decreaseLikes(long bno);
+
+	public void likesReplyCancel(PetBoardHeartDTO dto);
+
+	public List<PetBoardDTO> searchPetBoards(String content);
+
+	public void increaseViews(long bno);
 
 }

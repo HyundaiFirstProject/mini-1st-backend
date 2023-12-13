@@ -12,7 +12,7 @@
 		values	(seq_pet_board.nextval, #{title}, #{content}, #{writer}, #{photo}, #{pettype}, #{user_no})
 	</insert>
 	<select id="getDetail">
-		select	bno, title, writer, views, likes, photo, regdate, updatedate, pettype, user_no
+		select	bno, title, content, writer, views, likes, photo, regdate, updatedate, pettype, user_no
 		from	pet_board
 		where	bno=#{bno}
 	</select>
@@ -25,4 +25,41 @@
 		delete 	from pet_board
 		where	bno=#{bno}
 	</delete>
+	<select id="peopleWhoLikes" resultType="long">
+		select	user_no
+		from	pet_board_heart
+		where	bno=#{bno}
+	</select>
+	<insert id="likesReply">
+		insert into pet_board_heart(hno, bno, user_no)
+		values (seq_pet_board_heart.nextval, #{bno}, #{user_no})
+	</insert>
+	<update id="increaseLikes">
+		update	pet_board
+		set		likes = likes + 1
+		where	bno = #{bno}
+	</update>
+	<update id="decreaseLikes">
+		update	pet_board
+		set		likes = likes - 1
+		where	bno = #{bno}
+	</update>
+	<delete id="likesReplyCancel">
+		delete	from pet_board_heart 
+		where	bno=#{bno} and user_no=#{user_no}
+	</delete>
+	<select id="searchPetBoards">
+		<![CDATA[
+        select	bno, title, content, writer, views, likes, photo, regdate, updatedate, pettype, user_no
+        from 	pet_board
+        where 	(title like '%' || #{content} || '%'
+        		or content like '%' || #{content} || '%'
+        		or writer like '%' || #{content} || '%')
+    	]]>
+	</select>
+	<update id="increaseViews">
+		update	pet_board
+		set		views = views + 1
+		where	bno = #{bno}
+	</update>
 </mapper>

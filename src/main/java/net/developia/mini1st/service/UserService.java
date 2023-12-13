@@ -15,4 +15,7 @@ public interface UserService {
     void updateUserProfile(UserDTO userDTO);
     
     boolean login(@Param("email")String email,@Param("password")String password);
+  
+    String getUserProfileImageUrl(int userId);
+
 }

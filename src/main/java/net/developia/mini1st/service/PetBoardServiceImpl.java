@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.developia.mini1st.domain.Criteria;
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
+import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.mapper.PetBoardMapper;
 
 @Service
@@ -86,6 +88,25 @@ public class PetBoardServiceImpl implements PetBoardService {
 	}
 
 	@Override
+
+	public List<UserDTO> getPeopleWhoLikes(long bno) {
+		return mapper.getPeopleWhoLikes(bno);
+	}
+
+	@Override
+	public long getTotalPage() {
+		Criteria cri = new Criteria();
+		long totalRecord = mapper.getTotalCount(cri);
+		long onePageRecord = (long)cri.getAmount();
+		if (totalRecord <= onePageRecord) {
+			return 1;
+		}
+		long totalPages = (totalRecord % onePageRecord == 0) ? 
+				(totalRecord / onePageRecord) 
+				: (totalRecord / onePageRecord + 1);
+		return totalPages;
+  }
+
 	public List<PetBoardDTO> getBestPets() {
 		return mapper.getBestPets();
 	}

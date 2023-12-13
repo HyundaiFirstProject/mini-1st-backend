@@ -20,6 +20,7 @@ import net.developia.mini1st.domain.PetReplyDTO;
 import net.developia.mini1st.domain.PetReplyHeartDTO;
 import net.developia.mini1st.domain.ReviewReplyDTO;
 import net.developia.mini1st.domain.ReviewReplyHeartDTO;
+import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.PetReplyService;
 
@@ -46,8 +47,7 @@ public class PetReplyController {
 	}
 
 	// 자랑게시판 댓글 조회(댓글 리스트)
-	@GetMapping(value = "/bestPetsComments/{bno}",
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/bestPetsComments/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PetReplyDTO>> getReplyList(@PathVariable("bno") long bno) {
 		try {
 			List<PetReplyDTO> list = service.getReplyList(bno);
@@ -101,7 +101,7 @@ public class PetReplyController {
 				// 유저가 좋아요를 누르지 않았으면
 				// 좋아요를 1증가시키고, pet_reply_heart 테이블에 정보 추가(좋아요번호(시퀀스), 댓글번호,유저번호)
 				service.likesReply(dto);
-			} else if (list.contains(user_no) == true) { 
+			} else if (list.contains(user_no) == true) {
 				// 유저가 이미 좋아요를 누른 상태면
 				// 좋아요를 1감소 시키고, review_reply_heart 테이블에 정보 삭제(좋아요번호(시퀀스),댓글번호, 유저번호)
 				service.likesReplyCancel(dto);
@@ -118,5 +118,18 @@ public class PetReplyController {
 		List<Long> list = new ArrayList<>();
 		list = service.peopleWhoLikes(rno);
 		return list;
+	}
+
+	// 특정 댓글 좋아요한 유저 정보 리스트
+	@GetMapping(value = "/bestPetReplyLikedUser/{rno}", 
+				produces = MediaType.APPLICATION_JSON_VALUE)
+	ResponseEntity<List<UserDTO>> getPeopleWhoLikes(@PathVariable("rno") long rno) {
+		try {
+			List<UserDTO> list = service.getPeopleWhoLikes(rno);
+			return new ResponseEntity<List<UserDTO>>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
+		}
 	}
 }

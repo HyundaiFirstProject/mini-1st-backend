@@ -26,5 +26,8 @@ public interface UserMapper {
     @Update("UPDATE user_info SET img_url = #{img_url},nickname = #{nickname} WHERE user_no = #{user_no}")
     void updateUserProfile(UserDTO userDTO);
 
+    @Select("SELECT img_url FROM user_info WHERE user_no=#{user_no}")
+    String getUserProfileImageUrl(int user_no);
+
 
 }

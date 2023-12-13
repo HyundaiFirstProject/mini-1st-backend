@@ -1,7 +1,9 @@
 package net.developia.mini1st.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import net.developia.mini1st.domain.ProductsDTO;
 import net.developia.mini1st.domain.ReviewBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.ReviewDetailDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.ReviewService;
 
 @RestController
@@ -53,6 +56,7 @@ public class ReviewController {
 	}
 	
 	// 후기 게시판 글 등록 (Create)
+	@HasRoleUser
 	@PostMapping(value="/bestReviewsPost"
 				,produces = MediaType.APPLICATION_JSON_VALUE
 				,consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -84,6 +88,7 @@ public class ReviewController {
 	}
 	
 	// 후기 게시판 글 수정(Update)
+	@HasRoleUser
 	@PostMapping(value="/bestReviewsUpdate", consumes = "application/json")
 	public ResponseEntity<String> updateReview(@RequestBody ReviewDTO dto){
 		log.info("update Review : " + dto.getPostid());
@@ -106,6 +111,7 @@ public class ReviewController {
 	}
 	
 	// 후기 게시판 게시글 삭제(Delete)
+	@HasRoleUser
 	@DeleteMapping(value="/bestReviewsDelete/{postID}"
 					,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> deleteReview(@PathVariable("postID") long postid){
@@ -119,6 +125,7 @@ public class ReviewController {
 	// 1. { } 번 게시글에 좋아요를 누른 사람 목록에서 유저 검색
 	// 2. 목록에서 찾지 못하면 -> 좋아요 안누른 상태 -> 좋아요 처리
 	// 3. 목록에서 찾으면 -> 좋아요 누른 상태 -> 좋아요 취소 처리
+	@HasRoleUser
 	@PostMapping(value="/bestReviewsBoardLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> reviewBoardLikes(@RequestBody ReviewBoardHeartDTO dto){
 		long postid = dto.getPostid(); // 게시글 번호
@@ -181,6 +188,21 @@ public class ReviewController {
 			e.printStackTrace();
 			return new ResponseEntity<List<ReviewDTO>>(HttpStatus.UNAUTHORIZED);
 			
+		}
+	}
+	
+	@GetMapping("/bestReviews")
+	public ResponseEntity<Map<String, Object>> getBestReviews(){
+		Map<String, Object> response = new HashMap<>();
+		try {
+			response.put("status", "200");
+			response.put("description", "대표게시물 통신 성공");
+			response.put("data", service.getBestReview());
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+            response.put("status", "500");
+			response.put("description", "Internal Server Error");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
 

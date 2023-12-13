@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.ReviewDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.PetBoardService;
 
 @RestController
@@ -45,6 +46,7 @@ public class PetBoardController {
 	}
 	
 	// 자랑게시판 게시글 등록
+	@HasRoleUser
 	@PostMapping(value="/bestPetsPost"
 				,produces = MediaType.APPLICATION_JSON_VALUE
 				,consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -71,6 +73,7 @@ public class PetBoardController {
 	}
 	
 	// 자랑게시판 게시글 수정
+	@HasRoleUser
 	@PostMapping(value="/bestPetsUpdate",
 				consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto){
@@ -88,6 +91,7 @@ public class PetBoardController {
 		}
 	}
 	// 자랑게시판 게시글 삭제
+	@HasRoleUser
 	@DeleteMapping("/bestPetsDelete/{bno}")
 	public ResponseEntity<String> deletePetBoard(@PathVariable("bno")long bno){
 		System.out.println("delete PetBoard(Controller) : " + bno);

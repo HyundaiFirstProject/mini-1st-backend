@@ -142,5 +142,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public void increaseViews(long postid) {
 		mapper.increaseViews(postid);
 	}
+	
+	@Override
+	public List<ReviewDTO> getBestReview() {
+		return mapper.getBestReview();
+	}
 
 }

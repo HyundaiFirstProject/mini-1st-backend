@@ -3,6 +3,10 @@ package net.developia.mini1st.service;
 import lombok.extern.java.Log;
 import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.mapper.UserMapper;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,4 +84,23 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+
+	@Override
+	public boolean login(@Param("email")String email, @Param("password")String password) {
+		try {
+            System.out.println("email -> " + email);
+            System.out.println("password -> " +password);
+			int num = userMapper.login(email,password);
+
+			if(num == 1) return true;
+			else return false;
+			
+		}catch(Exception e) {
+			log.info(e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	
 }

@@ -7,6 +7,7 @@ import net.developia.mini1st.domain.ProductsDTO;
 import net.developia.mini1st.domain.ReviewBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.ReviewDetailDTO;
+import net.developia.mini1st.domain.UserDTO;
 
 public interface ReviewService {
 	public List<ReviewDTO> getReviewList(Criteria cri);
@@ -34,6 +35,12 @@ public interface ReviewService {
 	public List<ReviewDTO> searchReviews(String keyword);
 
 	public void increaseViews(long postid);
+
+	public long getTotalPage();
+
+	public List<ReviewDTO> getReviewsByItem(String product_name);
+
+	public List<UserDTO> getPeopleWhoLikes(long postid);
 
 	public List<ReviewDTO> getBestReview();
 }

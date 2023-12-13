@@ -5,6 +5,7 @@ import java.util.List;
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
+import net.developia.mini1st.domain.UserDTO;
 
 public interface PetBoardService {
 
@@ -27,6 +28,10 @@ public interface PetBoardService {
 	List<PetBoardDTO> searchPetBoards(String content);
 
 	void increaseViews(long bno);
+
+	List<UserDTO> getPeopleWhoLikes(long bno);
+
+	long getTotalPage();
 
 
 	public List<PetBoardDTO> getBestPets();

@@ -180,6 +180,7 @@ public class PetBoardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
+		}
     }
 	
 	@GetMapping("/bestPets")

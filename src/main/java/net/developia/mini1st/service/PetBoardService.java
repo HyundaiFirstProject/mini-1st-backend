@@ -34,5 +34,6 @@ public interface PetBoardService {
 	long getTotalPage();
 
 
+	public List<PetBoardDTO> getBestPets();
 
 }

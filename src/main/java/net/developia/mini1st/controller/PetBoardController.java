@@ -23,6 +23,7 @@ import net.developia.mini1st.domain.PetBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.UserDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.PetBoardService;
 
 @RestController
@@ -50,8 +51,11 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 등록
-	@PostMapping(value = "/bestPetsPost", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PetBoardDTO> register(@RequestBody PetBoardDTO dto) {
+	@HasRoleUser
+	@PostMapping(value="/bestPetsPost"
+				,produces = MediaType.APPLICATION_JSON_VALUE
+				,consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PetBoardDTO> register(@RequestBody PetBoardDTO dto){
 		System.out.println("== 자랑게시판 글 등록 컨트롤러 호출 ==");
 		int createCount = service.register(dto);
 		return (createCount == 1) ? new ResponseEntity<PetBoardDTO>(HttpStatus.OK)
@@ -73,8 +77,10 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 수정
-	@PostMapping(value = "/bestPetsUpdate", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto) {
+	@HasRoleUser
+	@PostMapping(value="/bestPetsUpdate",
+				consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto){
 		try {
 			int updateCount = service.updatePetBoard(dto);
 			if (updateCount == 1) {
@@ -90,6 +96,7 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 삭제
+	@HasRoleUser
 	@DeleteMapping("/bestPetsDelete/{bno}")
 	public ResponseEntity<String> deletePetBoard(@PathVariable("bno") long bno) {
 		System.out.println("delete PetBoard(Controller) : " + bno);
@@ -163,7 +170,7 @@ public class PetBoardController {
 
 		}
 	}
-
+  
 	// 특정 게시글 좋아요한 유저 정보 리스트
 	@GetMapping(value = "/bestPetsLikedList/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<List<UserDTO>> getPeopleWhoLikes(@PathVariable("bno") long bno) {
@@ -173,6 +180,21 @@ public class PetBoardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
-		}
+    }
+	
+	@GetMapping("/bestPets")
+	public ResponseEntity<Map<String, Object>> getBestReviews(){
+		Map<String, Object> response = new HashMap<>();
+		try {
+			response.put("status", "200");
+			response.put("description", "대표게시물 통신 성공");
+			response.put("data", service.getBestPets());
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+            response.put("status", "500");
+			response.put("description", "Internal Server Error");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
 	}
-}
+	}

@@ -62,6 +62,7 @@
 		set		views = views + 1
 		where	bno = #{bno}
 	</update>
+
 	<select id="getPeopleWhoLikes" resultType="net.developia.mini1st.domain.UserDTO">
 		select	user_no, email, nickname, img_url
 		from	user_info
@@ -69,5 +70,16 @@
 	</select>
 	<select id="getTotalCount" resultType="long">
 		select count(*) from pet_board 
+</select>
+
+	<select id="getBestPets" resultType="net.developia.mini1st.domain.PetBoardDTO">
+		<![CDATA[
+    		SELECT bno, title, photo, pettype, likes
+    		FROM (
+        		SELECT bno, title, photo, pettype, likes
+        		FROM pet_board
+        		ORDER BY likes DESC
+    		) WHERE ROWNUM <= 4
+    	]]>
 	</select>
 </mapper>

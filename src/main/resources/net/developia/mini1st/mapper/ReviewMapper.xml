@@ -103,14 +103,28 @@
 		set		views = views + 1
 		where	postid = #{postid}
 	</update>
+
 	<select id="getReviewsByItem" resultType="net.developia.mini1st.domain.ReviewDTO">
 		select 	postid, title, content, writer, views, likes, regdate, updatedate, stars, user_no, itemid, img
 		from 	review_board
 		where  	itemid in (select product_id from pet_products where product_name like '%'|| #{product_name} ||'%')
 	</select>
+  
 	<select id="getPeopleWhoLikes" resultType="net.developia.mini1st.domain.UserDTO">
 		select	user_no, email, nickname, img_url
 		from	user_info 
 		where	user_no	in (select user_no from review_board_heart where postid=#{postid})
 	</select> 
+
+	<select id="getBestReview" resultType="net.developia.mini1st.domain.ReviewDTO">
+		<![CDATA[
+    		SELECT postid, title, img, stars, likes
+    		FROM (
+        		SELECT postid, title, img, stars, likes
+        		FROM review_board
+        		ORDER BY likes DESC
+    		) WHERE ROWNUM <= 4
+    	]]>
+	</select>
+
 </mapper>

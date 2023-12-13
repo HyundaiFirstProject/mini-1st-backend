@@ -20,6 +20,7 @@ import net.developia.mini1st.domain.PetReplyDTO;
 import net.developia.mini1st.domain.PetReplyHeartDTO;
 import net.developia.mini1st.domain.ReviewReplyDTO;
 import net.developia.mini1st.domain.ReviewReplyHeartDTO;
+import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.PetReplyService;
 
 @RestController
@@ -31,6 +32,7 @@ public class PetReplyController {
 	private PetReplyService service;
 
 	// 자랑게시판 댓글 등록
+	@HasRoleUser
 	@PostMapping(value = "/bestPetsCommentsUpload", consumes = "application/json")
 	public ResponseEntity<PetReplyDTO> createReply(@RequestBody PetReplyDTO dto) {
 		log.info("create Reply : " + dto);
@@ -57,6 +59,7 @@ public class PetReplyController {
 	}
 
 	// 자랑게시판 댓글 수정
+	@HasRoleUser
 	@PostMapping(value = "/bestPetsCommentsUpdate", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> updateReply(@RequestBody PetReplyDTO dto) {
 		long rno = dto.getRno();
@@ -68,6 +71,7 @@ public class PetReplyController {
 	}
 
 	// 자랑게시판 댓글 삭제
+	@HasRoleUser
 	@DeleteMapping("/bestPetsCommentsDelete/{rno}")
 	public ResponseEntity<String> deleteReply(@PathVariable("rno") long rno) {
 		System.out.println("delete Reply(Controller) : " + rno);
@@ -80,6 +84,7 @@ public class PetReplyController {
 	// 1. { } 번 댓글에 좋아요를 누른 사람 목록에서 유저 검색
 	// 2. 목록에서 찾지 못하면 -> 좋아요 안누른 상태 -> 좋아요 처리
 	// 3. 목록에서 찾으면 -> 좋아요 누른 상태 -> 좋아요 취소 처리
+	@HasRoleUser
 	@PostMapping(value = "/bestPetsCommentsLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> replyLikes(@RequestBody PetReplyHeartDTO dto) {
 		long rno = dto.getRno(); // 댓글 번호

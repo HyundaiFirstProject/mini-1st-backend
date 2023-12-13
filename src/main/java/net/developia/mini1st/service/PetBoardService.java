@@ -5,16 +5,17 @@ import java.util.List;
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
+import net.developia.mini1st.domain.UserDTO;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface PetBoardService {
 
 	List<PetBoardDTO> getPetBoardList();
 
-	int register(PetBoardDTO dto);
-
 	PetBoardDTO getDetail(long bno);
 
-	int updatePetBoard(PetBoardDTO dto);
+	void updatePetBoard(PetBoardDTO dto);
 
 	int deleteReview(long bno);
 
@@ -31,4 +32,5 @@ public interface PetBoardService {
 
 	public List<PetBoardDTO> getBestPets();
 
+	void insertPetBoard(PetBoardDTO petBoardDTO);
 }

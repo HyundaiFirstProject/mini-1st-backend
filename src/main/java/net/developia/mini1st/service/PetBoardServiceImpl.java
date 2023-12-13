@@ -25,8 +25,9 @@ public class PetBoardServiceImpl implements PetBoardService {
 	}
 
 	@Override
-	public int register(PetBoardDTO dto) {
-		return mapper.register(dto);
+	public void insertPetBoard(PetBoardDTO dto) {
+		System.out.println("dto = " + dto);
+		mapper.register(dto);
 	}
 
 	@Override
@@ -35,8 +36,8 @@ public class PetBoardServiceImpl implements PetBoardService {
 	}
 
 	@Override
-	public int updatePetBoard(PetBoardDTO dto) {
-		return mapper.updatePetBoard(dto);
+	public void updatePetBoard(PetBoardDTO dto) {
+		mapper.updatePetBoard(dto);
 	}
 
 	@Override

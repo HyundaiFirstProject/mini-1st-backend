@@ -12,6 +12,4 @@ public interface UserService {
 
     String getUserProfileImageUrl(int userId);
 
-    byte[] readImageFromUrl(String imageUrl);
-
 }

@@ -46,7 +46,8 @@ public class PetReplyController {
 	}
 
 	// 자랑게시판 댓글 조회(댓글 리스트)
-	@GetMapping(value = "/bestPetsComments/{bno}")
+	@GetMapping(value = "/bestPetsComments/{bno}",
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PetReplyDTO>> getReplyList(@PathVariable("bno") long bno) {
 		try {
 			List<PetReplyDTO> list = service.getReplyList(bno);

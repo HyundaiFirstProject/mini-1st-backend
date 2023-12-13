@@ -103,4 +103,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	
+	@Override
+	public String getUserProfileImageUrl(int userId) {
+		return userMapper.getUserProfileImageUrl(userId);
+	}
 }

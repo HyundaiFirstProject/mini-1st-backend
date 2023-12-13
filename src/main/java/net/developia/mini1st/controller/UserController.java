@@ -11,7 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import net.developia.mini1st.service.ImageS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,7 +46,6 @@ public class UserController {
         this.emailSendService = emailSendService;
         this.imageS3Service =  imageS3Service;
     }
-
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signUp(@RequestBody UserDTO userDTO) {
         try {
@@ -137,6 +139,7 @@ public class UserController {
         }
     }
 
+
     @PostMapping(value="/login")
     public ResponseEntity<Map<String,String>> login(@RequestBody Map<String, String> request,  HttpServletRequest httpRequest, HttpServletResponse httpResponse){
     	Map<String, String> response = new HashMap<>();
@@ -174,5 +177,32 @@ public class UserController {
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate(); // 세션 무효화
         return "redirect:/"; // 로그아웃 후 리다이렉트할 URL
+    }
+  
+    @PostMapping("/singleImg")
+    public ResponseEntity<String> uploadProfile
+            (@RequestParam("file") MultipartFile ImageFile) {
+        try {
+        String responseUrl = imageS3Service.responseUrl(ImageFile);
+        return new ResponseEntity<String>(responseUrl,HttpStatus.OK);
+        }
+        catch (Exception e) {
+        log.info(e.getMessage());
+        return new ResponseEntity<String>("Server error",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getUserInfo/{userno}")
+    public ResponseEntity<String> getProfileUrl(@PathVariable int userno) {
+        try {
+            String profileUrl = userService.getUserProfileImageUrl(userno);
+
+            // 성공한 경우
+            return new ResponseEntity<>(profileUrl, HttpStatus.OK);
+        }  catch (Exception e) {
+            // 그 외의 예외가 발생한 경우
+            log.info(e.getMessage());
+            return new ResponseEntity<>("Server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

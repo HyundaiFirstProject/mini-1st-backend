@@ -6,4 +6,8 @@
 	<select id="login" resultType="int">
 		SELECT COUNT(*) FROM user_info WHERE email = #{param1} and password = #{param2}	
 	</select>
+	
+	<select id="countEmail" resultType="int">
+		SELECT COUNT(*) FROM user_info WHERE email = #{param1} 
+	</select>
 </mapper>

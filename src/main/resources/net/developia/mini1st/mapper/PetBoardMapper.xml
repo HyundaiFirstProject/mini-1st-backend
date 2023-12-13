@@ -62,4 +62,16 @@
 		set		views = views + 1
 		where	bno = #{bno}
 	</update>
+	
+	
+	<select id="getBestPets" resultType="net.developia.mini1st.domain.PetBoardDTO">
+		<![CDATA[
+    		SELECT bno, title, photo, pettype, likes
+    		FROM (
+        		SELECT bno, title, photo, pettype, likes
+        		FROM pet_board
+        		ORDER BY likes DESC
+    		) WHERE ROWNUM <= 4
+    	]]>
+	</select>
 </mapper>

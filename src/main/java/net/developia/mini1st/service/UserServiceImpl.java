@@ -107,4 +107,16 @@ public class UserServiceImpl implements UserService{
 	public String getUserProfileImageUrl(int userId) {
 		return userMapper.getUserProfileImageUrl(userId);
 	}
+
+
+	@Override
+	public boolean isEmailAvailable(String email) {
+		int emailCounter = userMapper.countEmail(email);
+        if (emailCounter > 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+	}
 }

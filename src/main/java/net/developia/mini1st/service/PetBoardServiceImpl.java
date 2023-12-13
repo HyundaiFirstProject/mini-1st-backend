@@ -85,5 +85,10 @@ public class PetBoardServiceImpl implements PetBoardService {
 		mapper.increaseViews(bno);
 	}
 
+	@Override
+	public List<PetBoardDTO> getBestPets() {
+		return mapper.getBestPets();
+	}
+
 
 }

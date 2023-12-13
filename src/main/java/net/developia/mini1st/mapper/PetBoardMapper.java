@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
+import net.developia.mini1st.domain.ReviewDTO;
 
 public interface PetBoardMapper {
 
@@ -31,4 +32,6 @@ public interface PetBoardMapper {
 
 	public void increaseViews(long bno);
 
+
+	public List<PetBoardDTO> getBestPets();
 }

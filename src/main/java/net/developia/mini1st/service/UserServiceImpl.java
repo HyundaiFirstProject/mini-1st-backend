@@ -80,4 +80,17 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	@Override
+	public String getUserProfileImageUrl(int userId) {
+		// 이 메서드를 구현하여 데이터베이스에서 사용자 프로필 이미지 URL을 가져옵니다.
+		return userMapper.getUserProfileImageUrl(userId);
+	}
+
+	@Override
+	public byte[] readImageFromUrl(String imageUrl) {
+		// 이미지 URL에서 바이트 배열을 읽어오는 메서드를 구현합니다.
+		// ImageS3Service의 readImageFromUrl 메서드를 참고하여 구현하세요.
+		// 적절하게 예외를 처리하세요.
+		return new byte[0];  // 실제 구현으로 대체하세요
+	}
 }

@@ -8,6 +8,7 @@ import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.UserDTO;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public interface PetBoardService {
 
@@ -28,6 +29,10 @@ public interface PetBoardService {
 	List<PetBoardDTO> searchPetBoards(String content);
 
 	void increaseViews(long bno);
+
+	List<UserDTO> getPeopleWhoLikes(long bno);
+
+	long getTotalPage();
 
 
 	public List<PetBoardDTO> getBestPets();

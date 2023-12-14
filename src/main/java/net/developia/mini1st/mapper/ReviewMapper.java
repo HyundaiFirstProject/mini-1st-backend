@@ -15,7 +15,7 @@ public interface ReviewMapper {
 
 	public ReviewDTO readReview(long postid);
 
-	public void updateReview(ReviewDTO dto);
+	public int updateReview(ReviewDTO dto);
 
 	public int deleteReview(long postid);
 

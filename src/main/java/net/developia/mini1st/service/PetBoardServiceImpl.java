@@ -1,5 +1,7 @@
 package net.developia.mini1st.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import net.developia.mini1st.domain.Criteria;
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
+import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.mapper.PetBoardMapper;
 
@@ -22,14 +25,28 @@ public class PetBoardServiceImpl implements PetBoardService {
 	}
 
 	@Override
-	public List<PetBoardDTO> getPetBoardList(Criteria cri) {
-		return mapper.getPetBoardList(cri);
+	public List<PetBoardDTO> getPetBoardList() {
+		List<PetBoardDTO> list = mapper.getPetBoardList();
+		for(PetBoardDTO dto: list) {
+			List<String> img = Arrays.asList(mapper.getImgString(dto.getBno()).split(","));
+			dto.setPhoto(img);
+		}
+		return mapper.getPetBoardList();
 	}
 
 	@Override
-	public void insertPetBoard(PetBoardDTO dto) {
-		System.out.println("dto = " + dto);
-		mapper.register(dto);
+	public int insertPetBoard(PetBoardDTO dto) {
+		List<String> imgList = dto.getPhoto();
+		System.out.println("=======================");
+		for(String pho :imgList) {
+			System.out.println(pho);
+		}
+		System.out.println("=======================");
+		String imgConcat = String.join(",", imgList);
+		List<String> newImg = new ArrayList<>();
+		newImg.add(imgConcat);
+		dto.setPhoto(newImg);
+		return mapper.register(dto);
 	}
 
 	@Override
@@ -38,8 +55,13 @@ public class PetBoardServiceImpl implements PetBoardService {
 	}
 
 	@Override
-	public void updatePetBoard(PetBoardDTO dto) {
-		mapper.updatePetBoard(dto);
+	public int updatePetBoard(PetBoardDTO dto) {
+		List<String> imgList = dto.getPhoto();
+		String imgConcat = String.join(",", imgList);
+		List<String> newImg = new ArrayList<>();
+		newImg.add(imgConcat);
+		dto.setPhoto(newImg);
+		return mapper.updatePetBoard(dto);
 	}
 
 	@Override

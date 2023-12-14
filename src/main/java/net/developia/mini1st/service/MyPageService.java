@@ -6,9 +6,9 @@ import net.developia.mini1st.domain.UserDTO;
 
 public interface MyPageService {
 
-	public PetBoardDTO getBestPet(long bno);
+	public PetBoardDTO getBestPet(long user_no);
 
-	public ReviewDTO getReview(long postid);
+	public ReviewDTO getReview(long user_no);
 
 	public UserDTO getUserInfo(String email);
 

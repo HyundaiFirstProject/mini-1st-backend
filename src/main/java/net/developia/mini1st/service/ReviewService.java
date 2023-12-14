@@ -10,7 +10,7 @@ import net.developia.mini1st.domain.ReviewDetailDTO;
 import net.developia.mini1st.domain.UserDTO;
 
 public interface ReviewService {
-	public List<ReviewDTO> getReviewList(Criteria cri);
+	public List<ReviewDTO> getReviewList();
 
 	public int register(ReviewDTO dto);
 

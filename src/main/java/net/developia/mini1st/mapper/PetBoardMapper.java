@@ -10,7 +10,7 @@ import net.developia.mini1st.domain.ReviewDTO;
 
 public interface PetBoardMapper {
 
-	public List<PetBoardDTO> getPetBoardList(Criteria cri);
+	public List<PetBoardDTO> getPetBoardList();
 
 	public int register(PetBoardDTO dto);
 
@@ -39,5 +39,7 @@ public interface PetBoardMapper {
 	public long getTotalCount(Criteria cri);
 
 	public List<PetBoardDTO> getBestPets();
+
+	public String getImgString(long bno);
 
 }

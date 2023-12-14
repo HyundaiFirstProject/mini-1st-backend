@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PetBoardService {
 
-	List<PetBoardDTO> getPetBoardList(Criteria cri);
+	List<PetBoardDTO> getPetBoardList();
 
 	PetBoardDTO getDetail(long bno);
 
-	void updatePetBoard(PetBoardDTO dto);
+	int updatePetBoard(PetBoardDTO dto);
 
 	int deleteReview(long bno);
 
@@ -38,5 +38,5 @@ public interface PetBoardService {
 
 	List<PetBoardDTO> getBestPets();
 
-	void insertPetBoard(PetBoardDTO petBoardDTO);
+	int insertPetBoard(PetBoardDTO petBoardDTO);
 }

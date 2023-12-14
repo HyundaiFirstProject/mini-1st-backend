@@ -29,8 +29,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 
 	@Override
-	public List<ReviewDTO> getReviewList(Criteria cri) {
-		List<ReviewDTO> list = mapper.getReviewList(cri);
+	public List<ReviewDTO> getReviewList() {
+		List<ReviewDTO> list = mapper.getReviewList();
 		// 이미지 파일(String) 을 다시 List<String> 으로 변환
 		for(ReviewDTO dto: list) {
 			List<String> img = Arrays.asList(mapper.getImgString(dto.getPostid()).split(","));

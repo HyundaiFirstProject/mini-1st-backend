@@ -5,28 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.developia.mini1st.domain.*;
+import net.developia.mini1st.service.ImageS3Service;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.slf4j.Slf4j;
-import net.developia.mini1st.domain.Criteria;
-import net.developia.mini1st.domain.ProductsDTO;
-import net.developia.mini1st.domain.ReviewBoardHeartDTO;
-import net.developia.mini1st.domain.ReviewDTO;
-import net.developia.mini1st.domain.ReviewDetailDTO;
-import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.ReviewService;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Slf4j
@@ -35,6 +26,8 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService service;
+	@Autowired
+	private ImageS3Service imageS3Service;
 
 	@Autowired
 	public ReviewController(ReviewService reviewService) {
@@ -54,18 +47,23 @@ public class ReviewController {
 		}
 	}
 
-	// 후기 게시판 글 등록 (Create)
 	@HasRoleUser
-	@PostMapping(value="/bestReviewsPost"
-				,produces = MediaType.APPLICATION_JSON_VALUE
-				,consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO dto){
-		log.info("posting new Review....");
-		System.out.println("글등록 컨트롤러 호출");
-		int createCount = service.register(dto);
-		log.info("## Review create count : " + createCount);
-		return (createCount == 1) ? new ResponseEntity<ReviewDTO>(HttpStatus.OK)
-				: new ResponseEntity<ReviewDTO>(HttpStatus.UNAUTHORIZED);
+	@PostMapping(value="/bestReviewsPost")
+	public ResponseEntity<Map<String,Object>> createReview(@RequestPart(value = "files",required = false) List<MultipartFile> boardfileImage,
+												  @RequestPart(value = "board")ReviewDTO dto){
+		try{
+			imageS3Service.uploadbestReviews(boardfileImage, dto);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.OK.value());
+            response.put("description", "성공");
+            return ResponseEntity.ok(response);
+		} catch (Exception e){
+			log.info(e.getMessage());
+			Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.put("description", "서버 오류");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
 	}
 
 	// 후기 게시판 글 상세보기 (Read)
@@ -86,25 +84,22 @@ public class ReviewController {
 
 	// 후기 게시판 글 수정(Update)
 	@HasRoleUser
-	@PostMapping(value="/bestReviewsUpdate", consumes = "application/json")
-	public ResponseEntity<String> updateReview(@RequestBody ReviewDTO dto){
-		log.info("update Review : " + dto.getPostid());
-		// 수정 가능 항목(RequestBody) : 사진(img), 제목(title), 내용(content), 별점(star) ,
-		// 제품번호(itemID)
-
+	@PostMapping(value="/bestReviewsUpdate")
+	public ResponseEntity<Map<String,Object>> updateReview(@RequestPart(value = "file",required = false) List<MultipartFile> boardfileImage,
+											   @RequestPart(value = "board") ReviewDTO dto) {
 		try {
-			// 해당 정보를 사용하여 업데이트
-			int updateCount = service.updateReview(dto);
-			// 업데이트가 성공하면 OK(200) 응답을 반환
-			if (updateCount == 1) {
-				return new ResponseEntity<>("success", HttpStatus.OK);
-			} else {
-				// 업데이트가 실패하면 UNAUTHORIZED(401) 응답을 반환
-				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-			}
+			imageS3Service.updateReviews(boardfileImage,dto);
+
+			Map<String, Object> response = new HashMap<>();
+			response.put("status", HttpStatus.OK.value());
+			response.put("description", "성공");
+			return ResponseEntity.ok(response);
 		} catch (Exception e) {
-			log.info(e.getMessage());
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			e.printStackTrace();
+			Map<String, Object> response = new HashMap<>();
+			response.put("status", "500");
+			response.put("description", "서버 오류");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
 

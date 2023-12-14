@@ -104,8 +104,6 @@ public class PetBoardController {
 	@PostMapping(value = "/bestPetsUpdate")
 	public ResponseEntity<Map<String,String>> updatePetBoard(@RequestPart(value = "file",required = false) MultipartFile boardfileImage,
 												 @RequestPart(value = "board") PetBoardDTO dto) {
-		System.out.println("boardfileImage = " + boardfileImage);
-		System.out.println("dto = " + dto);
 		try {
 			imageS3Service.updatebestPets(boardfileImage,dto);
 			Map<String, String> response = new HashMap<>();
@@ -196,7 +194,6 @@ public class PetBoardController {
 
 		}
 	}
-
 
 
   

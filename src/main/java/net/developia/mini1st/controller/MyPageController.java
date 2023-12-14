@@ -30,8 +30,9 @@ public class MyPageController {
 	@GetMapping(value="/getUserInfo",
 				produces= {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserDTO> getUserInfo(@RequestParam("email") String email){
-		
-		System.out.println("get user info : " + email);
+		// 이메일에서 @ 를 언더바(_) 로 바꿔서 보낼 예정
+		// 여기서 다시 @ 로 바꿔 진행
+		email = email.replace('_', '@');
 		try {
 			UserDTO dto = service.getUserInfo(email);
 			dto.setPassword(null);

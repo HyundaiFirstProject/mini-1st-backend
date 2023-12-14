@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.developia.mini1st.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,15 @@ public class ReviewServiceImpl implements ReviewService {
 		this.mapper = reviewMapper;
 	}
 
+
+
 	@Override
 	public List<ReviewDTO> getReviewList(Criteria cri) {
 		return mapper.getReviewList(cri);
 	}
 
 	@Override
-	public int register(ReviewDTO dto) {
+	public void register(ReviewDTO dto) {
 		// 배열로 들어온 img 를 하나의 String 으로 합치고
 		// 다시 원소가 1개인 List 로 바꾸어 세팅
 		// 마이바티스에서는 0번째 원소만 추출
@@ -40,7 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
 		List<String> newImg = new ArrayList<>();
 		newImg.add(imgConcat);
 		dto.setImg(newImg);
-		return mapper.createReview(dto);
+		mapper.createReview(dto);
 	}
 
 	@Override
@@ -79,8 +82,14 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int updateReview(ReviewDTO dto) {
-		return mapper.updateReview(dto);
+	public void updateReview(ReviewDTO dto) {
+		List<String> imgList = dto.getImg();
+		String imgConcat = String.join(",", imgList);
+		List<String> newImg = new ArrayList<>();
+		newImg.add(imgConcat);
+		dto.setImg(newImg);
+		System.out.println("dto = " + dto);
+		mapper.updateReview(dto);
 	}
 
 	@Override

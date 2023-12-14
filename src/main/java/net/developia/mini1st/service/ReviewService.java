@@ -12,11 +12,11 @@ import net.developia.mini1st.domain.UserDTO;
 public interface ReviewService {
 	public List<ReviewDTO> getReviewList(Criteria cri);
 
-	public int register(ReviewDTO dto);
+	public void register(ReviewDTO dto);
 
 	public ReviewDTO readReview(long postid);
 
-	public int updateReview(ReviewDTO dto);
+	public void updateReview(ReviewDTO dto);
 
 	public int deleteReview(long postid);
 	

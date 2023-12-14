@@ -22,8 +22,8 @@ public class PetBoardServiceImpl implements PetBoardService {
 	}
 
 	@Override
-	public List<PetBoardDTO> getPetBoardList() {
-		return mapper.getPetBoardList();
+	public List<PetBoardDTO> getPetBoardList(Criteria cri) {
+		return mapper.getPetBoardList(cri);
 	}
 
 	@Override

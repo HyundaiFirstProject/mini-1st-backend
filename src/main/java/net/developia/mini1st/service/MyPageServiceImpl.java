@@ -1,5 +1,7 @@
 package net.developia.mini1st.service;
 
+import net.developia.mini1st.domain.PetBoardDTO;
+import net.developia.mini1st.domain.ReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,15 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public UserDTO getUserInfo(int user_no) {
 		return mapper.getUserInfo(user_no);
+	}
+
+	@Override
+	public PetBoardDTO getBestPet(long bno){
+		return mapper.getBestPet(bno);}
+
+	@Override
+	public ReviewDTO getReview(long postid){
+		return mapper.getReview(postid);
 	}
 
 }

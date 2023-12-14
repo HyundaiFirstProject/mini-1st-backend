@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.java.Log;
@@ -23,15 +24,15 @@ public class MyPageController {
 	private MyPageService service;
 	
 	@HasRoleUser
-	@GetMapping(value="/getUserInfo/{userno}",
+	@GetMapping(value="/getUserInfo",
 				produces= {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UserDTO> getUserInfo(@PathVariable("userno") int user_no){
+	public ResponseEntity<UserDTO> getUserInfo(@RequestParam("email") String email){
 		
-		log.info("get user info : " + user_no);
+		System.out.println("get user info : " + email);
 		try {
-			UserDTO dto = service.getUserInfo(user_no);
+			UserDTO dto = service.getUserInfo(email);
 			dto.setPassword(null);
-			log.info("user => " + dto.toString());
+			System.out.println("user => " + dto.toString());
 			return new ResponseEntity<UserDTO>(dto, HttpStatus.OK);
 		}catch(Exception e) {
 			log.info(e.getMessage());

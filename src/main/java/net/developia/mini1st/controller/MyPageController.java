@@ -1,5 +1,8 @@
 package net.developia.mini1st.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.developia.mini1st.domain.PetBoardDTO;
+import net.developia.mini1st.domain.ReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,4 +42,52 @@ public class MyPageController {
 			return new ResponseEntity<UserDTO>(HttpStatus.UNAUTHORIZED);
 		}
 	}
+
+	@HasRoleUser
+	@GetMapping(value = "/mypage/bestPetsBoard/{bno}",
+			produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<String> myBestPets(@PathVariable("bno") long bno) {
+		try {
+			PetBoardDTO dto = service.getBestPet(bno);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = objectMapper.writeValueAsString(dto);
+			return new ResponseEntity<>(json, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@HasRoleUser
+	@GetMapping(value = "/mypage/bestPetsLiked/{bno}",
+			produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<String> myBestPetsLiked(@PathVariable("bno") long bno){
+		try {
+			PetBoardDTO dto = service.getBestPet(bno);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = objectMapper.writeValueAsString(dto);
+			return new ResponseEntity<>(json,HttpStatus.OK);
+		}catch (Exception e){
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@HasRoleUser
+	@GetMapping(value = "/mypage/bestReviewsLiked/{postid}",
+			produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<String> reviewBoard(@PathVariable("postid") long postid){
+		try {
+			ReviewDTO dto = service.getReview(postid);
+			System.out.println("dto = " + dto);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = objectMapper.writeValueAsString(dto);
+			return new ResponseEntity<>(json,HttpStatus.OK);
+		}catch (Exception e){
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
 }
+
+
+

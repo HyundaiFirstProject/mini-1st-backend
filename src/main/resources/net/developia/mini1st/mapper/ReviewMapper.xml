@@ -39,7 +39,7 @@
 	</select>
 	<update id="updateReview">
     update review_board 
-    set title=#{title}, content=#{content}, stars=#{stars}, itemid=#{itemid}, updatedate=sysdate
+    set title=#{title}, content=#{content}, stars=#{stars}, itemid=#{itemid} ,img=#{img[0]},updatedate=sysdate
     where postid=#{postid}
 	</update>
 	<delete id="deleteReview">

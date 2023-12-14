@@ -37,11 +37,15 @@ public class ReviewController {
 	// 후기 게시판 게시글 리스트 불러오기
 	@GetMapping(value = "/bestReviewsList", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<ReviewDTO>> getReviewList(Criteria cri) {
+		long total = service.getTotalCount();
+		if (total <= 12) {
+			// listW = service.getListWithOutPaging();
+		}
 		try {
 			List<ReviewDTO> list = service.getReviewList(cri);
 			System.out.println("list=>" + list.toString());
 			System.out.println("============ [Controller] =================");
-			for(ReviewDTO el : list) {
+			for (ReviewDTO el : list) {
 				System.out.println("img : " + el.getImg());
 			}
 			System.out.println("=======================================");
@@ -52,23 +56,16 @@ public class ReviewController {
 		}
 	}
 
+	// 후기 게시판 글 등록
 	@HasRoleUser
-	@PostMapping(value="/bestReviewsPost")
-	public ResponseEntity<Map<String,Object>> createReview(@RequestPart(value = "files",required = false) List<MultipartFile> boardfileImage,
-												  @RequestPart(value = "board")ReviewDTO dto){
-		try{
-			imageS3Service.uploadbestReviews(boardfileImage, dto);
-            Map<String, Object> response = new HashMap<>();
-            response.put("status", HttpStatus.OK.value());
-            response.put("description", "성공");
-            return ResponseEntity.ok(response);
-		} catch (Exception e){
-			log.info(e.getMessage());
-			Map<String, Object> response = new HashMap<>();
-            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-            response.put("description", "서버 오류");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
+	@PostMapping(value = "/bestReviewsPost")
+	public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO dto) {
+		log.info("posting new Review....");
+		System.out.println("글등록 컨트롤러 호출");
+		int createCount = service.register(dto);
+		log.info("## Review create count : " + createCount);
+		return (createCount == 1) ? new ResponseEntity<ReviewDTO>(HttpStatus.OK)
+				: new ResponseEntity<ReviewDTO>(HttpStatus.UNAUTHORIZED);
 	}
 
 	// 후기 게시판 글 상세보기 (Read)
@@ -89,30 +86,28 @@ public class ReviewController {
 
 	// 후기 게시판 글 수정(Update)
 	@HasRoleUser
-	@PostMapping(value="/bestReviewsUpdate")
-	public ResponseEntity<Map<String,Object>> updateReview(@RequestPart(value = "file",required = false) List<MultipartFile> boardfileImage,
-											   @RequestPart(value = "board") ReviewDTO dto) {
+	@PostMapping(value = "/bestReviewsUpdate", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateReview(@RequestBody ReviewDTO dto) {
 		try {
-			imageS3Service.updateReviews(boardfileImage,dto);
-
-			Map<String, Object> response = new HashMap<>();
-			response.put("status", HttpStatus.OK.value());
-			response.put("description", "성공");
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Map<String, Object> response = new HashMap<>();
-			response.put("status", "500");
-			response.put("description", "서버 오류");
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	        // 해당 정보를 사용하여 업데이트 
+	        int updateCount = service.updateReview(dto);
+	        // 업데이트가 성공하면 OK(200) 응답을 반환
+	        if (updateCount == 1) {
+	            return new ResponseEntity<>("success", HttpStatus.OK);
+	        } else {
+	            // 업데이트가 실패하면 UNAUTHORIZED(401) 응답을 반환
+	            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+	        }
+		}catch(Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 
 	// 후기 게시판 게시글 삭제(Delete)
 	@HasRoleUser
-	@DeleteMapping(value="/bestReviewsDelete/{postID}"
-					,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> deleteReview(@PathVariable("postID") long postid){
+	@DeleteMapping(value = "/bestReviewsDelete/{postID}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> deleteReview(@PathVariable("postID") long postid) {
 		log.info("delete Review(Controller) : " + postid);
 		return (service.deleteReview(postid) == 1) ? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
@@ -125,8 +120,8 @@ public class ReviewController {
 	// 3. 목록에서 찾으면 -> 좋아요 누른 상태 -> 좋아요 취소 처리
 
 	@HasRoleUser
-	@PostMapping(value="/bestReviewsBoardLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> reviewBoardLikes(@RequestBody ReviewBoardHeartDTO dto){
+	@PostMapping(value = "/bestReviewsBoardLikes", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> reviewBoardLikes(@RequestBody ReviewBoardHeartDTO dto) {
 		long postid = dto.getPostid(); // 게시글 번호
 		// 1. {postid}번 게시글에 좋아요를 누른 사람 목록에서 유저가 있는지 찾는다
 		List<Long> list = peopleWhoLikes(postid);
@@ -188,13 +183,12 @@ public class ReviewController {
 	}
 
 	// 후기 게시판 전체 페이지 수
-	@GetMapping(value="/bestReviewsTotalPages"
-				,produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/bestReviewsTotalPages", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, Long>> getTotalPage() {
 		try {
 			long end = service.getTotalPage(); // 마지막 페이지(전체페이지)
 			Map<String, Long> response = new HashMap<>();
-	        response.put("end", end);
+			response.put("end", end);
 			return new ResponseEntity<Map<String, Long>>(response, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -215,8 +209,7 @@ public class ReviewController {
 	}
 
 	// 특정 게시글 좋아요한 유저 정보 리스트
-	@GetMapping(value = "/bestReviewsLikedList/{postid}"
-				,produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/bestReviewsLikedList/{postid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<List<UserDTO>> getPeopleWhoLikes(@PathVariable("postid") long postid) {
 		try {
 			List<UserDTO> list = service.getPeopleWhoLikes(postid);
@@ -226,9 +219,9 @@ public class ReviewController {
 			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
 		}
 	}
-	
+
 	@GetMapping("/bestReviews")
-	public ResponseEntity<Map<String, Object>> getBestReviews(){
+	public ResponseEntity<Map<String, Object>> getBestReviews() {
 		Map<String, Object> response = new HashMap<>();
 		try {
 			response.put("status", "200");
@@ -236,7 +229,7 @@ public class ReviewController {
 			response.put("data", service.getBestReview());
 			return ResponseEntity.ok(response);
 		} catch (Exception e) {
-            response.put("status", "500");
+			response.put("status", "500");
 			response.put("description", "Internal Server Error");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}

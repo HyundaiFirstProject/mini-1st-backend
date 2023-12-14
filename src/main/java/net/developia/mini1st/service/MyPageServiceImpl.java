@@ -15,8 +15,8 @@ public class MyPageServiceImpl implements MyPageService{
 	private MyPageMapper mapper;
 	
 	@Override
-	public UserDTO getUserInfo(int user_no) {
-		return mapper.getUserInfo(user_no);
+	public UserDTO getUserInfo(String email) {
+		return mapper.getUserInfo(email);
 	}
 
 	@Override

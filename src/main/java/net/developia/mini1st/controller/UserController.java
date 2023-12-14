@@ -126,19 +126,27 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-    
-    @PostMapping(value="/checkPW")
+    // [비밀번호 확인 -> 비밀번호 변경] 으로 변경
+    @PostMapping(value="/changePassword", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> checkPW(@RequestBody UserDTO dto){
-        boolean check = userService.checkPW(dto);
-        System.out.println("----- controller -----");
-        System.out.println("check -> " + check);
-        if(check == true) {
-            return new ResponseEntity<String>("success", HttpStatus.OK);
-        }else {
-            return new ResponseEntity<String>("wrong password", HttpStatus.UNAUTHORIZED);
-        }
+    	System.out.println("======== 비밀번호 변경 컨트롤러 =====");
+    	try {
+    		int user_no = dto.getUser_no();
+    		String password = dto.getPassword();
+    		System.out.println("user_no => " + user_no);
+    		System.out.println("password => " + password);
+    		System.out.println();
+    		int result = userService.changePwd(password, user_no);
+    		if (result == 1)
+    			return new ResponseEntity<String>("success change pwd" ,HttpStatus.OK);
+    		else
+    			return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    		return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+    	}
     }
-
+    
 
     @PostMapping(value="/login")
     public ResponseEntity<Map<String,String>> login(@RequestBody Map<String, String> request,  HttpServletRequest httpRequest, HttpServletResponse httpResponse){

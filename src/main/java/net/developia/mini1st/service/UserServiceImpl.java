@@ -40,27 +40,13 @@ public class UserServiceImpl implements UserService{
         }
     }
 
-
+    // 비밀번호 변경
 	@Override
-	public boolean checkPW(UserDTO dto) {
-		int user_no = dto.getUser_no();
-		String pwdRequest = dto.getPassword(); // 사용자가 입력한 비밀번호
-		String pwdDB = userMapper.getUserPassword(user_no);// 데이터베이스에 저장된 비밀번호
-		System.out.println("===============================");
-		System.out.println("사용자가 입력한 비밀번호 : " + pwdRequest);
-		System.out.println("실제 비밀번호 : " + pwdDB);
-		System.out.println("일치? -> " + pwdRequest.equals(pwdDB));
-		System.out.println("===============================");
-		if(pwdRequest.equals(pwdDB) == true)
-		{
-			System.out.println("return true");
-			return true;
-		}
-		else
-		{
-			System.out.println("return false");
-			return false;
-		}
+	public int changePwd(@Param("password") String password,@Param("user_no") int user_no) {
+		System.out.println("****** 비밀번호 변경 서비스 **********");
+		System.out.printf("password : %s || user_no : %d\n", password, user_no);
+		System.out.println("*******************************");
+		return userMapper.changePwd(password, user_no);
 	}
 
 	@Override

@@ -40,6 +40,11 @@ public class ReviewController {
 		try {
 			List<ReviewDTO> list = service.getReviewList(cri);
 			System.out.println("list=>" + list.toString());
+			System.out.println("============ [Controller] =================");
+			for(ReviewDTO el : list) {
+				System.out.println("img : " + el.getImg());
+			}
+			System.out.println("=======================================");
 			return new ResponseEntity<List<ReviewDTO>>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

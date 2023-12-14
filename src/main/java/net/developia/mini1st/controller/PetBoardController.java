@@ -74,9 +74,9 @@ public class PetBoardController {
 	@GetMapping(value = "/bestPetsDetail", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PetBoardDTO> getDetail(@RequestParam("bno") long bno) {
 		System.out.println("=== 자랑 게시판 글 상세보기 호출(컨트롤러) ===");
+		service.increaseViews(bno); // 조회수 1증가
 		try {
 			PetBoardDTO dto = service.getDetail(bno);
-			service.increaseViews(bno); // 조회수 1증가
 			return new ResponseEntity<PetBoardDTO>(dto, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

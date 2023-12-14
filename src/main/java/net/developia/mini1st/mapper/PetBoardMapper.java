@@ -10,7 +10,7 @@ import net.developia.mini1st.domain.ReviewDTO;
 
 public interface PetBoardMapper {
 
-	public List<PetBoardDTO> getPetBoardList();
+	public List<PetBoardDTO> getPetBoardList(Criteria cri);
 
 	public int register(PetBoardDTO dto);
 

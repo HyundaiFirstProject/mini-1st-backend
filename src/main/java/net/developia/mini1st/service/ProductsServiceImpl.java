@@ -30,7 +30,7 @@ public class ProductsServiceImpl implements ProductsService{
 	public void createProductList() {
 		System.out.println("createProductsList(Service)...");
 		// pet_products 테이블 비우기
-		mapper.initProducts();
+		// mapper.initProducts();
 		// WebDriverManager를 사용하여 WebDriver 초기화
 		WebDriverManager.chromedriver().setup();
 		//System.setProperty("webdriver.chrome.driver", "C:/dev/chromedriver-win64/chromedriver.exe");
@@ -41,7 +41,7 @@ public class ProductsServiceImpl implements ProductsService{
         WebDriver driver = new ChromeDriver(options);
         try {
             // 쇼핑몰 페이지 열기
-            driver.get("https://www.thehyundai.com/front/dpa/sbSect.thd?sectId=192766");
+            driver.get("https://www.thehyundai.com/front/dpa/sbSect.thd?sectId=192022");
 
             // WebDriver를 사용하여 페이지가 완전히 로드될 때까지 기다리기
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -2,6 +2,7 @@ package net.developia.mini1st.service;
 
 import java.util.List;
 
+import net.developia.mini1st.domain.Criteria;
 import net.developia.mini1st.domain.PetBoardDTO;
 import net.developia.mini1st.domain.PetBoardHeartDTO;
 import net.developia.mini1st.domain.ReviewDTO;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PetBoardService {
 
-	List<PetBoardDTO> getPetBoardList();
+	List<PetBoardDTO> getPetBoardList(Criteria cri);
 
 	PetBoardDTO getDetail(long bno);
 

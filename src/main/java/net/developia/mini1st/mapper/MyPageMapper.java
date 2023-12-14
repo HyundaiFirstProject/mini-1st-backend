@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface MyPageMapper {
+
 	public UserDTO getUserInfo(int user_no);
 
 	@Select("SELECT * FROM pet_board WHERE bno = #{bno}")
@@ -16,4 +17,7 @@ public interface MyPageMapper {
 
 	@Select("SELECT * FROM review_board WHERE postid = #{postid}")
 	public ReviewDTO getReview(long postid);
+
+	public UserDTO getUserInfo(String email);
+
 }

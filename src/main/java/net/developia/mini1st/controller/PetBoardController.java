@@ -196,8 +196,6 @@ public class PetBoardController {
 	}
 
 
-
-
   
 	// 특정 게시글 좋아요한 유저 정보 리스트
 	@GetMapping(value = "/bestPetsLikedList/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -212,7 +210,7 @@ public class PetBoardController {
     }
 	
 	@GetMapping("/bestPets")
-	public ResponseEntity<Map<String, Object>> getBestReviews(){
+	public ResponseEntity<Map<String, Object>> getBestPets(){
 		Map<String, Object> response = new HashMap<>();
 		try {
 			response.put("status", "200");

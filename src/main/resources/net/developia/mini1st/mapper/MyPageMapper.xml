@@ -6,6 +6,6 @@
 	<select id="getUserInfo" resultType="net.developia.mini1st.domain.UserDTO">
 		select	user_no, email, password, nickname, img_url
 		from	user_info
-		where	user_no = #{userno}
+		where	email = #{email}
 	</select>
 </mapper>

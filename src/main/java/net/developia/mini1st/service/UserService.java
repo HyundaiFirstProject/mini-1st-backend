@@ -9,7 +9,7 @@ import net.developia.mini1st.domain.UserDTO;
 public interface UserService {
     void signUp(UserDTO userDTO);
     boolean isNicknameAvailable(String nickname);
-	boolean checkPW(UserDTO dto);
+	int changePwd(@Param("password") String password, @Param("user_no") int user_no );
 
     UserDTO getUserById(int userid);
     void updateUserProfile(UserDTO userDTO);

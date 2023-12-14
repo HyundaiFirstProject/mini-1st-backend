@@ -36,13 +36,9 @@ public class ReviewController {
 
 	// 후기 게시판 게시글 리스트 불러오기
 	@GetMapping(value = "/bestReviewsList", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<List<ReviewDTO>> getReviewList(Criteria cri) {
-		long total = service.getTotalCount();
-		if (total <= 12) {
-			// listW = service.getListWithOutPaging();
-		}
+	public ResponseEntity<List<ReviewDTO>> getReviewList() {
 		try {
-			List<ReviewDTO> list = service.getReviewList(cri);
+			List<ReviewDTO> list = service.getReviewList();
 			System.out.println("list=>" + list.toString());
 			System.out.println("============ [Controller] =================");
 			for (ReviewDTO el : list) {
@@ -72,10 +68,10 @@ public class ReviewController {
 	@GetMapping(value = "/bestReviewsDetail/{postid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReviewDetailDTO> readReview(@PathVariable("postid") long postid) {
 		log.info("read Review : " + postid);
+		service.increaseViews(postid); // 조회수 1증가
 		System.out.println("게시판 글 상세보기(Detail) 컨트롤러 호출...");
 		try {
 			ReviewDetailDTO dto = service.getDetail(postid);
-			service.increaseViews(postid); // 조회수 1증가
 			return new ResponseEntity<ReviewDetailDTO>(dto, HttpStatus.OK);
 		} catch (Exception e) {
 			log.info(e.getMessage());

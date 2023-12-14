@@ -129,7 +129,7 @@ public class UserController {
     // 비밀번호 변경 - 이메일로 변경
     @PostMapping(value="/changePassword", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> checkPW(@RequestBody UserDTO dto){
-    	System.out.println("======== 비밀번호 변경 컨트롤러 ======");
+    	System.out.println("======== 비밀번호 변경 컨트롤러 =======");
     	try {
     		// email 과 비밀번호를 보낸다
     		String password = dto.getPassword();

@@ -36,6 +36,6 @@ public interface UserMapper {
     int countEmail(String email);
     
     // 비밀번호 변경
-    @Update("Update user_info set password=#{password} where user_no=#{user_no}")
-    int changePwd(@Param("password") String password, @Param("user_no") int user_no);
+    @Update("Update user_info set password=#{password} where email=#{email}")
+    int changePwd(@Param("password") String password, @Param("email") String email);
 }

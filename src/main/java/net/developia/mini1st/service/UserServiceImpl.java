@@ -42,11 +42,11 @@ public class UserServiceImpl implements UserService{
 
     // 비밀번호 변경
 	@Override
-	public int changePwd(@Param("password") String password,@Param("user_no") int user_no) {
+	public int changePwd(@Param("password") String password,@Param("email") String email) {
 		System.out.println("****** 비밀번호 변경 서비스 **********");
-		System.out.printf("password : %s || user_no : %d\n", password, user_no);
+		System.out.printf("password : %s || email : %s\n", password, email);
 		System.out.println("*******************************");
-		return userMapper.changePwd(password, user_no);
+		return userMapper.changePwd(password, email);
 	}
 
 	@Override

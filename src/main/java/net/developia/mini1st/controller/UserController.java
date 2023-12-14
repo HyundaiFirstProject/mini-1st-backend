@@ -126,17 +126,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-    // [비밀번호 확인 -> 비밀번호 변경] 으로 변경
+    // 비밀번호 변경 - 이메일로 변경
     @PostMapping(value="/changePassword", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> checkPW(@RequestBody UserDTO dto){
-    	System.out.println("======== 비밀번호 변경 컨트롤러 =====");
+    	System.out.println("======== 비밀번호 변경 컨트롤러 =======");
     	try {
-    		int user_no = dto.getUser_no();
+    		// email 과 비밀번호를 보낸다
     		String password = dto.getPassword();
-    		System.out.println("user_no => " + user_no);
+    		String email = dto.getEmail();
     		System.out.println("password => " + password);
     		System.out.println();
-    		int result = userService.changePwd(password, user_no);
+    		int result = userService.changePwd(password, email);
     		if (result == 1)
     			return new ResponseEntity<String>("success change pwd" ,HttpStatus.OK);
     		else

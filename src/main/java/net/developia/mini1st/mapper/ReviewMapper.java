@@ -9,7 +9,7 @@ import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.UserDTO;
 
 public interface ReviewMapper {
-	public List<ReviewDTO> getReviewList(Criteria cri);
+	public List<ReviewDTO> getReviewList();
 
 	public int createReview(ReviewDTO dto);
 

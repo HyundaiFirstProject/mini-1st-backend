@@ -4,31 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.developia.mini1st.mapper.PetBoardMapper">
 	<select id="getPetBoardList" resultType="net.developia.mini1st.domain.PetBoardDTO">
-		<![CDATA[
 		select	bno, title, content, writer, views, likes, photo, regdate, updatedate, pettype, user_no
-		from	(
-					select	/*+INDEX_DESC(tbl_board pk_board) */
-							rownum rn
-							,bno
-							,title
-							,content
-							,writer
-							,views
-							,likes
-							,photo
-							,regdate
-							,updatedate
-							,pettype
-							,user_no
-					from	pet_board
-					where	rownum <= #{pageNum} * #{amount}
-					)
-		where 		rn > (#{pageNum} - 1) * #{amount}
-		]]>
+		from	pet_board
 	</select>
 	<insert id="register">
 		insert 	into pet_board(bno, title, content, writer, photo, pettype, user_no)
-		values	(seq_pet_board.nextval, #{title}, #{content}, #{writer}, #{photo}, #{pettype}, #{user_no})
+		values	(seq_pet_board.nextval, #{title}, #{content}, #{writer}, #{photo[0]}, #{pettype}, #{user_no})
 	</insert>
 	<select id="getDetail">
 		select	bno, title, content, writer, views, likes, photo, regdate, updatedate, pettype, user_no
@@ -37,7 +18,7 @@
 	</select>
 	<update id="updatePetBoard">
 		update	pet_board
-		set		title=#{title}, content=#{content}, photo=#{photo}, pettype=#{pettype}, updatedate=sysdate
+		set		title=#{title}, content=#{content}, photo=#{photo[0]}, pettype=#{pettype}, updatedate=sysdate
 		where	bno=#{bno}
 	</update>
 	<delete id="deletePetBoard">
@@ -100,5 +81,8 @@
         		ORDER BY likes DESC
     		) WHERE ROWNUM <= 4
     	]]>
+	</select>
+	<select id="getImgString" resultType="String">
+		select photo from pet_board where bno=#{bno}
 	</select>
 </mapper>

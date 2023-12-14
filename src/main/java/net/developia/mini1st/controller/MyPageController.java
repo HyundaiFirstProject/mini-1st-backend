@@ -1,8 +1,7 @@
 package net.developia.mini1st.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import net.developia.mini1st.domain.PetBoardDTO;
-import net.developia.mini1st.domain.ReviewDTO;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.extern.java.Log;
+import net.developia.mini1st.domain.PetBoardDTO;
+import net.developia.mini1st.domain.ReviewDTO;
 import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.MyPageService;
@@ -45,11 +48,11 @@ public class MyPageController {
 	}
 
 	@HasRoleUser
-	@GetMapping(value = "/mypage/bestPetsBoard/{bno}",
+	@GetMapping(value = "/mypage/bestPetsBoard/{user_no}",
 			produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<String> myBestPets(@PathVariable("bno") long bno) {
+	public ResponseEntity<String> myBestPets(@PathVariable("user_no") long user_no) {
 		try {
-			PetBoardDTO dto = service.getBestPet(bno);
+			PetBoardDTO dto = service.getBestPet(user_no);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String json = objectMapper.writeValueAsString(dto);
 			return new ResponseEntity<>(json, HttpStatus.OK);
@@ -59,14 +62,12 @@ public class MyPageController {
 	}
 
 	@HasRoleUser
-	@GetMapping(value = "/mypage/bestPetsLiked/{bno}",
+	@GetMapping(value = "/mypage/bestPetsLiked/{user_no}",
 			produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<String> myBestPetsLiked(@PathVariable("bno") long bno){
+	public ResponseEntity<List<PetBoardDTO>> myBestPetsLiked(@PathVariable("user_no") long user_no){
 		try {
-			PetBoardDTO dto = service.getBestPet(bno);
-			ObjectMapper objectMapper = new ObjectMapper();
-			String json = objectMapper.writeValueAsString(dto);
-			return new ResponseEntity<>(json,HttpStatus.OK);
+			List<PetBoardDTO> dto = service.getBestPet(user_no);
+			return new ResponseEntity<>(dto,HttpStatus.OK);
 		}catch (Exception e){
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

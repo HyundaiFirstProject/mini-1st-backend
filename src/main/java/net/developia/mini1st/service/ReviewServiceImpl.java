@@ -45,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void register(ReviewDTO dto) {
+	public int register(ReviewDTO dto) {
 		// 배열로 들어온 img 를 하나의 String 으로 합치고
 		// 다시 원소가 1개인 List 로 바꾸어 세팅
 		// 마이바티스에서는 0번째 원소만 추출
@@ -54,7 +54,7 @@ public class ReviewServiceImpl implements ReviewService {
 		List<String> newImg = new ArrayList<>();
 		newImg.add(imgConcat);
 		dto.setImg(newImg);
-		mapper.createReview(dto);
+		return mapper.createReview(dto);
 	}
 
 	@Override
@@ -93,14 +93,14 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void updateReview(ReviewDTO dto) {
+	public int updateReview(ReviewDTO dto) {
 		List<String> imgList = dto.getImg();
 		String imgConcat = String.join(",", imgList);
 		List<String> newImg = new ArrayList<>();
 		newImg.add(imgConcat);
 		dto.setImg(newImg);
 		System.out.println("dto = " + dto);
-		mapper.updateReview(dto);
+		return mapper.updateReview(dto);
 	}
 
 	@Override
@@ -109,10 +109,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.deleteReview(postid);
 	}
 
-	@Override
-	public long getTotalCount(Criteria cri) {
-		return mapper.getTotalCount(cri);
-	}
+//	@Override
+//	public long getTotalCount() {
+//		return mapper.getTotalCount();
+//	}
 
 	@Override
 	public List<Long> peopleWhoLikes(long postid) {
@@ -195,6 +195,14 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<UserDTO> getPeopleWhoLikes(long postid) {
 		return mapper.getPeopleWhoLikes(postid);
+	}
+
+
+
+	@Override
+	public long getTotalCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

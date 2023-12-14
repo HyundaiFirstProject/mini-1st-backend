@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.PetBoardService;
 
-
 import net.developia.mini1st.service.PetBoardService;
 import org.springframework.web.multipart.MultipartFile;
+
 @RestController
 @RequestMapping("/api")
 @Log
@@ -40,17 +40,17 @@ public class PetBoardController {
 	private final ImageS3Service imageS3Service;
 
 	@Autowired
-	public PetBoardController(PetBoardService service,ImageS3Service imageS3Service) {
+	public PetBoardController(PetBoardService service, ImageS3Service imageS3Service) {
 		this.service = service;
 		this.imageS3Service = imageS3Service;
 	}
 
 	// 자랑게시판 게시물리스트
 	@GetMapping(value = "/bestPetsBoard", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<PetBoardDTO>> getPetBoardList(Criteria cri) {
+	public ResponseEntity<List<PetBoardDTO>> getPetBoardList() {
 		System.out.println("== 자랑게시판 리스트 컨트롤러 호출 ==");
 		try {
-			List<PetBoardDTO> list = service.getPetBoardList(cri);
+			List<PetBoardDTO> list = service.getPetBoardList();
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,27 +59,15 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 등록
-	@PostMapping( "/bestPetsPost")
-	public ResponseEntity<Map<String,String>> register(
-			@RequestPart(value = "file",required = false) MultipartFile boardfileImage,
-			@RequestPart(value = "board") PetBoardDTO dto) {
+	@HasRoleUser
+	@PostMapping(value = "/bestPetsPost", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<PetBoardDTO> register(@RequestBody PetBoardDTO dto) {
 		System.out.println("== 자랑게시판 글 등록 컨트롤러 호출 ==");
-		System.out.println("boardfileImage = " + boardfileImage);
-		System.out.println("dto = " + dto);
-		try {
-			imageS3Service.uploadbestPets(boardfileImage, dto);
-			Map<String, String> response = new HashMap<>();
-			response.put("status", "200");
-			response.put("description", "성공");
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			// 실패 시
-			log.info(e.getMessage());
-			Map<String, String> response = new HashMap<>();
-			response.put("status", "422");
-			response.put("description", "Entitiy 에러");
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
-		}
+		System.out.println("** content : " + dto.getContent());
+		System.out.println("==============================");
+		int createCount = service.insertPetBoard(dto);
+		return (createCount == 1) ? new ResponseEntity<PetBoardDTO>(HttpStatus.OK)
+				: new ResponseEntity<PetBoardDTO>(HttpStatus.UNAUTHORIZED);
 	}
 
 	// 자랑게시판 게시글 상세보기
@@ -96,25 +84,24 @@ public class PetBoardController {
 		}
 	}
 
-	 // 자랑게시판 게시글 수정
-	@PostMapping(value = "/bestPetsUpdate")
-	public ResponseEntity<Map<String,String>> updatePetBoard(@RequestPart(value = "file",required = false) MultipartFile boardfileImage,
-												 @RequestPart(value = "board") PetBoardDTO dto) {
-		try {
-			imageS3Service.updatebestPets(boardfileImage,dto);
-			Map<String, String> response = new HashMap<>();
-			response.put("status", "200");
-			response.put("description", "성공");
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Map<String, String> response = new HashMap<>();
-			response.put("status", "500");
-			response.put("description", "서버 에러");
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	// 자랑게시판 게시글 수정
+		@HasRoleUser
+		@PostMapping(value="/bestPetsUpdate",
+					consumes = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto){
+			try {
+				int updateCount = service.updatePetBoard(dto);
+				if (updateCount == 1) {
+					return new ResponseEntity<>("success", HttpStatus.OK);
+				} else {
+					// 업데이트가 실패하면 UNAUTHORIZED(401) 응답을 반환
+					return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			}
 		}
-	}
-
 
 	// 자랑게시판 게시글 삭제
 	@DeleteMapping("/bestPetsDelete/{bno}")
@@ -191,8 +178,6 @@ public class PetBoardController {
 		}
 	}
 
-
-  
 	// 특정 게시글 좋아요한 유저 정보 리스트
 	@GetMapping(value = "/bestPetsLikedList/{bno}", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<List<UserDTO>> getPeopleWhoLikes(@PathVariable("bno") long bno) {
@@ -203,10 +188,10 @@ public class PetBoardController {
 			e.printStackTrace();
 			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
 		}
-    }
-	
+	}
+
 	@GetMapping("/bestPets")
-	public ResponseEntity<Map<String, Object>> getBestPets(){
+	public ResponseEntity<Map<String, Object>> getBestPets() {
 		Map<String, Object> response = new HashMap<>();
 		try {
 			response.put("status", "200");
@@ -214,11 +199,10 @@ public class PetBoardController {
 			response.put("data", service.getBestPets());
 			return ResponseEntity.ok(response);
 		} catch (Exception e) {
-            response.put("status", "500");
+			response.put("status", "500");
 			response.put("description", "Internal Server Error");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-    }
+		}
 
 	}
-	}
-
+}

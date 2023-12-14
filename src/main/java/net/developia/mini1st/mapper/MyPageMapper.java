@@ -12,10 +12,10 @@ public interface MyPageMapper {
 
 	public UserDTO getUserInfo(int user_no);
 
-	@Select("SELECT * FROM pet_board WHERE bno = #{bno}")
+	@Select("SELECT * FROM pet_board WHERE user_no = #{user_no}")
 	public PetBoardDTO getBestPet(long bno);
 
-	@Select("SELECT * FROM review_board WHERE postid = #{postid}")
+	@Select("SELECT * FROM review_board WHERE user_no = #{user_no}")
 	public ReviewDTO getReview(long postid);
 
 	public UserDTO getUserInfo(String email);

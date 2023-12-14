@@ -20,12 +20,12 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	@Override
-	public PetBoardDTO getBestPet(long bno){
-		return mapper.getBestPet(bno);}
+	public PetBoardDTO getBestPet(long user_no){
+		return mapper.getBestPet(user_no);}
 
 	@Override
-	public ReviewDTO getReview(long postid){
-		return mapper.getReview(postid);
+	public ReviewDTO getReview(long user_no){
+		return mapper.getReview(user_no);
 	}
 
 }

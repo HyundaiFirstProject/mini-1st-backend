@@ -74,6 +74,10 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewDetailDTO.setItemid(reviewDTO.getItemid());
 		reviewDetailDTO.setNickname(userDTO.getNickname());
 		reviewDetailDTO.setImg_url(userDTO.getImg_url());
+		System.out.println("===================================");
+		System.out.println("user->" + userDTO.toString());
+		System.out.println("===================================");
+		
 		return reviewDetailDTO;
 	}
 

@@ -24,11 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.developia.mini1st.domain.PetBoardDTO;
-import net.developia.mini1st.domain.PetBoardHeartDTO;
-import net.developia.mini1st.domain.ReviewBoardHeartDTO;
-import net.developia.mini1st.domain.ReviewDTO;
-import net.developia.mini1st.domain.UserDTO;
 import net.developia.mini1st.security.HasRoleUser;
 import net.developia.mini1st.service.PetBoardService;
 
@@ -52,9 +47,10 @@ public class PetBoardController {
 
 	// 자랑게시판 게시물리스트
 	@GetMapping(value = "/bestPetsBoard", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<PetBoardDTO>> getPetBoardList() {
+	public ResponseEntity<List<PetBoardDTO>> getPetBoardList(Criteria cri) {
+		System.out.println("== 자랑게시판 리스트 컨트롤러 호출 ==");
 		try {
-			List<PetBoardDTO> list = service.getPetBoardList();
+			List<PetBoardDTO> list = service.getPetBoardList(cri);
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

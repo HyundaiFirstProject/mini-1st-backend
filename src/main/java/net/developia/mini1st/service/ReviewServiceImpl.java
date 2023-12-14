@@ -30,7 +30,18 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<ReviewDTO> getReviewList(Criteria cri) {
-		return mapper.getReviewList(cri);
+		List<ReviewDTO> list = mapper.getReviewList(cri);
+		// 이미지 파일(String) 을 다시 List<String> 으로 변환
+		for(ReviewDTO dto: list) {
+			List<String> img = Arrays.asList(mapper.getImgString(dto.getPostid()).split(","));
+			dto.setImg(img);
+		}
+		System.out.println("************ [Service] *************");
+		for(ReviewDTO dto: list) {
+			System.out.println("img => " + dto.getImg().toArray());
+		}
+		System.out.println("*************************************");
+		return list;
 	}
 
 	@Override

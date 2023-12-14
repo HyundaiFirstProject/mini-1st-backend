@@ -192,7 +192,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getUserInfo/{userno}")
+    @GetMapping("/getUserInfoProfile/{userno}")
     public ResponseEntity<String> getProfileUrl(@PathVariable int userno) {
         try {
             String profileUrl = userService.getUserProfileImageUrl(userno);

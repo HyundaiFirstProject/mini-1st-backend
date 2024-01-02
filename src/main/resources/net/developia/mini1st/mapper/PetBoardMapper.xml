@@ -4,8 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.developia.mini1st.mapper.PetBoardMapper">
 	<select id="getPetBoardList" resultType="net.developia.mini1st.domain.PetBoardDTO">
+	<![CDATA[
 		select	bno, title, content, writer, views, likes, photo, regdate, updatedate, pettype, user_no
 		from	pet_board
+		]]>
 	</select>
 	<insert id="register">
 		insert 	into pet_board(bno, title, content, writer, photo, pettype, user_no)
@@ -74,9 +76,9 @@
 
 	<select id="getBestPets" resultType="net.developia.mini1st.domain.PetBoardDTO">
 		<![CDATA[
-    		SELECT bno, title, photo, pettype, likes
+    		SELECT bno, title, photo, pettype, likes, content, writer, regdate, updatedate
     		FROM (
-        		SELECT bno, title, photo, pettype, likes
+        		SELECT bno, title, photo, pettype, likes, content, writer, regdate, updatedate
         		FROM pet_board
         		ORDER BY likes DESC
     		) WHERE ROWNUM <= 4

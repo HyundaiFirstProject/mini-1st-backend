@@ -36,13 +36,9 @@ public class ReviewController {
 
 	// 후기 게시판 게시글 리스트 불러오기
 	@GetMapping(value = "/bestReviewsList", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<List<ReviewDTO>> getReviewList(Criteria cri) {
-		long total = service.getTotalCount();
-		if (total <= 12) {
-			// listW = service.getListWithOutPaging();
-		}
+	public ResponseEntity<List<ReviewDTO>> getReviewList() {
 		try {
-			List<ReviewDTO> list = service.getReviewList(cri);
+			List<ReviewDTO> list = service.getReviewList();
 			System.out.println("list=>" + list.toString());
 			System.out.println("============ [Controller] =================");
 			for (ReviewDTO el : list) {
@@ -195,10 +191,10 @@ public class ReviewController {
 			return new ResponseEntity<Map<String, Long>>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-
-	// 아이템에 해당하는 게시물 조회
-	@GetMapping(value = "/bestReviewsItemMatchingPost/{product_name}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ReviewDTO>> getReviewsByItem(@PathVariable("product_name") String product_name) {
+	
+	// 아이템에 해당하는 게시물 조회 **
+	@GetMapping(value = "/bestReviewsItemMatchingPost", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ReviewDTO>> getReviewsByItem(@RequestParam("product_name") String product_name) {
 		try {
 			List<ReviewDTO> list = service.getReviewsByItem(product_name);
 			return new ResponseEntity<List<ReviewDTO>>(list, HttpStatus.OK);
@@ -219,8 +215,8 @@ public class ReviewController {
 			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
 		}
 	}
-
-	@GetMapping("/bestReviews")
+	// 후기게시판 대표 게시물
+	@GetMapping(value="/bestReviews", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, Object>> getBestReviews() {
 		Map<String, Object> response = new HashMap<>();
 		try {

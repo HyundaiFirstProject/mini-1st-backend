@@ -20,4 +20,5 @@ public interface UserService {
 
     boolean isEmailAvailable(String email);
 
+    int withdrawl(String email);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.developia.mini1st.domain.ProductsDTO;
@@ -41,10 +42,10 @@ public class ProductsController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
-	// 후기 게시판 아이템 검색
-	@GetMapping(value="/bestReviewsItemSearch/{product_name}"
+	// 후기 게시판 아이템 검색 **
+	@GetMapping(value="/bestReviewsItemSearch"
 				,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ProductsDTO>> searchProducts(@PathVariable("product_name")String product_name){
+	public ResponseEntity<List<ProductsDTO>> searchProducts(@RequestParam("product_name")String product_name){
 		try {
 			List<ProductsDTO> list = service.searchProducts(product_name);
 			return new ResponseEntity<List<ProductsDTO>>(list, HttpStatus.OK);

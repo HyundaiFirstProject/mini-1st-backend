@@ -105,4 +105,10 @@ public class UserServiceImpl implements UserService{
             return true;
         }
 	}
+
+
+	@Override
+	public int withdrawl(String email) {
+		return userMapper.withdrawl(email);
+	}
 }

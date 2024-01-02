@@ -15,23 +15,23 @@ public class EmailSendSeviceImpl implements EmailSendService {
 	JavaMailSender emailSender;
 
 	    public MimeMessage createMessage(String to, Integer pw) throws Exception{
-	        System.out.println("º¸³»´Â ´ë»ó : "+ to);
-	        System.out.println("ÀÎÁõ ¹øÈ£ : "+ pw);
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : "+ to);
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ : "+ pw);
 	        MimeMessage  message = emailSender.createMimeMessage();
 
-	        message.addRecipients(RecipientType.TO, to);//º¸³»´Â ´ë»ó
-	        message.setSubject("ÀÌ¸ŞÀÏ ÀÎÁõ");//Á¦¸ñ
+	        message.addRecipients(RecipientType.TO, to);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	        message.setSubject("Pet&E ì´ë©”ì¼ ì¸ì¦");//ï¿½ï¿½ï¿½ï¿½
 
 	        String msgg="";
 	        msgg+= "<div align='center' style='margin:30px; color:black;'>";
-	        msgg+= "<h2 align='left' style='margin-left:10%;'>ÀÎÁõ¸ŞÀÏ</h2>";
+	        msgg+= "<h2 align='left' style='margin-left:10%;'>ì¸ì¦ë©”ì¼</h2>";
 	        msgg+= "<hr style='background-color:#000000; height:2px; width:80%;'/>";
 	        msgg+= "<br>";
 	        msgg+= "<br>";
-	        msgg+= "ÀÎÁõ¹øÈ£ ¹ß¼Û ¸ŞÀÏÀÔ´Ï´Ù.\n";
+	        msgg+= "Pet&E ì¸ì¦ ë²ˆí˜¸ ë°œì†¡ ë©”ì¼ ì…ë‹ˆë‹¤.\n";
 	        msgg+= "<br>";
 	        msgg+= "<br>";
-	        msgg+= "¾Æ·¡ÀÇ ÀÎÁõ¹øÈ£¸¦ »ç¿ëÇÏ¿© ÀÌ¸ŞÀÏ ÁÖ¼Ò ÀÎÁõÀ» ¿Ï·áÇÏ¸é ´ÙÀ½ ´Ü°è·Î ÁøÇàÀÌ °¡´ÉÇÕ´Ï´Ù.\n";
+	        msgg+= "[ì¸ì¦ ë²ˆí˜¸]\n";
 	        msgg+= "<br>";
 	        msgg+= "<br>";
 	        msgg+= "<br>";
@@ -40,8 +40,8 @@ public class EmailSendSeviceImpl implements EmailSendService {
 	        msgg+= "<div style='font-size:130%;'>";
 	        msgg+= "<strong>"+pw+"</strong><div><br/></div>";
 
-	        message.setText(msgg, "utf-8", "html");//³»¿ë
-	        message.setFrom(new InternetAddress("kimeunseo0508@gmail.com","Çö´ëIT&E 1Â÷ ÇÁ·ÎÁ§Æ®"));//º¸³»´Â »ç¶÷
+	        message.setText(msgg, "utf-8", "html");//ï¿½ï¿½ï¿½ï¿½
+	        message.setFrom(new InternetAddress("kimeunseo0508@gmail.com","Pet&E"));//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
 	        return message;
 	    }
@@ -50,7 +50,7 @@ public class EmailSendSeviceImpl implements EmailSendService {
 	    public String sendSimpleMessage(String to, Integer pw) throws Exception {
 	        // TODO Auto-generated method stub
 	        MimeMessage message = createMessage(to, pw);
-	        try{//¿¹¿ÜÃ³¸®
+	        try{//ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
 	            emailSender.send(message);
 	        }catch(MailException es){
 	            es.printStackTrace();

@@ -38,4 +38,8 @@ public interface UserMapper {
     // 비밀번호 변경
     @Update("Update user_info set password=#{password} where email=#{email}")
     int changePwd(@Param("password") String password, @Param("email") String email);
+    
+    // 탈퇴
+//    @Delete("delete from user_info where email = #{email}")
+    int withdrawl(@Param("email")String email);
 }

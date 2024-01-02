@@ -159,17 +159,27 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<ReviewDTO> searchReviews(String keyword) {
-		return mapper.searchReviews(keyword);
+		List<ReviewDTO> list = mapper.searchReviews(keyword);
+		for(ReviewDTO dto: list) {
+			List<String> img = Arrays.asList(mapper.getImgString(dto.getPostid()).split(","));
+			dto.setImg(img);
+		}
+		return list;
 	}
 
 	@Override
 	public void increaseViews(long postid) {
 		mapper.increaseViews(postid);
 	}
-	
+	// 후기게시판 대표 게시물
 	@Override
 	public List<ReviewDTO> getBestReview() {
-		return mapper.getBestReview();
+		List<ReviewDTO> list = mapper.getBestReview();
+		for(ReviewDTO dto: list) {
+			List<String> img = Arrays.asList(mapper.getImgString(dto.getPostid()).split(","));
+			dto.setImg(img);
+		}
+		return list;
 	}
 
 	@Override

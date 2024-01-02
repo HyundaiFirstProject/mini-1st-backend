@@ -90,6 +90,9 @@ public class UserController {
             Integer userId = Integer.parseInt(request.get("user_no"));
             //userId에 해당하는 UserDTO 가져오기
             UserDTO userDTO = userService.getUserById(userId);
+            System.out.println("********************************");
+            System.out.println(userDTO.toString());
+            System.out.println("********************************");
             userDTO.setNickname(request.get("nickname"));
             System.out.println("userId에 해당하는 UserDTO = " + userDTO);
 
@@ -110,6 +113,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(response);
         }
     }
+
 
     @PostMapping("/sendEmail")
     public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailDTO emailDTO) {
@@ -229,6 +233,25 @@ public class UserController {
             response.put("description", "서버 오류");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+    
+    // 탈퇴
+    @DeleteMapping("/user/withdrawl")
+    public ResponseEntity<String> withdrawl(@RequestParam("email") String email){
+    	System.out.println("1111");
+    	try {
+    		int result = userService.withdrawl(email);
+    		System.out.println("## result = " + result);
+    		if(result == 1) {
+    			return new ResponseEntity<String>("탈퇴 성공", HttpStatus.OK);
+    		}else {
+    			return new ResponseEntity<String>("탈퇴 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+    		}
+    	}catch(Exception e) {
+    		System.out.println("2222");
+    		log.info(e.getMessage());
+    		return new ResponseEntity<String>("탈퇴 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
     }
     
 }

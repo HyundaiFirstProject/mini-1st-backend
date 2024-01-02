@@ -85,23 +85,23 @@ public class PetBoardController {
 	}
 
 	// 자랑게시판 게시글 수정
-		@HasRoleUser
-		@PostMapping(value="/bestPetsUpdate",
-					consumes = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto){
-			try {
-				int updateCount = service.updatePetBoard(dto);
-				if (updateCount == 1) {
-					return new ResponseEntity<>("success", HttpStatus.OK);
-				} else {
-					// 업데이트가 실패하면 UNAUTHORIZED(401) 응답을 반환
-					return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+	@HasRoleUser
+	@PostMapping(value="/bestPetsUpdate",
+				consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updatePetBoard(@RequestBody PetBoardDTO dto){
+		try {
+			int updateCount = service.updatePetBoard(dto);
+			if (updateCount == 1) {
+				return new ResponseEntity<>("success", HttpStatus.OK);
+			} else {
+				// 업데이트가 실패하면 UNAUTHORIZED(401) 응답을 반환
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
+	}
 
 	// 자랑게시판 게시글 삭제
 	@DeleteMapping("/bestPetsDelete/{bno}")
@@ -189,8 +189,8 @@ public class PetBoardController {
 			return new ResponseEntity<List<UserDTO>>(HttpStatus.GONE);
 		}
 	}
-
-	@GetMapping("/bestPets")
+	// 자랑게시판 대표 게시물
+	@GetMapping(value="/bestPets", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, Object>> getBestPets() {
 		Map<String, Object> response = new HashMap<>();
 		try {

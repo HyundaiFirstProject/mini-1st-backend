@@ -98,9 +98,9 @@
 
 	<select id="getBestReview" resultType="net.developia.mini1st.domain.ReviewDTO">
 		<![CDATA[
-    		SELECT postid, title, img, stars, likes
+    		SELECT postid, title, img, stars, likes, content, writer, regdate, updatedate
     		FROM (
-        		SELECT postid, title, img, stars, likes
+        		SELECT postid, title, img, stars, likes, content, writer, regdate, updatedate
         		FROM review_board
         		ORDER BY likes DESC
     		) WHERE ROWNUM <= 4

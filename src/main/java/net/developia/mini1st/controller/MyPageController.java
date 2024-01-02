@@ -60,18 +60,18 @@ public class MyPageController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	// 작성한 자랑 게시판 
+//	@HasRoleUser//	@GetMapping(value = "/mypage/bestPetsLiked/{user_no}",
+//			produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
+//	public ResponseEntity<List<PetBoardDTO>> myBestPetsLiked(@PathVariable("user_no") long user_no){
+//		try {
+//			List<PetBoardDTO> dto = service.getBestPet(user_no);
+//			return new ResponseEntity<>(dto,HttpStatus.OK);
+//		}catch (Exception e){
+//			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//	}
 
-	@HasRoleUser
-	@GetMapping(value = "/mypage/bestPetsLiked/{user_no}",
-			produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<PetBoardDTO>> myBestPetsLiked(@PathVariable("user_no") long user_no){
-		try {
-			List<PetBoardDTO> dto = service.getBestPet(user_no);
-			return new ResponseEntity<>(dto,HttpStatus.OK);
-		}catch (Exception e){
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
 
 	@HasRoleUser
 	@GetMapping(value = "/mypage/bestReviewsLiked/{postid}",

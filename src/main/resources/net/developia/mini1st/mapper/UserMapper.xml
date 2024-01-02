@@ -10,4 +10,7 @@
 	<select id="countEmail" resultType="int">
 		SELECT COUNT(*) FROM user_info WHERE email = #{param1} 
 	</select>
+	<delete id="withdrawl">
+		delete from user_info where email = #{email}
+	</delete>
 </mapper>

@@ -26,19 +26,26 @@ public class PetBoardServiceImpl implements PetBoardService {
 
 	@Override
 	public List<PetBoardDTO> getPetBoardList() {
+		System.out.println("***************** Service ********************");
 		List<PetBoardDTO> list = mapper.getPetBoardList();
-		for(PetBoardDTO dto: list) {
+
+		for (PetBoardDTO dto : list) {
+			System.out.println("dto ==> " + dto.toString());
 			List<String> img = Arrays.asList(mapper.getImgString(dto.getBno()).split(","));
+			for (String photo : img) {
+				System.out.println("=========   " + photo + "    ===========");
+			}
 			dto.setPhoto(img);
 		}
-		return mapper.getPetBoardList();
+		System.out.println("*********************************************");
+		return list;
 	}
 
 	@Override
 	public int insertPetBoard(PetBoardDTO dto) {
 		List<String> imgList = dto.getPhoto();
 		System.out.println("=======================");
-		for(String pho :imgList) {
+		for (String pho : imgList) {
 			System.out.println(pho);
 		}
 		System.out.println("=======================");
@@ -102,7 +109,13 @@ public class PetBoardServiceImpl implements PetBoardService {
 
 	@Override
 	public List<PetBoardDTO> searchPetBoards(String content) {
-		return mapper.searchPetBoards(content);
+		List<PetBoardDTO> list = mapper.searchPetBoards(content);
+
+		for (PetBoardDTO dto : list) {
+			List<String> img = Arrays.asList(mapper.getImgString(dto.getBno()).split(","));
+			dto.setPhoto(img);
+		}
+		return list;
 	}
 
 	@Override
@@ -120,19 +133,24 @@ public class PetBoardServiceImpl implements PetBoardService {
 	public long getTotalPage() {
 		Criteria cri = new Criteria();
 		long totalRecord = mapper.getTotalCount(cri);
-		long onePageRecord = (long)cri.getAmount();
+		long onePageRecord = (long) cri.getAmount();
 		if (totalRecord <= onePageRecord) {
 			return 1;
 		}
-		long totalPages = (totalRecord % onePageRecord == 0) ? 
-				(totalRecord / onePageRecord) 
+		long totalPages = (totalRecord % onePageRecord == 0) ? (totalRecord / onePageRecord)
 				: (totalRecord / onePageRecord + 1);
 		return totalPages;
-  }
-
-	public List<PetBoardDTO> getBestPets() {
-		return mapper.getBestPets();
 	}
 
+	// 자랑게시판 대표 게시물
+	public List<PetBoardDTO> getBestPets() {
+		List<PetBoardDTO> list = mapper.getBestPets();
+
+		for (PetBoardDTO dto : list) {
+			List<String> img = Arrays.asList(mapper.getImgString(dto.getBno()).split(","));
+			dto.setPhoto(img);
+		}
+		return list;
+	}
 
 }
